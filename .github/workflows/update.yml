@@ -1,0 +1,48 @@
+name: Update Earth Observatory feed
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: earth-feed
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Quick feeds
+        run: python scripts/fetch_feeds.py
+        env:
+          FIRMS_KEY: ${{ secrets.FIRMS_KEY }}
+      - name: Movement feeds (aircraft, fishing, outages)
+        continue-on-error: true
+        run: python scripts/fetch_movement.py
+        env:
+          OPENSKY_ID: ${{ secrets.OPENSKY_ID }}
+          OPENSKY_SECRET: ${{ secrets.OPENSKY_SECRET }}
+          GFW_TOKEN: ${{ secrets.GFW_TOKEN }}
+      - name: Satellite element sets (refuses to run more than every 6 hours)
+        continue-on-error: true
+        run: python scripts/fetch_sats.py
+      - name: Lightning from GOES GLM
+        continue-on-error: true
+        run: |
+          pip install numpy netCDF4
+          python scripts/fetch_lightning.py
+      - name: Commit
+        run: |
+          git config user.name "earth-feed bot"
+          git config user.email "actions@github.com"
+          git add data
+          git diff --staged --quiet || git commit -m "feed update $(date -u +%FT%TZ)"
+          git push
