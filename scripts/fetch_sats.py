@@ -3,6 +3,7 @@ write them for the page to propagate. CelesTrak asks that the same data is not
 requested more often than every few hours, so this script refuses to run again
 inside REFRESH_HOURS."""
 import json, pathlib, datetime, requests
+from feed_health import publish, record, run
 
 OUT = pathlib.Path(__file__).resolve().parents[1] / "data"
 OUT.mkdir(exist_ok=True)
@@ -23,8 +24,9 @@ def fresh_enough():
 
 def main():
     if fresh_enough():
-        print(f"sats.json is under {REFRESH_HOURS} h old, skipping"); return
+        record("sats", "ok", "Cached orbital elements are within the 6-hour refresh interval"); return
     items = []
+    failed_groups = []
     for g in GROUPS:
         try:
             r = requests.get(f"https://celestrak.org/NORAD/elements/gp.php?GROUP={g}&FORMAT=JSON",
@@ -38,17 +40,14 @@ def main():
             items += objs
             print(g, len(objs))
         except Exception as e:
-            print(f"{g} failed: {e}")
+            failed_groups.append(g)
     if not items:
-        print("nothing fetched, leaving the old file alone"); return
-    TARGET.write_text(json.dumps({
-        "items": items,
-        "fetched": datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds"),
-        "source": "CelesTrak GP data in OMM JSON format",
-        "class": "calculated",
-        "note": "Element sets only. Positions are computed in the browser with SGP4, and accuracy falls as the elements age."
-    }, separators=(",", ":")))
+        raise ValueError("No orbital elements fetched")
+    publish('sats', {'items':items}, 'CelesTrak GP OMM orbital elements', 'calculated',
+            'Element sets propagated with SGP4; accuracy falls as elements age.')
+    if failed_groups:
+        record('sats','partial','Some orbital groups failed: '+', '.join(failed_groups))
     print("wrote sats.json with", len(items), "objects")
 
 if __name__ == "__main__":
-    main()
+    run("sats", main)
