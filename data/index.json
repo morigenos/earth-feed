@@ -1,1 +1,1 @@
-{"files":["flights.json","lightning.json","quakes.json","sats.json","storms.json"],"fetched":"2026-09-20T06:12:43+00:00","source":"feed manifest","class":"reference","note":""}
+{"files":["alerts.json","flights.json","lightning.json","outages.json","quakes.json","sats.json","space.json","storms.json"],"fetched":"2026-09-20T07:53:42+00:00","health":"health.json","source":"feed manifest","class":"reference"}
