@@ -1,8 +1,10 @@
 name: Update Earth Observatory feed
 
+# Every 30 minutes. GitHub drops frequent schedules under load, so asking for
+# less often means fewer silently skipped runs.
 on:
   schedule:
-    - cron: '7,22,37,52 * * * *'
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -10,21 +12,40 @@ permissions:
 
 concurrency:
   group: earth-feed
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 14
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests
+
+      - run: pip install requests numpy netCDF4
+
+      # Data now lives only on the gh-pages branch, published as a single commit.
+      # Bring back the last published copy so collectors can keep "last good" data,
+      # the 6-hour satellite cache and the Deep Time reconstructions.
+      - name: Restore last published data
+        run: |
+          if git fetch --depth=1 origin gh-pages 2>/dev/null; then
+            rm -rf data
+            git checkout origin/gh-pages -- data
+            git reset -q
+            echo "restored $(find data -type f | wc -l) files from gh-pages"
+          else
+            echo "no gh-pages branch yet, starting from the data folder on main"
+          fi
+
       - name: Quick feeds
         run: python scripts/fetch_feeds.py
         env:
           FIRMS_KEY: ${{ secrets.FIRMS_KEY }}
+
       - name: Movement feeds (aircraft, fishing, outages)
         continue-on-error: true
         run: python scripts/fetch_movement.py
@@ -32,22 +53,45 @@ jobs:
           OPENSKY_ID: ${{ secrets.OPENSKY_ID }}
           OPENSKY_SECRET: ${{ secrets.OPENSKY_SECRET }}
           GFW_TOKEN: ${{ secrets.GFW_TOKEN }}
+
       - name: Satellite element sets (refuses to run more than every 6 hours)
         continue-on-error: true
         run: python scripts/fetch_sats.py
+
       - name: Lightning from GOES GLM
         continue-on-error: true
-        run: |
-          pip install numpy netCDF4
-          python scripts/fetch_lightning.py
+        run: python scripts/fetch_lightning.py
+
+      - name: Coral heat stress
+        continue-on-error: true
+        run: python scripts/fetch_coral.py
+
+      - name: Deep Time reconstructions (caches; fetches at most 40 new ages per run)
+        continue-on-error: true
+        timeout-minutes: 8
+        run: python scripts/fetch_paleo.py
+
       - name: Final feed health manifest
         if: always()
         run: python scripts/feed_health.py
-      - name: Commit
+
+      # Publish the observatory and its data as one fresh commit on gh-pages.
+      # Force-pushing a single commit means the branch never accumulates history,
+      # so the repository stays small no matter how often this runs.
+      - name: Publish site
         if: always()
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          rm -rf site && mkdir site
+          cp index.html site/ 2>/dev/null || echo "no index.html on main yet"
+          cp -r data site/data
+          touch site/.nojekyll
+          cd site
+          git init -q -b gh-pages
           git config user.name "earth-feed bot"
           git config user.email "actions@github.com"
-          git add data
-          git diff --staged --quiet || git commit -m "feed update $(date -u +%FT%TZ)"
-          git push
+          git add -A
+          git commit -qm "site and data $(date -u +%FT%TZ)"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          echo "published $(find . -type f -not -path './.git/*' | wc -l) files to gh-pages"
