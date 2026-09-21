@@ -32,8 +32,10 @@ def flights():
         states = payload["states"] or []
         if not isinstance(states, list):
             raise ValueError("Invalid aircraft states")
-        items = [[round(s[5], 3), round(s[6], 3), int(s[7] or s[13] or 0), 1 if s[8] else 0, (s[1] or "").strip()]
-                 for s in states if s[5] is not None and s[6] is not None][:5000]
+        rows = [s for s in states if s[5] is not None and s[6] is not None]
+        rows.sort(key=lambda s: 1 if s[8] else 0)          # airborne aircraft before grounded ones
+        items = [[round(s[5], 2), round(s[6], 2), int(s[7] or s[13] or 0), 1 if s[8] else 0, (s[1] or "").strip()]
+                 for s in rows[:3000]]
         write("flights.json", items, "OpenSky Network state vectors", "observed",
               "Coverage follows volunteer receivers: oceans and remote regions are sparse.")
     except Exception as e:

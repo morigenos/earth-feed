@@ -37,7 +37,14 @@ def main():
         except Exception: continue
     if not loaded: raise ValueError('No readable GLM files')
     flashes.sort(key=lambda x:x[2])
-    publish('lightning',{'items':flashes[-MAX_FLASHES:],'filesRead':loaded,'filesRequested':len(keys),
+    raw_count=len(flashes)
+    latest={}
+    for lo,la,t in flashes:                                 # sorted by time, so later flashes overwrite earlier ones
+        latest[(round(lo*20),round(la*20))]=[lo,la,t]
+    flashes=sorted(latest.values(),key=lambda x:x[2])
+    truncated=max(0,len(flashes)-MAX_FLASHES)
+    publish('lightning',{'items':flashes[-MAX_FLASHES:],'rawFlashes':raw_count,'droppedOldest':truncated,
+        'thinning':'newest flash kept per 0.05-degree cell','filesRead':loaded,'filesRequested':len(keys),
         'validTime':datetime.datetime.fromtimestamp(max(times),datetime.UTC).isoformat(),
         'coverage':'GOES-East Americas and neighbouring oceans, not global'},
         'NOAA GOES-19 GLM level 2','observed','Optical flashes, including in-cloud events. Timestamps use file start times.')

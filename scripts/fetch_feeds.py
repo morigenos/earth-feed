@@ -3,11 +3,21 @@ import csv, datetime, io, math, os, requests
 from feed_health import NotConfigured, publish, run, manifest
 UA={'User-Agent':'earth-observatory-feed (personal, non-commercial)'}
 GDACS='https://www.gdacs.org/gdacsapi/api/events/geteventlist/events4app'
+GDACS_FALLBACK='https://www.gdacs.org/gdacsapi/api/events/geteventlist/MAP?eventtypes=FL,DR,WF,TC,VO,EQ'
 
-def get(url):
-    r=requests.get(url,headers=UA,timeout=60)
-    r.raise_for_status()
-    return r
+def get(url,tries=3,timeout=60):
+    # GDACS and NOAA both drop the odd request from cloud runners; a short backoff clears most of them
+    import time
+    last=None
+    for i in range(tries):
+        try:
+            r=requests.get(url,headers=UA,timeout=timeout)
+            r.raise_for_status()
+            return r
+        except Exception as e:
+            last=e
+            time.sleep(4*(i+1))
+    raise last
 
 def finite(v): return isinstance(v,(float,int)) and math.isfinite(v)
 
@@ -33,8 +43,16 @@ def storms():
     publish('storms',{'items':items},'NOAA National Hurricane Center','observed','Atlantic, eastern and central Pacific only; empty means no active NHC storms.')
 
 def alerts():
-    data=get(GDACS).json()
-    if not isinstance(data.get('features'),list): raise ValueError('Invalid alert collection')
+    data=None
+    for url in (GDACS,GDACS_FALLBACK):
+        try:
+            candidate=get(url,timeout=90).json()
+            if isinstance(candidate,dict) and isinstance(candidate.get('features'),list) and candidate['features']:
+                data=candidate; break
+            print('gdacs: empty or unexpected collection from',url.split('?')[0])
+        except Exception as e:
+            print('gdacs:',url.split('?')[0],type(e).__name__,str(e)[:120])
+    if data is None: raise ValueError('Invalid alert collection from both GDACS endpoints')
     kinds={'FL':'flood','DR':'drought','WF':'fire','TC':'storm','VO':'ash','EQ':'quake'}
     items=[]
     for f in data['features']:
@@ -63,7 +81,13 @@ def space():
     kp,kp_time=latest_kp(get('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json').json())
     ov=get('https://services.swpc.noaa.gov/json/ovation_aurora_latest.json').json()
     if not isinstance(ov.get('coordinates'),list) or not ov['coordinates']: raise ValueError('No aurora grid')
-    publish('space',{'kp':kp,'kpTime':kp_time,'aurora':ov['coordinates'],'auroraTime':ov.get('Forecast Time'),'validTime':ov.get('Forecast Time')},'NOAA SWPC Kp and OVATION','modelled')
+    cells={}
+    for lo,la,v in ov['coordinates']:
+        if not v: continue                                  # zero probability carries no information
+        k=(int(lo)//2*2,int(la)//2*2)
+        if v>cells.get(k,0): cells[k]=v
+    thinned=[[lo,la,v] for (lo,la),v in cells.items()]
+    publish('space',{'kp':kp,'kpTime':kp_time,'aurora':thinned,'auroraGrid':'2 degrees, maximum of each block, zeros dropped','auroraTime':ov.get('Forecast Time'),'validTime':ov.get('Forecast Time')},'NOAA SWPC Kp and OVATION','modelled')
 
 def fires():
     key=os.environ.get('FIRMS_KEY','').strip()
