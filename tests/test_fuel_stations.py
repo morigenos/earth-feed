@@ -1,4 +1,4 @@
-"""Station-level fuel prices: France, Spain, Italy.
+"""Station-level fuel prices: France, Spain, Italy, Mexico.
 
 Fixtures in fixtures/stations/ are cut from the real feeds downloaded on 10 Oct 2026:
 - fr_instant.json.gz: prix-carburants instant feed v2 (data.gouv.fr, Licence Ouverte 2.0), 50 stations
@@ -7,6 +7,10 @@ Fixtures in fixtures/stations/ are cut from the real feeds downloaded on 10 Oct 
   Ceuta and Melilla, records unchanged.
 - it_anagrafica.csv, it_prezzo_alle_8.csv: MIMIT registry and 8 a.m. prices (IODL 2.0), 50 stations
   including motorway, attended-only and names that contain '|'.
+- mx_places.xml, mx_prices.xml: CNE station list and registered prices, 46 real stations (some listed once per
+  product, two with a 0.01 peso price), plus three made-up entries: a station with no price, one at 0,0 and a
+  price for a station that is not in the list.
+- ecb_daily.xml: the ECB daily reference-rate file, shortened to three currencies.
 """
 import datetime, gzip, json, pathlib, sys, tempfile, unittest
 from unittest.mock import patch
@@ -16,13 +20,15 @@ import fetch_fuel_stations as st
 
 FIX = pathlib.Path(__file__).resolve().parent / 'fixtures' / 'stations'
 NOW = datetime.datetime(2026, 10, 10, 4, 37, tzinfo=datetime.UTC)
-LOW = {'FRA': 20, 'ESP': 20, 'ITA': 20}
+LOW = {'FRA': 20, 'ESP': 20, 'ITA': 20, 'MEX': 20}
 
 
 def samples():
     return {'FRA': gzip.decompress((FIX / 'fr_instant.json.gz').read_bytes()),
             'ESP': (FIX / 'es_stations.json').read_bytes(),
-            'ITA': ((FIX / 'it_anagrafica.csv').read_bytes(), (FIX / 'it_prezzo_alle_8.csv').read_bytes())}
+            'ITA': ((FIX / 'it_anagrafica.csv').read_bytes(), (FIX / 'it_prezzo_alle_8.csv').read_bytes()),
+            'MEX': ((FIX / 'mx_places.xml').read_bytes(), (FIX / 'mx_prices.xml').read_bytes()),
+            'ecb': (FIX / 'ecb_daily.xml').read_bytes()}
 
 
 class StationTests(unittest.TestCase):
@@ -42,10 +48,10 @@ class StationTests(unittest.TestCase):
     def run_all(self, files=None):
         self.assertTrue(health.run('fuel_stations', lambda: st.main(files or samples(), NOW)))
 
-    def test_three_countries_publish_with_index(self):
+    def test_four_countries_publish_with_index(self):
         self.run_all()
         idx = self.data('fuel_stations')
-        self.assertEqual(set(idx['countries']), {'FRA', 'ESP', 'ITA'})
+        self.assertEqual(set(idx['countries']), {'FRA', 'ESP', 'ITA', 'MEX'})
         for iso, c in idx['countries'].items():
             self.assertEqual(c['file'], f'fuel/stations/{iso}.json')
             self.assertEqual(c['count'], len(self.country(iso)['items']))
@@ -91,6 +97,43 @@ class StationTests(unittest.TestCase):
         self.assertEqual(next(s for s in both if s['id'] == sid)['slot']['PETROL'],
                          float(next(r for r in rows if r[3] == '1')[2]))
 
+    def test_mexico_products_merged_prices_in_pesos_with_euro_rate(self):
+        self.run_all()
+        j = self.country('MEX')
+        self.assertEqual(j['currency'], 'MXN')
+        self.assertAlmostEqual(j['eurPerUnit'], 1 / 21.32, places=6); self.assertEqual(j['fxDate'], '2026-10-09')
+        ids = [r[8] for r in j['items']]
+        self.assertEqual(len(ids), len(set(ids)))                     # one row per station
+        self.assertNotIn('PL/0001/EXP/ES/2099', ids)                  # no price
+        self.assertNotIn('PL/0002/EXP/ES/2099', ids)                  # at 0,0
+        merged = [r for r in j['items'] if r[4] is not None and r[5] is not None and r[11]]
+        self.assertTrue(merged)                                        # regular, diesel and premium from separate entries
+        self.assertTrue(all(12 <= r[4] <= 45 for r in j['items'] if r[4] is not None))
+        self.assertGreaterEqual(j['rejected'], 2)                      # the 0.01 peso prices
+        self.assertEqual(j['extraFuels'], ['Gasolina premium (91 AKI)'])
+        self.assertTrue(all(r[7] is None for r in j['items']))         # the list has no per-station dates
+        self.assertEqual(j['validTime'], '2026-10-10T00:00:00+00:00')  # 18:00 Mexico City on 9 Oct
+        self.assertIn('consultado 2026-10-10', j['attribution'])
+        idx = self.data('fuel_stations')['countries']['MEX']
+        self.assertEqual((idx['currency'], idx['fxDate']), ('MXN', '2026-10-09'))
+        self.assertIn('8%', idx['note'])
+        fra = self.data('fuel_stations')['countries']['FRA']
+        self.assertEqual(fra['currency'], 'EUR'); self.assertNotIn('eurPerUnit', fra)
+
+    def test_mexico_keeps_last_euro_rate_when_ecb_fails(self):
+        self.run_all()
+        old = self.country('MEX')['eurPerUnit']
+        files = samples(); del files['ecb'], files['FRA'], files['ESP'], files['ITA']
+        with patch.object(st, 'get', side_effect=st.requests.ConnectionError('ecb down')):
+            self.run_all(files)
+        self.assertEqual(self.country('MEX')['eurPerUnit'], old)
+
+    def test_mexico_publication_time(self):
+        mx = st.ZoneInfo('America/Mexico_City')
+        before = datetime.datetime(2026, 10, 10, 17, 59, tzinfo=mx); after = datetime.datetime(2026, 10, 10, 18, 1, tzinfo=mx)
+        self.assertEqual(st.mx_published(before).date(), datetime.date(2026, 10, 9))
+        self.assertEqual(st.mx_published(after).date(), datetime.date(2026, 10, 10))
+
     def test_implausible_column_value_is_dropped(self):
         files = samples()
         fr = json.loads(files['FRA']); fr[5]['gazole_prix'] = '9.999'; fr[6]['gplc_prix'] = '2.31'
@@ -108,7 +151,7 @@ class StationTests(unittest.TestCase):
 
     def test_too_few_stations_refused(self):
         with patch.dict(st.MIN_STATIONS, {'ESP': 10000}):
-            files = samples(); del files['FRA'], files['ITA']
+            files = samples(); del files['FRA'], files['ITA'], files['MEX']
             self.assertFalse(health.run('fuel_stations', lambda: st.main(files, NOW)))
 
     def test_recent_country_not_downloaded_again(self):
