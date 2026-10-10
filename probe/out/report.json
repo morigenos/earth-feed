@@ -1,0 +1,240 @@
+{
+ "es_dns": [
+  "192.187.17.88"
+ ],
+ "es_rest_0": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "seconds": 0.3
+ },
+ "es_rest_1": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "seconds": 0.3
+ },
+ "es_rest_2": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "seconds": 0.3
+ },
+ "es_rest_browser": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "seconds": 0.3
+ },
+ "es_rest_http": {
+  "url": "http://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "seconds": 0.4
+ },
+ "es_geoportal": {
+  "url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
+  "ctype": "text/html",
+  "clen": "18369",
+  "bytes": 18369,
+  "head": "<!doctype html>\r\n<html lang=\"es\">\r\n<head><base href=\"/geoportal-instalaciones/\">\r\n  <meta charset=\"utf-8\">\r\n  <title>Geoportal</title>\r\n  <meta name=\"viewport\" content=\"width=device-width, maximum-scale=1\">\r\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\r\n  \r\n  \r\n  <!--OPENLAYERS6 -->\r\n  <!-- <script type=\"text/javascript\" src=\"js/Openlayers6_3/ol.js\"></script>\r\n  <link rel=\"stylesheet\" type=\"text/css\" href=\"js/Openlayers6_3/ol.css\"> -->\r\n  <!-- Layer Switcher -->\r\n <!--  <script src=\"https://unpkg.com/ol-layerswitcher@3.5.0\"></script> -->\r\n  <!-- <link rel=\"stylesheet\" type=\"text/css\" href=\"js/Openlayers6_3/ol-layerswitcher.css\"> -->\r\n  <!--PROJ4-->\r\n  <!-- <script type=\"text/javascript\" src=\"js/proj4/proj4.js\"></script> -->\r\n  <!--CONTROLES MAPA-->\r\n <!--  <script type=\"text/javascript\" src=\"js/controlesMapaOpenLayers6.js\"></script> -->\r\n  <!--IMPORTACIONES PARA INTERNET EXPLORER-->\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery-ui.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery.dataTables.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/moment.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/parametros.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/funciones.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/utilities.js\"></script>\r\n ",
+  "links": [],
+  "seconds": 0.6
+ },
+ "es_geoportal_desc": {
+  "url": "https://geoportalgasolineras.es/geoportal-instalaciones/DescargarFicheros",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/geoportal-instalaciones/DescargarFicheros",
+  "ctype": "text/html",
+  "clen": "18369",
+  "bytes": 18369,
+  "head": "<!doctype html>\r\n<html lang=\"es\">\r\n<head><base href=\"/geoportal-instalaciones/\">\r\n  <meta charset=\"utf-8\">\r\n  <title>Geoportal</title>\r\n  <meta name=\"viewport\" content=\"width=device-width, maximum-scale=1\">\r\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\r\n  \r\n  \r\n  <!--OPENLAYERS6 -->\r\n  <!-- <script type=\"text/javascript\" src=\"js/Openlayers6_3/ol.js\"></script>\r\n  <link rel=\"stylesheet\" type=\"text/css\" href=\"js/Openlayers6_3/ol.css\"> -->\r\n  <!-- Layer Switcher -->\r\n <!--  <script src=\"https://unpkg.com/ol-layerswitcher@3.5.0\"></script> -->\r\n  <!-- <link rel=\"stylesheet\" type=\"text/css\" href=\"js/Openlayers6_3/ol-layerswitcher.css\"> -->\r\n  <!--PROJ4-->\r\n  <!-- <script type=\"text/javascript\" src=\"js/proj4/proj4.js\"></script> -->\r\n  <!--CONTROLES MAPA-->\r\n <!--  <script type=\"text/javascript\" src=\"js/controlesMapaOpenLayers6.js\"></script> -->\r\n  <!--IMPORTACIONES PARA INTERNET EXPLORER-->\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery-ui.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/jquery.dataTables.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/moment.min.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/parametros.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/funciones.js\"></script>\r\n  <script type=\"text/javascript\" src=\"assets/js/utilities.js\"></script>\r\n ",
+  "links": [],
+  "seconds": 0.6
+ },
+ "es_geoportal_root": {
+  "url": "https://geoportalgasolineras.es/",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/",
+  "ctype": "text/html;charset=ISO-8859-1",
+  "clen": null,
+  "bytes": 28458,
+  "head": "<!DOCTYPE html>\r\n \r\n<html data-ng-app=\"geoportalApp\" lang=\"es\">\r\n<!-- Faro_Geoportal -->\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n<meta name=\"keywords\" content=\"Estaciones de Servicio, precio, gasolina, di&eacute;sel, gas&oacute;leo\" />\r\n<meta name=\"rating\" content=\"GENERAL\" />\r\n<meta name=\"subject\" content=\"Computers:Internet:WWW\" />\r\n<meta name=\"description\" content=\"Geoportal de precios de carburantes en las Estaciones de Servicio\" />\r\n<meta name=\"robots\" content=\"ALL\" />\r\n<meta name=\"distribution\" content=\"GLOBAL\" />\r\n<meta name=\"classification\" content=\"Online Resource\" />\r\n<meta name=\"author\" content=\"MINETUR\" />\r\n<meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\" />\r\n<meta http-equiv=\"Pragma\" content=\"no-cache\" />\r\n<meta http-equiv=\"Expires\" content=\"0\" />\r\n<meta name=\"google-signin-scope\" content=\"profile email\">\r\n<link rel=\"image_src\" href=\"resources/imagenes/chosen/chosen-sprite.png\"></link>\r\n<link rel=\"shortcut icon\" type=\"image/png\" href=\"resources/imagenes/favicon.ico\"></link>\r\n<title>Geoportal</title>\r\n\r\n<!-- jsp:include page=\"import_js_css.jsp\" /-->\r\n<!-- Librerias externas -->\r\n<script type=\"text/javascript\" src=\"resources/js/jquery-1.11.3.min.js?v=1.0.0\"></script>\r\n<script type=\"text/javascript\" src=\"resources/js/jquery-ui-1.11.4.min.js?v=1.0.0\"></script>\r\n \t\r\n<!-- AngularJS -->\r\n<script type=\"text/javascript\" src=\"resources/libs/angular-",
+  "links": [
+   "resources/app/modules/downloads/DownloadsCtrl.js?v=1.0.0",
+   "resources/app/modules/downloads/DownloadsModule.js?v=1.0.1",
+   "resources/app/modules/downloads/DownloadsService.js?v=1.0.0",
+   "resources/app/modules/downloadsKml/DownloadKmlCtrl.js?v=1.0.3",
+   "resources/app/modules/downloadsKml/DownloadKmlDirective.js?v=1.0.2",
+   "resources/app/modules/downloadsKml/DownloadKmlModule.js?v=1.0.1",
+   "resources/app/modules/downloadsMobiles/DownloadMobileDirective.js?v=1.0.1",
+   "resources/app/modules/downloadsPlans/DownloadPlansDirective.js?v=1.0.0",
+   "resources/app/modules/downloadsPrices/DownloadPricesDirective.js?v=1.0.2",
+   "resources/app/modules/downloadsRestServices/RestServiceDirective.js?v=1.0.0",
+   "resources/js/angularFileUpload/FileAPI.js?v=1.0.0"
+  ],
+  "seconds": 0.7
+ },
+ "uk_ff_page": {
+  "url": "https://www.developer.fuel-finder.service.gov.uk/access-latest-fuelprices",
+  "status": 403,
+  "final": "https://www.developer.fuel-finder.service.gov.uk/access-latest-fuelprices",
+  "ctype": null,
+  "clen": "0",
+  "bytes": 0,
+  "head": "",
+  "seconds": 0.3
+ },
+ "uk_ff_page2": {
+  "url": "https://www.developer.fuel-finder.service.gov.uk/fuel-finder/access-latest-fuelprices",
+  "status": 403,
+  "final": "https://www.developer.fuel-finder.service.gov.uk/fuel-finder/access-latest-fuelprices",
+  "ctype": null,
+  "clen": "0",
+  "bytes": 0,
+  "head": "",
+  "seconds": 0.1
+ },
+ "uk_ff_root": {
+  "url": "https://www.developer.fuel-finder.service.gov.uk/",
+  "status": 403,
+  "final": "https://www.developer.fuel-finder.service.gov.uk/",
+  "ctype": null,
+  "clen": "0",
+  "bytes": 0,
+  "head": "",
+  "seconds": 0.0
+ },
+ "uk_ff_terms": {
+  "url": "https://www.developer.fuel-finder.service.gov.uk/terms-and-conditions",
+  "status": 403,
+  "final": "https://www.developer.fuel-finder.service.gov.uk/terms-and-conditions",
+  "ctype": null,
+  "clen": "0",
+  "bytes": 0,
+  "head": "",
+  "seconds": 0.1
+ },
+ "mx_prices.xml": {
+  "url": "https://publicacionexterna.azurewebsites.net/publicaciones/prices",
+  "status": 200,
+  "final": "https://publicacionexterna.azurewebsites.net/publicaciones/prices",
+  "ctype": "text/html",
+  "clen": null,
+  "bytes": 2411916,
+  "head": "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<places>\r\n  <place place_id=\"11703\">\r\n    <gas_price type=\"regular\">22.95</gas_price>\r\n    <gas_price type=\"premium\">27.9</gas_price>\r\n  </place>\r\n  <place place_id=\"11702\">\r\n    <gas_price type=\"regular\">24.5</gas_price>\r\n    <gas_price type=\"premium\">30.5</gas_price>\r\n    <gas_price type=\"diesel\">27</gas_price>\r\n  </place>\r\n  <place place_id=\"11701\">\r\n    <gas_price type=\"regular\">20.4</gas_price>\r\n    <gas_price type=\"diesel\">26.99</gas_price>\r\n  </place>\r\n  <place place_id=\"11700\">\r\n    <gas_price type=\"regular\">23.58</gas_price>\r\n    <gas_price type=\"premium\">27.84</gas_price>\r\n    <gas_price type=\"diesel\">26.95</gas_price>\r\n  </place>\r\n  <place place_id=\"11699\">\r\n    <gas_price type=\"regular\">21.99</gas_price>\r\n    <gas_price type=\"premium\">27.45</gas_price>\r\n  </place>\r\n  <place place_id=\"11697\">\r\n    <gas_price type=\"regular\">23.69</gas_price>\r\n    <gas_price type=\"premium\">27.79</gas_price>\r\n    <gas_price type=\"diesel\">27.29</gas_price>\r\n  </place>\r\n  <place place_id=\"11696\">\r\n    <gas_price type=\"premium\">27.41</gas_price>\r\n  </place>\r\n  <place place_id=\"11696\">\r\n    <gas_price type=\"regular\">21.99</gas_price>\r\n    <gas_price type=\"diesel\">25.39</gas_price>\r\n  </place>\r\n  <place place_id=\"11695\">\r\n    <gas_price type=\"regular\">23.99</gas_price>\r\n    <gas_price type=\"premium\">27.29</gas_price>\r\n    <gas_price type=\"diesel\">27.29</gas_price>\r\n  </place>\r\n  <place place_id=\"11694\">\r\n    <gas_price type=\"regular\">23.99</gas_pr",
+  "saved": "mx_prices.xml",
+  "links": [],
+  "seconds": 0.3
+ },
+ "mx_places.xml": {
+  "url": "https://publicacionexterna.azurewebsites.net/publicaciones/places",
+  "status": 200,
+  "final": "https://publicacionexterna.azurewebsites.net/publicaciones/places",
+  "ctype": "text/html",
+  "clen": null,
+  "bytes": 3181581,
+  "head": "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<places>\r\n  <place place_id=\"2039\">\r\n    <name>ESTACION HIPODROMO SA DE CV</name>\r\n    <cre_id>PL/658/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-116.9214</x>\r\n      <y>32.47641</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2040\">\r\n    <name>LAS MEJORES ESTACIONES SA DE CV</name>\r\n    <cre_id>PL/902/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-99.74484</x>\r\n      <y>20.3037</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2041\">\r\n    <name>DIAZ GAS SA DE CV</name>\r\n    <cre_id>PL/760/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-106.4514</x>\r\n      <y>31.71947</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2042\">\r\n    <name>COMBU-EXPRESS SA DE CV</name>\r\n    <cre_id>PL/825/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-103.3042</x>\r\n      <y>20.71413</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2043\">\r\n    <name>PETROMAX SA DE CV</name>\r\n    <cre_id>PL/585/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-98.29977</x>\r\n      <y>26.03787</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2044\">\r\n    <name>ESTACION RAEL S DE RL DE CV</name>\r\n    <cre_id>PL/842/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-117.0715</x>\r\n      <y>32.51342</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2045\">\r\n    <name>MULTISERVICIOS LA PILARICA SA DE CV</name>\r\n    <cre_id>PL/371/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-108.9685</x>\r\n      <y>25.7558</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2",
+  "saved": "mx_places.xml",
+  "links": [],
+  "seconds": 0.4
+ },
+ "mx_ckan": {
+  "url": "https://historico.datos.gob.mx/busca/api/3/action/package_show?id=estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel",
+  "status": 403,
+  "final": "https://historico.datos.gob.mx/busca/api/3/action/package_show?id=estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel",
+  "ctype": "text/html",
+  "clen": "436",
+  "bytes": 436,
+  "head": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;historico&#46;datos&#46;gob&#46;mx&#47;busca&#47;api&#47;3&#47;action&#47;package&#95;show&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;ef263e17&#46;1791642872&#46;908b2d6c\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;ef263e17&#46;1791642872&#46;908b2d6c</P>\n</BODY>\n</HTML>\n",
+  "saved": "mx_ckan",
+  "links": [],
+  "seconds": 0.2
+ },
+ "mx_ckan2": {
+  "url": "https://www.datos.gob.mx/api/3/action/package_search?q=gasolineras%20precios",
+  "status": 403,
+  "final": "https://www.datos.gob.mx/api/3/action/package_search?q=gasolineras%20precios",
+  "ctype": "text/html",
+  "clen": "422",
+  "bytes": 422,
+  "head": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;www&#46;datos&#46;gob&#46;mx&#47;api&#47;3&#47;action&#47;package&#95;search&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;e8263e17&#46;1791642872&#46;8abef765\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;e8263e17&#46;1791642872&#46;8abef765</P>\n</BODY>\n</HTML>\n",
+  "saved": "mx_ckan2",
+  "links": [],
+  "seconds": 0.1
+ },
+ "ar_ckan": {
+  "url": "http://datos.energia.gob.ar/api/3/action/package_show?id=precios-en-surtidor",
+  "status": 200,
+  "final": "http://datos.energia.gob.ar/api/3/action/package_show?id=precios-en-surtidor",
+  "ctype": "application/json;charset=utf-8",
+  "clen": "6243",
+  "bytes": 6243,
+  "head": "{\"help\": \"http://datos.energia.gob.ar/api/3/action/help_show?name=package_show\", \"success\": true, \"result\": {\"license_title\": \"CC-BY-4.0\", \"maintainer\": \"Secretar\\u00eda de Energ\\u00eda. Subsecretar\\u00eda de Hidrocarburos.\", \"relationships_as_object\": [], \"private\": false, \"maintainer_email\": \"\", \"num_tags\": 4, \"id\": \"1c181390-5045-475e-94dc-410429be4b17\", \"metadata_created\": \"2018-03-21T17:19:44.921115\", \"metadata_modified\": \"2026-10-10T14:00:29.348695\", \"author\": \"Secretar\\u00eda de Energ\\u00eda. Subsecretar\\u00eda de Eficiencia e Informaci\\u00f3n Energ\\u00e9tica. Direcci\\u00f3n Nacional de Escenarios y Evaluaci\\u00f3n de Proyectos. Direcci\\u00f3n de Informaci\\u00f3n Energ\\u00e9tica.Tecnolog\\u00eda de la Informaci\\u00f3n.\", \"author_email\": \"tienerg-energia@mecon.gob.ar\", \"state\": \"active\", \"version\": \"\", \"creator_user_id\": \"194449d7-3afb-4289-b838-289d36e2527c\", \"type\": \"dataset\", \"resources\": [{\"mimetype\": \"text/csv\", \"cache_url\": null, \"hash\": \"\", \"description\": \"Precios vigentes de naftas, gasoil y GNC, seg\\u00fan declaraciones realizadas por EESS en el marco de la Resoluci\\u00f3n 314/2016 del Ministerio de Energ\\u00eda y Miner\\u00eda, en AR$/litro\", \"name\": \"Precios vigentes en surtidor - Resoluci\\u00f3n 314/2016\", \"format\": \"CSV\", \"url\": \"http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv\", \"datastore_active\": true, \"cache_last_updated\": null, \"packag",
+  "saved": "ar_ckan",
+  "seconds": 6.9
+ },
+ "ar_page": {
+  "url": "http://datos.energia.gob.ar/dataset/precios-en-surtidor",
+  "status": 504,
+  "final": "http://datos.energia.gob.ar/dataset/precios-en-surtidor",
+  "ctype": "text/html",
+  "clen": "594",
+  "bytes": 594,
+  "head": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.10.3 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n",
+  "links": [],
+  "seconds": 61.0
+ },
+ "de_tk": {
+  "url": "https://creativecommons.tankerkoenig.de/",
+  "status": 200,
+  "final": "https://creativecommons.tankerkoenig.de/",
+  "ctype": "text/html; charset=UTF-8",
+  "clen": null,
+  "bytes": 110571,
+  "head": "<!DOCTYPE html>\n<!--[if IE 8]>\t\t\t<html lang=\"DE\" class=\"ie ie8\"> <![endif]-->\n<!--[if IE 9]>\t\t\t<html lang=\"DE\" class=\"ie ie9\"> <![endif]-->\n<!--[if gt IE 9]><!-->\t<html lang=\"DE\"> <!--<![endif]-->\n\n\n<!--\n\nhttp://localhost/benzinpreis/www/html/creativecommons/\nhttps://creativecommons.tankerkoenig.de/\n\n\n-->\n\n<head>\n    <title>Tankerkönig API</title>\n\n    <meta charset=\"utf-8\" />\n    <meta name=\"keywords\" content=\"Benzinpreis,Spritpreis,Tankerkönig,Spritpreis-API, historische Spritpreise\" />\n    <meta name=\"description\" content=\"\" />\n    <meta name=\"Author\" content=\"Martin Kurz\" />\n\n    <!-- mobile settings -->\n    <meta name=\"format-detection\" content=\"telephone=no\" />\n    <meta name=\"viewport\" content=\"width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0\" />\n    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->\n\n    <!-- WEB FONTS : use %7C instead of | (pipe) -->\n    <!-- link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700\" rel=\"stylesheet\" type=\"text/css\" / -->\n    <link href=\"/assets/css/fonts.css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700\" rel=\"stylesheet\" type=\"text/css\" />\n\n    <!-- CORE CSS -->\n    <link href=\"assets/plugins/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" />\n\n    <!-- THEME CSS -->\n    <link href=\"assets/css/essentials.css\" rel=\"stylesheet\" type=\"text/css\" /",
+  "links": [
+   "assets/favicons/manifest.json",
+   "https://creativecommons.org/licenses/by/4.0/deed.de",
+   "https://creativecommons.tankerkoenig.de/json/detail.php?id=24a381e3-0d72-416d-bfd8-b2f65f6e5802&apikey=00000000-0000-0000-0000-000000000002",
+   "https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=00000000-0000-0000-0000-000000000002",
+   "https://creativecommons.tankerkoenig.de/json/prices.php?ids=278130b1-e062-4a0f-80cc-19e486b4c024,93d1a836-ec60-4bca-b313-d0e9cf1e5411&apikey=00000000-0000-0000-0000-000000000002",
+   "https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700",
+   "https://github.com/codengine/tankerkoenig-api",
+   "https://www.tankerkoenig.de/spende/?app=API"
+  ],
+  "seconds": 0.8
+ },
+ "de_tk_terms": {
+  "url": "https://creativecommons.tankerkoenig.de/terms",
+  "status": 404,
+  "final": "https://creativecommons.tankerkoenig.de/terms",
+  "ctype": "text/html",
+  "clen": null,
+  "bytes": 1691,
+  "head": "<!doctype html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"utf-8\">\n    <title>Seite nicht vorhanden</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <style>\n\n        * {\n            line-height: 1.2;\n            margin: 0;\n        }\n\n        html {\n            color: #888;\n            display: table;\n            font-family: sans-serif;\n            height: 100%;\n            text-align: center;\n            width: 100%;\n        }\n\n        body {\n            display: table-cell;\n            vertical-align: middle;\n            margin: 2em auto;\n        }\n\n        .content {\n            display: inline-block;\n            text-align: left;\n        }\n\n        h1 {\n            color: #555;\n            font-size: 2em;\n            font-weight: 400;\n        }\n\n        p {\n            margin: 0 auto;\n            /* width: 280px; */\n        }\n\n        @media only screen and (max-width: 280px) {\n\n            body, p {\n                width: 95%;\n            }\n\n            h1 {\n                font-size: 1.5em;\n                margin: 0 0 0.3em;\n            }\n\n        }\n\n    </style>\n</head>\n<body>\n<div class=\"content\">\n    <h1>Seite nicht vorhanden</h1>\n    <table>\n        <tr>\n            <td>Startseite</td>\n            <td><a href=\"https://tankerkoenig.de\">https://tankerkoenig.de</a></td>\n        </tr>\n        <tr>\n            <td>Creativecommons</td>\n            <td><a href=\"https://creativecommons.tankerkoenig.de\">https://creativecommons.tankerkoenig",
+  "links": [],
+  "seconds": 0.7
+ },
+ "pt_dgeg": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "clen": "24422",
+  "bytes": 24422,
+  "head": "\r\n\r\n<!doctype html>\r\n<html lang=\"pt\">\r\n<head>\r\n    <!-- Global site tag (gtag.js) - Google Analytics -->\r\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-GXE3NPJVR6\"></script>\r\n    <script>\r\n        window.dataLayer = window.dataLayer || [];\r\n        function gtag() { dataLayer.push(arguments); }\r\n        gtag('js', new Date());\r\n\r\n        gtag('config', 'G-GXE3NPJVR6');\r\n    </script>\r\n\r\n    <meta charset=\"utf-8\">\r\n    <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <title>DGEG</title>\r\n    <meta content=\"\" name=\"description\">\r\n    <meta content=\"\" name=\"keywords\">\r\n\r\n    <!-- Favicons -->\r\n    <link href=\"/assets/img/favicon.png\" rel=\"icon\">\r\n    <!-- Vendor CSS Files -->\r\n    <link href=\"/assets/vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/bootstrap/css/bootstrap-select.min.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/icofont/icofont.min.css\" rel=\"stylesheet\">\r\n    <!-- Template Main CSS File -->\r\n    <link href=\"/assets/css/style.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/css/custom.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/css/table.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/multiSelect/css/multiSelect.css\" rel=\"stylesheet\">\r\n    \r\n\r\n\r\n</head>\r\n<body>\r\n    <!-- ======= Header ======= -->\r\n    \r\n\r\n<header id=\"header\" class=\"fixed-top\">\r\n    <div class=\"tamanhoNav\">\r\n        <div class=\"row",
+  "links": [
+   "#download"
+  ],
+  "seconds": 0.8
+ },
+ "pt_api": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/PesquisarPostos?idsTiposComb=3201&qtdPorPagina=5&pagina=1",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/PesquisarPostos?idsTiposComb=3201&qtdPorPagina=5&pagina=1",
+  "ctype": "application/json; charset=utf-8",
+  "clen": "1920",
+  "bytes": 1920,
+  "head": "{\"status\":true,\"mensagem\":\"sucesso\",\"resultado\":[{\"Id\":94527,\"Nome\":\"PETROPRIX Estarreja\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Estarreja\",\"Preco\":\"1,899 €\",\"Marca\":\"PETROPRIX \",\"Combustivel\":\"Gasolina simples 95\",\"DataAtualizacao\":\"2026-10-05 08:35\",\"Distrito\":\"Aveiro\",\"Morada\":\"Tv. da Arrotinha 109\",\"Localidade\":\"Estarreja\",\"CodPostal\":\"3860-210\",\"Latitude\":40.769615,\"Longitude\":-8.569939,\"Quantidade\":3023},{\"Id\":69113,\"Nome\":\"BXPRESS ESTARREJA\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Estarreja\",\"Preco\":\"1,909 €\",\"Marca\":\"BXPRESS\",\"Combustivel\":\"Gasolina simples 95\",\"DataAtualizacao\":\"2026-10-05 00:20\",\"Distrito\":\"Aveiro\",\"Morada\":\"Rua Dr. Manuel Ferreira da SilvaEN 109 - Arrotinha\",\"Localidade\":\"Estarreja- Arrotinha \",\"CodPostal\":\"3860-210\",\"Latitude\":40.764812,\"Longitude\":-8.571344,\"Quantidade\":3023},{\"Id\":95260,\"Nome\":\"POSTO DPP GAFANHA\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Ílhavo\",\"Preco\":\"1,919 €\",\"Marca\":\"DPP\",\"Combustivel\":\"Gasolina simples 95\",\"DataAtualizacao\":\"2026-10-06 16:30\",\"Distrito\":\"Aveiro\",\"Morada\":\"Rua de Ílhavo\",\"Localidade\":\"Gafanha da Encarnação\",\"CodPostal\":\"3830-488\",\"Latitude\":40.613533,\"Longitude\":-8.726525,\"Quantidade\":3023},{\"Id\":73796,\"Nome\":\"ENERGETICA  II - ILHAVO\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Ílhavo\",\"Preco\":\"1,928 €\",\"Marca\":\"Genérico\",\"Combustivel\":\"Gasolina simples 95\",\"DataAtualizacao\":\"2026-10-06 23:00\",\"Distrito\":\"Aveiro\",\"Morada\":\"Rua do Norte\",\"Localidade\":\"Gafanha de Aquem\",\"CodPostal\":\"3830-167\",\"Latitude\":40.61489,\"Longitude\":-8.",
+  "saved": "pt_api",
+  "seconds": 0.5
+ }
+}
