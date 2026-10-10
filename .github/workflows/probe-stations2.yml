@@ -2,7 +2,7 @@ name: Station source check (one-off)
 on:
   push:
     branches: [probe-stations-2]
-    paths: ['probe/stations2.py', '.github/workflows/probe-stations2.yml']
+    paths: ['probe/stations2.py', 'probe/stations3.py', '.github/workflows/probe-stations2.yml']
 permissions:
   contents: write
 jobs:
@@ -15,12 +15,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
-      - run: python probe/stations2.py
+      - run: python probe/stations3.py
       - name: Commit results to this branch
         if: always()
         run: |
           git config user.name "earth-feed bot"
           git config user.email "actions@github.com"
-          git add probe/out
+          git add probe/out probe/out3
           git diff --staged --quiet || git commit -qm "station source check $(date -u +%FT%TZ)"
           git push
