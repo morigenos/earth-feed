@@ -1,0 +1,26 @@
+{
+ "uk_weekly_2018.csv": {
+  "url": "https://assets.publishing.service.gov.uk/media/6ac3b5951ef3e896de979385/CSV__2018_-__.csv",
+  "seconds": 0.1,
+  "status": 200,
+  "type": "text/csv",
+  "bytes": 20414,
+  "final": "https://assets.publishing.service.gov.uk/media/6ac3b5951ef3e896de979385/CSV__2018_-__.csv"
+ },
+ "uk_weekly_2003_2017.csv": {
+  "url": "https://assets.publishing.service.gov.uk/media/68a3326b32d2c63f869343a3/weekly_road_fuel_prices_2003_to_2017.csv",
+  "seconds": 0.5,
+  "status": 200,
+  "type": "text/csv",
+  "bytes": 34088,
+  "final": "https://assets.publishing.service.gov.uk/media/68a3326b32d2c63f869343a3/weekly_road_fuel_prices_2003_to_2017.csv"
+ },
+ "es_stations.json": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "seconds": 20.7,
+  "status": 200,
+  "type": "application/json; charset=utf-8",
+  "bytes": 12242733,
+  "final": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
+ }
+}
