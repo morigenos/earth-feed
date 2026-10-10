@@ -1,0 +1,1 @@
+{"status":"401 UNAUTHORIZED","code":"error.autenticacion.necesaria","message":"Autenticación necesaria","url":"/rest/pathReportPreciosPorCarburante"}

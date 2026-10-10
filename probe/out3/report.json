@@ -1,0 +1,175 @@
+{
+ "es_DownloadsService.js": {
+  "url": "https://geoportalgasolineras.es/resources/app/modules/downloads/DownloadsService.js?v=1.0.0",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/resources/app/modules/downloads/DownloadsService.js?v=1.0.0",
+  "ctype": "text/javascript",
+  "bytes": 1176,
+  "disp": null,
+  "saved": "es_DownloadsService.js",
+  "seconds": 0.5
+ },
+ "es_DownloadsCtrl.js": {
+  "url": "https://geoportalgasolineras.es/resources/app/modules/downloads/DownloadsCtrl.js?v=1.0.0",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/resources/app/modules/downloads/DownloadsCtrl.js?v=1.0.0",
+  "ctype": "text/javascript",
+  "bytes": 1596,
+  "disp": null,
+  "saved": "es_DownloadsCtrl.js",
+  "seconds": 0.5
+ },
+ "es_DownloadPricesDirective.js": {
+  "url": "https://geoportalgasolineras.es/resources/app/modules/downloadsPrices/DownloadPricesDirective.js?v=1.0.2",
+  "status": 404,
+  "final": "https://geoportalgasolineras.es/resources/app/modules/downloadsPrices/DownloadPricesDirective.js?v=1.0.2",
+  "ctype": "text/html;charset=utf-8",
+  "bytes": 610,
+  "disp": null,
+  "saved": "es_DownloadPricesDirective.js",
+  "seconds": 0.5
+ },
+ "es_RestServiceDirective.js": {
+  "url": "https://geoportalgasolineras.es/resources/app/modules/downloadsRestServices/RestServiceDirective.js?v=1.0.0",
+  "status": 200,
+  "final": "https://geoportalgasolineras.es/resources/app/modules/downloadsRestServices/RestServiceDirective.js?v=1.0.0",
+  "ctype": "text/javascript",
+  "bytes": 640,
+  "disp": null,
+  "saved": "es_RestServiceDirective.js",
+  "seconds": 0.5
+ },
+ "es_candidates": [
+  "rest/pathReportPreciosPorCarburante"
+ ],
+ "es_try_0": {
+  "url": "https://geoportalgasolineras.es/rest/pathReportPreciosPorCarburante",
+  "status": 401,
+  "final": "https://geoportalgasolineras.es/rest/pathReportPreciosPorCarburante",
+  "ctype": "application/json;charset=UTF-8",
+  "bytes": 152,
+  "disp": null,
+  "saved": "es_try_0",
+  "seconds": 0.7
+ },
+ "ar_vigentes.csv": {
+  "url": "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv",
+  "status": 200,
+  "final": "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv",
+  "ctype": "text/csv",
+  "bytes": 9269863,
+  "disp": null,
+  "saved": "ar_vigentes.csv",
+  "seconds": 12.7
+ },
+ "mx_hist_page": {
+  "url": "https://historico.datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel",
+  "status": 403,
+  "final": "https://historico.datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel",
+  "ctype": "text/html",
+  "bytes": 515,
+  "disp": null,
+  "saved": "mx_hist_page",
+  "seconds": 0.1
+ },
+ "mx_cne_page": {
+  "url": "https://www.cne.gob.mx/ConsultaPrecios/GasolinasyDiesel/GasolinasyDiesel.html",
+  "status": 200,
+  "final": "https://www.cne.gob.mx/ConsultaPrecios/GasolinasyDiesel/GasolinasyDiesel.html",
+  "ctype": "text/html",
+  "bytes": 7753,
+  "disp": null,
+  "saved": "mx_cne_page",
+  "seconds": 0.1
+ },
+ "mx_terms": {
+  "url": "https://historico.datos.gob.mx/libreusomx",
+  "status": 403,
+  "final": "https://historico.datos.gob.mx/libreusomx",
+  "ctype": "text/html",
+  "bytes": 390,
+  "disp": null,
+  "saved": "mx_terms",
+  "seconds": 0.0
+ },
+ "pt_page": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_page",
+  "seconds": 0.6
+ },
+ "pt_tipos": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/GetTiposCombustiveis",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/GetTiposCombustiveis",
+  "ctype": "application/json; charset=utf-8",
+  "bytes": 2250,
+  "disp": null,
+  "saved": "pt_tipos",
+  "seconds": 0.4
+ },
+ "pt_95_all": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/PesquisarPostos?idsTiposComb=3201&qtdPorPagina=4000&pagina=1",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/PesquisarPostos?idsTiposComb=3201&qtdPorPagina=4000&pagina=1",
+  "ctype": "application/json; charset=utf-8",
+  "bytes": 1125995,
+  "disp": null,
+  "saved": "pt_95_all",
+  "seconds": 1.2
+ },
+ "pt_termos-e-condicoes": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/termos-e-condicoes/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_termos-e-condicoes",
+  "seconds": 0.6
+ },
+ "pt_termos": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/termos/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_termos",
+  "seconds": 0.7
+ },
+ "pt_sobre": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/sobre/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_sobre",
+  "seconds": 0.5
+ },
+ "pt_faq": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/faq/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_faq",
+  "seconds": 0.5
+ },
+ "pt_api": {
+  "url": "https://precoscombustiveis.dgeg.gov.pt/api/",
+  "status": 200,
+  "final": "https://precoscombustiveis.dgeg.gov.pt/",
+  "ctype": "text/html; charset=utf-8",
+  "bytes": 24422,
+  "disp": null,
+  "saved": "pt_api",
+  "seconds": 0.5
+ }
+}

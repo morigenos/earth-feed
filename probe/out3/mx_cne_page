@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115362330-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-115362330-1');
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios de expendio de gasolinas y di&#233;sel - Precios gasolinas y diésel</title>
+    <link href='https://framework-gb.cdn.gob.mx/favicon.ico' rel='shortcut icon'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+	
+	<script src="https://www.google.com/recaptcha/api.js?onload=captcha&render=explicit" async defer></script>
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+    <script src="js/GasolinasyDiesel.js?v=1.5"></script>
+    <script src="js/EntidadesMunicipiosLocalidades.js?v=1.5"></script>
+    <script src="js/ConfigUrl.js?v=1.5"></script>
+	<script src="js/recaptcha.js?v=1.5"></script>
+    <script src="js/DescargaPreciosConsolidados.js?v=1.0"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <style>
+        .dataTables_filter label {
+            font-weight: 400;
+        }
+
+        .dataTables_length label {
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container body-content">
+        <ol class="breadcrumb">
+            <li>
+                <a href="http://www.gob.mx">
+                    <span class="icon icon-home"></span>
+                    <span class="sr-only">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.gob.mx/cne">Comisión Nacional de Energía</a>
+            </li>
+            <li class="active">
+                <a href="http://www.cne.gob.mx/ConsultaPrecios/Index.html">Precios de gasolinas y diésel</a>
+            </li>
+        </ol>
+
+
+
+
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Precios de gasolinas y diésel reportados por los permisionarios</h3>
+                <hr class="red" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p style="margin: 0 0 4px 0; font-size: 18px; font-weight: 600; color: #333;">
+                    Listado de Precios Comerciales de Gasolina y Diesel por Estación de Servicio (XML)
+                </p>
+                <p style="margin: 0 0 10px 0; font-size: 15px; color: #666;">
+                    Relación de precios de gasolina regular, gasolina premium y diesel por estación de servicio.
+                    Actualizado diariamente a las 18:00 hrs (GMT-6).
+                </p>
+                <a href="https://publicacionexterna.azurewebsites.net/publicaciones/prices" class="btn btn-primary btn-md" id="btnDescargarConsolidado">
+                    &#8681;&nbsp; Descargar
+                </a>
+                <div id="avisoDescarga" style="margin-top: 8px;"></div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <p>Precios reportados por los permisionarios en línea de conformidad con la obligación establecida en el
+                    Acuerdo Núm. A/041/2018 de la Comisión Reguladora de Energía. </p>
+            </div>
+        </div>
+        <br>
+        <div class="row form-group">
+            <div class="col-md-4">
+                Entidad federativa
+                <span class="form-text" id="entidad">*</span>:
+            </div>
+            <div class="col-md-8">
+                <select id="entidadFederativa" class="form-control"></select>
+                <small class="form-text form-text-error" id="entidadObligado">Este campo es obligatorio</small>
+            </div>
+        </div>
+        <br />
+        <div class="row form-group">
+            <div class="col-md-4">
+                Municipio:
+                <span class="form-text" id="mpio">*</span>
+            </div>
+            <div class="col-md-8">
+                <select id="municipio" class="form-control"></select>
+                <small class="form-text form-text-error" id="municipioObligado">Este campo es obligatorio</small>
+            </div>
+        </div>
+        <br />
+		
+		<div class="clearfix">
+			<div class="g-recaptcha pull-right" data-sitekey="6LdDNFwrAAAAAJF4y3BV8HdA0DZsS42dkgVjSM04" data-callback="captcha"></div>
+			<div class="col-md-12">
+				<div class="pull-right">
+					<input type="button" class="btn btn-primary" id="btnConsultar" value="Consultar">
+				</div>
+			</div>
+		</div>
+        <!-- <div class="clearfix"> -->
+            <!-- <div class="g-recaptcha pull-right" data-sitekey="6LeWB1wrAAAAABiV12_GnWdQ8z2dygCIf5VzJal1" data-callback="captcha"></div> -->
+            <!-- <div class="col-md-12"> -->
+                
+                <!-- <div class="pull-right"> -->
+					
+                    <!-- <input type="button" class="btn btn-primary" id="btnConsultar" value="Consultar" disabled> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+        <!-- </div> -->
+		
+		   <!-- <div class="form-group"> -->
+                <!-- <div class="col-sm-3"> -->
+                <!-- </div> -->
+                <!-- <div class="col-sm-9"> -->
+                    <!-- <input type="button" class="btn btn-primary pull-right" id="btnConsultar" value="Consultar"> -->
+                    <!-- <div class="g-recaptcha pull-right" data-sitekey="6LcfEFwrAAAAAL32k2phIpk0Llz7RV7Is5wCu42K" data-callback="captcha"></div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+			
+
+        <hr />
+        <span id="cargando"></span>
+
+        <div class="row" id="gPrecios" style="display: none;">
+            <div class="col-md-12">
+                <table class="display" id="precios">
+                    <thead>
+                        <tr>
+                            <th>No de Permiso</th>
+                            <th>Nombre de la gasolinera</th>
+                            <th>Dirección</th>
+                            <th>Producto</th>
+                            <th>Subproducto</th>
+                            <th>Precio registrado</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <br />
+            <br />
+
+
+            <div class="col-md-12">
+                <p>(1) Regular cuenta con un índice de octano ([RON+MON]/2) mínimo de 87</p>
+                <p>(2) Premium cuenta con un índice de octano ([RON+MON]/2) mínimo de 91</p>
+                <p>(3) Diésel Automotriz cuenta con un contenido mayor de azufre a 15 mg/kg y contenido máximo de azufre
+                    de
+                    500 mg/kg</p>
+                <p>(4) Diésel de Ultra Bajo Azufre (DUBA) cuenta con un contenido máximo de azufre de 15 mg/kg</p>
+            </div>
+
+        </div>
+
+
+
+        <hr />
+    </div>
+    <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+    <script>
+
+        $gmx(document).ready(function () {
+            $.Index();
+
+        });
+    </script>
+</body>
+
+</html>
