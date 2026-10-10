@@ -86,6 +86,15 @@ class WorldTests(unittest.TestCase):
         self.assertIn('DIESEL', nat['areas']['USA-CA'])
         self.assertNotIn('GASOLINE_REGULAR', nat['areas']['USA-CA'])
 
+    def test_regions_are_not_downloaded_again_within_the_same_week(self):
+        self.run_all()
+        first = self.item('USA-CA', 'GASOLINE_REGULAR')
+        files = samples()
+        for code in [c for c in files['us_eia'] if '_NUS_' not in c]: del files['us_eia'][code]
+        self.run_all(files)                                     # same national week: regions reused
+        self.assertEqual(self.item('USA-CA', 'GASOLINE_REGULAR'), first)
+        self.assertIn('USA-LOSANGELES', self.data('fuel_world')['regions']['USA']['areas'])
+
     def test_canadian_cities_have_diesel_and_premium_and_name_their_province(self):
         self.run_all()
         j = self.data('fuel_world')

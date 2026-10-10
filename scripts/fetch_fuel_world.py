@@ -452,6 +452,34 @@ def national_file(src, areas, extra=None, rejected=0, skipped=None):
     return out
 
 
+def eia_fetch(codes, f, offline):
+    """Workbooks -> [(series or None, error or None)] in the order given, six downloads at a time."""
+    from concurrent.futures import ThreadPoolExecutor
+    def one(c):
+        try:
+            blob = f.get(c) if offline else get(EIA.format(code=c)).content
+            return (parse_eia(blob), None) if blob is not None else (None, None)
+        except Exception as e:
+            return None, e
+    with ThreadPoolExecutor(6) as ex:
+        return list(ex.map(one, codes))
+
+
+def eia_reuse(national):
+    """Regional series from the previous run when they already reach this week's national date."""
+    try:
+        old = json.loads((health.OUT / 'fuel' / 'national' / 'us_eia.json').read_text(encoding='utf-8'))
+    except Exception:
+        return None
+    if not national: return None
+    newest = ymd(national[-1][0])
+    regional = {a: v for a, v in old.get('areas', {}).items() if a.startswith('USA-')}
+    if not regional or max(max(s['dates']) for v in regional.values() for s in v.values()) < newest: return None
+    day = lambda d: datetime.datetime.strptime(str(d), '%Y%m%d').date()
+    return {a: {fuel: [(day(d), loc, None) for d, loc in zip(s['dates'], s['local'])] for fuel, s in v.items()}
+            for a, v in regional.items()}
+
+
 def fetch_source(src, fx, files=None):
     """Download (or read from `files`) and parse one source; returns the national file payload."""
     f = files or {}
@@ -467,17 +495,15 @@ def fetch_source(src, fx, files=None):
                     last = e
             if fuel not in parsed['USA'] and fuel != 'GASOLINE_PREMIUM':
                 raise last or ValueError('EIA ' + fuel)
-        skipped = []
-        for key, code, _n, _k, _st in EIA_AREAS:      # regions, states, cities: a missing one is skipped, not fatal
-            for fuel, pattern in EIA_AREA_CODE.items():
-                if fuel == 'DIESEL' and code not in EIA_DIESEL: continue
-                c = pattern.format(a=code)
-                try:
-                    blob = f.get(c) if files is not None else get(EIA.format(code=c)).content
-                    if blob is None: continue
-                    parsed.setdefault(key, {})[fuel] = parse_eia(blob)
-                except Exception as e:
-                    skipped.append(f'{c} ({type(e).__name__})')
+        skipped, reused = [], eia_reuse(parsed['USA'].get('GASOLINE_REGULAR'))
+        if reused:                     # EIA publishes weekly; the regions were fetched for this week already
+            parsed.update(reused)
+        else:                          # about 70 workbooks; EIA is slow per request, so six at a time
+            jobs = [(key, fuel, pattern.format(a=code)) for key, code, *_ in EIA_AREAS for fuel, pattern in EIA_AREA_CODE.items()
+                    if fuel != 'DIESEL' or code in EIA_DIESEL]
+            for (key, fuel, c), (series, err) in zip(jobs, eia_fetch([c for *_, c in jobs], f, files is not None)):
+                if series is not None: parsed.setdefault(key, {})[fuel] = series
+                elif err is not None: skipped.append(f'{c} ({type(err).__name__})')
         areas, rej = to_euro(src, parsed, fx)
         return national_file(src, areas, rejected=rej, skipped=skipped)
     if src == 'uk_desnz':
