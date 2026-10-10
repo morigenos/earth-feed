@@ -1,0 +1,26 @@
+name: Stage 9 live check (one-off)
+on:
+  push:
+    branches: [probe-stage9-live]
+    paths: ['probe/run.py', '.github/workflows/probe-live.yml', 'scripts/fetch_fuel_world.py', 'scripts/fetch_fuel_stations.py']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests openpyxl xlrd
+      - run: python probe/run.py
+      - name: Commit results to this branch
+        if: always()
+        run: |
+          git config user.name "earth-feed bot"
+          git config user.email "actions@github.com"
+          git add probe/live
+          git diff --staged --quiet || git commit -qm "live fuel check $(date -u +%FT%TZ)"
+          git push
