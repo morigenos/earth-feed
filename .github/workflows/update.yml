@@ -78,9 +78,9 @@ jobs:
         timeout-minutes: 5
         run: python scripts/fetch_fuel_eu.py
 
-      - name: National fuel prices outside the EU (US, UK, Canada, New Zealand, Malaysia; at most every 12 hours)
+      - name: National fuel prices outside the EU (US, UK, Canada, New Zealand, Malaysia; US regions and Canadian cities; at most every 12 hours)
         continue-on-error: true
-        timeout-minutes: 6
+        timeout-minutes: 8
         run: python scripts/fetch_fuel_world.py
 
       - name: Station fuel prices (France, Spain, Italy, Mexico; France and Spain at most hourly, Italy and Mexico every 6 hours)
