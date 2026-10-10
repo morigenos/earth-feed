@@ -1,0 +1,18 @@
+{
+ "ok": true,
+ "seconds": 66.8,
+ "health": {
+  "schemaVersion": 1,
+  "datasets": {
+   "fuel_stations": {
+    "status": "ok",
+    "lastAttempt": "2026-10-10T14:45:52+00:00",
+    "message": "",
+    "lastSuccess": "2026-10-10T14:45:52+00:00",
+    "recordCount": 3,
+    "validTime": "2026-10-10T14:17:34+00:00"
+   }
+  },
+  "generated": "2026-10-10T14:45:52+00:00"
+ }
+}
