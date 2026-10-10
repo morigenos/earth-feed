@@ -1,0 +1,32 @@
+{
+ "fuel_world": {
+  "ok": true,
+  "seconds": 145.3
+ },
+ "fuel_stations": {
+  "ok": true,
+  "seconds": 59.4
+ },
+ "health": {
+  "schemaVersion": 1,
+  "datasets": {
+   "fuel_world": {
+    "status": "ok",
+    "lastAttempt": "2026-10-10T16:59:44+00:00",
+    "message": "",
+    "lastSuccess": "2026-10-10T16:59:44+00:00",
+    "recordCount": 132,
+    "validTime": "2026-10-08"
+   },
+   "fuel_stations": {
+    "status": "ok",
+    "lastAttempt": "2026-10-10T17:00:44+00:00",
+    "message": "",
+    "lastSuccess": "2026-10-10T17:00:44+00:00",
+    "recordCount": 4,
+    "validTime": "2026-10-10T16:59:55+00:00"
+   }
+  },
+  "generated": "2026-10-10T17:00:44+00:00"
+ }
+}
