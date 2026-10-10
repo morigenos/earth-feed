@@ -1,0 +1,26 @@
+name: Station source check (one-off)
+on:
+  push:
+    branches: [probe-stations-2]
+    paths: ['probe/stations2.py', '.github/workflows/probe-stations2.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python probe/stations2.py
+      - name: Commit results to this branch
+        if: always()
+        run: |
+          git config user.name "earth-feed bot"
+          git config user.email "actions@github.com"
+          git add probe/out
+          git diff --staged --quiet || git commit -qm "station source check $(date -u +%FT%TZ)"
+          git push
