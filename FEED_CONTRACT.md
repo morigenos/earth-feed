@@ -101,13 +101,16 @@ Every file is a JSON object carrying at least:
 ## Station prices (`fuel_stations.json`, `fuel/stations/`)
 
 - France (prix-carburants, Licence Ouverte 2.0), Spain (MITECO Geoportal, reuse with attribution),
-  Italy (MIMIT Osservatorio prezzi, IODL 2.0), Mexico (Comisión Nacional de Energía, Libre Uso MX).
+  Italy (MIMIT Osservatorio prezzi, IODL 2.0), Mexico (Comisión Nacional de Energía, Libre Uso MX),
+  Portugal (DGEG Preços dos Combustíveis Online: free use, commercial use prohibited; not an open licence,
+  so the `licence` and `note` fields say so and both must be shown with Portugal's stations).
   Pump prices with tax per litre in the country's `currency`: euros with three decimals, Mexican pesos
   with two. Outside the euro, `eurPerUnit` is the ECB reference rate (euros per unit) of `fxDate`; if the
   ECB is unreachable the previous file's rate is kept, and if there is none the field is `null`.
 - `undated: true` (Mexico) means the source gives no per-station dates: `updatedEpoch` is `null` and no
   age filter can be applied. `validTime` is then the source's scheduled publication time (18:00 Mexico City).
-- `note` is a caveat the globe shows with the country's stations (Mexico: lower VAT in the border regions).
+- `note` is a caveat the globe shows with the country's stations (Mexico: lower VAT in the border regions;
+  Portugal: non-commercial terms, mainland only).
 - `flags`: bit 0 motorway, bit 1 attended service only, bit 2 open 24 hours; `flags >> 3` is the zone index
   into `zones` (Spain: mainland and Balearics, Canary Islands, Ceuta and Melilla, ranked separately).
 - Columns `petrol`, `diesel`, `lpg` hold each country's standard product (labels in `fuels`);

@@ -15,8 +15,8 @@ Last verified: 20 September 2026, against a live workflow run. Fuel rows and glo
 | flights | ok | 5,000 | OpenSky, anonymous access working |
 | outages | ok | 0 | IODA reported nothing in the window |
 | fuel | pending first scheduled run | 73 | 27 EU states, bulletin of 5 Oct 2026; verified locally against the Commission workbook, 10 Oct 2026 |
-| fuel_world | ok; regions pending merge | 132 | US, UK, Canada, New Zealand, Malaysia (plus East Malaysia diesel); with Stage 9 also 28 US regions, states and cities and 18 Canadian cities, verified on a runner 10 Oct 2026 (2.4 minutes, EIA downloads in parallel) |
-| fuel_stations | ok, Spain pending | 30,775 | First run from main, 10 Oct 2026: France 9,174 and Italy 21,601 published; Spain's server refused the runner's connection, so the globe shows Spain from its embedded snapshot until a run gets through. Mexico (13,848) verified on a runner; publishes once merged |
+| fuel_world | ok | 132 | US, UK, Canada, New Zealand, Malaysia (plus East Malaysia diesel); with Stage 9 also 28 US regions, states and cities and 18 Canadian cities, published from main 10 Oct 2026 (EIA downloads in parallel, regions once a week) |
+| fuel_stations | ok | 56,065 | 10 Oct 2026 from main: France 9,155, Spain 11,461, Italy 21,601, Mexico 13,848. Portugal (3,091) parsed from the DGEG response fetched on a runner the same day; publishes once merged. Spain's server refuses some runner addresses; a later run gets through |
 | fires | not configured | — | needs `FIRMS_KEY` |
 | ships | not configured | — | no collector: free AIS is websocket-only |
 | fishing | not configured | — | needs `GFW_TOKEN` |
@@ -50,6 +50,8 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
   states and provinces against the national figure (blue cheaper, red dearer, ±20%) from EIA's regions, sub-regions
   and nine states and from the average of Statistics Canada's cities in each province. The fills follow the fuel
   timeline; the panel lists regions, states and cities with their 1-year change.
+- Stage 10 (10 Oct 2026): Portugal's 3,091 mainland stations (DGEG, non-commercial terms shown with them), and a
+  switch in the fuel controls to colour zoomed-in states and provinces on the world price scale instead.
 - Published page: https://claude.ai/artifact/HBtwLbZx8kKKbZ3c1RVzDh
 - Roadmap: https://claude.ai/artifact/1zi4qa2CYpQqieQZNSDNB7
 
@@ -60,4 +62,4 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
 3. Pipelines and submarine cables remain blocked on licence and a dead data source.
 4. Fuel: Phase 1b (GlobalPetrolPrices, private channel) waits on written licence terms; see the fuel plan in the project folder.
 5. Fuel: Statistics Canada publishes only regular petrol nationally; Canada's diesel and premium now show by city and province (Stage 9), not on the world map.
-6. Fuel stations: Germany waits on a Tankerkönig API key; Portugal on Archie's call (the DGEG portal allows free use but forbids commercial use); the UK's Fuel Finder on registration and runner access.
+6. Fuel stations: Germany waits on a Tankerkönig API key; Portugal added on Archie's decision under non-commercial terms; the UK's Fuel Finder on registration and runner access.

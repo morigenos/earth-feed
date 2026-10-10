@@ -83,7 +83,7 @@ jobs:
         timeout-minutes: 8
         run: python scripts/fetch_fuel_world.py
 
-      - name: Station fuel prices (France, Spain, Italy, Mexico; France and Spain at most hourly, Italy and Mexico every 6 hours)
+      - name: Station fuel prices (France, Spain, Italy, Mexico, Portugal; France and Spain at most hourly, Portugal every 3 hours, Italy and Mexico every 6)
         continue-on-error: true
         timeout-minutes: 8
         run: python scripts/fetch_fuel_stations.py

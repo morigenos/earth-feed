@@ -1,4 +1,4 @@
-"""Station-level fuel prices from four open government feeds.
+"""Station-level fuel prices from five government feeds (four open; Portugal non-commercial).
 
   FRA  prix-carburants (Ministère de l'Économie), instant feed v2 on data.gouv.fr, Licence Ouverte 2.0.
        About 9,800 stations; each price carries its own update time. Motorway stations are flagged.
@@ -11,6 +11,9 @@
        names no licence; Mexico's federal open-data terms (Libre Uso MX, compatible with CC BY) apply to
        the dataset as catalogued on datos.gob.mx. Prices are pesos per litre, kept in pesos; the file
        carries the ECB euro rate so the globe can show both. The list has no per-station dates.
+  PRT  Preços dos Combustíveis Online (DGEG), one JSON list of about 3,100 mainland stations, each price with
+       its own update time (Lisbon). Not an open licence: the DGEG allows free use but forbids commercial
+       use. Included on Archie's decision for this non-commercial project; the licence line says so.
 
 One file per country, fuel/stations/<ISO3>.json, plus a small index fuel_stations.json the globe
 reads first. Each station is a compact array; prices are per litre with tax, as at the pump, in the
@@ -36,11 +39,11 @@ import feed_health as health
 
 UA = {'User-Agent': 'earth-observatory-feed (personal, non-commercial)',
       'Accept': 'application/json, text/csv, */*', 'Accept-Language': 'en;q=0.9, es;q=0.8, fr;q=0.8, it;q=0.8'}
-REFRESH_MINUTES = {'FRA': 50, 'ESP': 50, 'ITA': 360, 'MEX': 360}
+REFRESH_MINUTES = {'FRA': 50, 'ESP': 50, 'ITA': 360, 'MEX': 360, 'PRT': 180}
 MAX_AGE_DAYS = 30
 RANGE = (0.3, 4.5)          # euros per litre; outside is rejected
 SLOT_RANGE = {'PETROL': (0.8, 4.0), 'DIESEL': (0.8, 4.0), 'LPG': (0.3, 1.8)}   # tighter, per column
-MIN_STATIONS = {'FRA': 5000, 'ESP': 6000, 'ITA': 10000, 'MEX': 8000}
+MIN_STATIONS = {'FRA': 5000, 'ESP': 6000, 'ITA': 10000, 'MEX': 8000, 'PRT': 2000}
 ECB_DAILY = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml'
 SLOTS = ('PETROL', 'DIESEL', 'LPG')
 # flags: bit 0 motorway, bit 1 attended service only (no self-service price), bit 2 open 24 hours,
@@ -85,9 +88,23 @@ COUNTRIES = {
             'note': ('Stations in the northern and southern border regions pay VAT at 8% instead of 16% (a federal stimulus '
                      'extended to 31 December 2026), so many rank cheaper than the rest of Mexico. The CNE list gives each '
                      "station's registered price, not the date it last changed.")},
+    # Not an open licence: the DGEG portal allows free use but forbids commercial use. Added on Archie's
+    # decision (10 Oct 2026) because this project is non-commercial; the licence line says so wherever shown.
+    'PRT': {'url': ('https://precoscombustiveis.dgeg.gov.pt/api/PrecoComb/PesquisarPostos?idsTiposComb=&idMarca='
+                    '&idTipoPosto=&idDistrito=&idsMunicipios=&qtdPorPagina=100000&pagina=1'),
+            'name': 'Preços dos Combustíveis Online (Direção-Geral de Energia e Geologia, DGEG)',
+            'licence': 'DGEG terms: free use, commercial use prohibited (not an open licence)',
+            'attribution': ('Fonte: Direção-Geral de Energia e Geologia (DGEG), Preços dos Combustíveis Online, '
+                            'precoscombustiveis.dgeg.gov.pt. Utilização livre; proibida a utilização para fins comerciais.'),
+            'page': 'https://precoscombustiveis.dgeg.gov.pt/',
+            'fuels': {'PETROL': 'Gasolina simples 95', 'DIESEL': 'Gasóleo simples', 'LPG': 'GPL Auto'},
+            'zones': ['Mainland Portugal'], 'level': 4, 'cadence': 'updated by each station when its price changes',
+            'note': ("Portugal's station prices may be used freely but not for commercial purposes (DGEG terms). "
+                     'The service covers mainland Portugal; the Azores and Madeira set prices separately.')},
 }
 BOUNDS = {'FRA': (-5.3, 41.2, 9.7, 51.2), 'ESP': (-18.5, 27.5, 4.5, 44.0), 'ITA': (6.5, 35.4, 18.6, 47.2),
-          'MEX': (-118.5, 14.4, -86.6, 32.8)}
+          'MEX': (-118.5, 14.4, -86.6, 32.8),
+          'PRT': (-9.6, 36.9, -6.1, 42.2)}
 
 
 def get(url, tries=3):
@@ -325,6 +342,42 @@ def eur_rate(ccy, files=None):
     return None, None
 
 
+# ---------------- Portugal ----------------
+PT_SLOT = {'Gasolina simples 95': 'PETROL', 'Gasóleo simples': 'DIESEL', 'GPL Auto': 'LPG'}
+PT_EXTRA = ['Gasolina especial 95', 'Gasolina 98', 'Gasolina especial 98', 'Gasóleo especial']
+PT_TZ = ZoneInfo('Europe/Lisbon')
+
+
+def parse_pt(blob, now):
+    """DGEG PesquisarPostos: one row per station and fuel, prices as '1,789 €', local update times."""
+    j = json.loads(blob)
+    rows = j.get('resultado') if isinstance(j, dict) else None
+    if not j.get('status') or not isinstance(rows, list): raise ValueError('Portugal: unexpected response')
+    acc, newest = {}, None
+    for r in rows:
+        fuel = r.get('Combustivel')
+        if fuel not in PT_SLOT and fuel not in PT_EXTRA: continue      # coloured diesel, heating oil, gas
+        lat, lon = coord(r.get('Latitude')), coord(r.get('Longitude'))
+        if not inside('PRT', lon, lat): continue
+        p = price(str(r.get('Preco') or '').replace('€', ''))
+        try: t = datetime.datetime.strptime(str(r.get('DataAtualizacao')).strip(), '%Y-%m-%d %H:%M').replace(tzinfo=PT_TZ)
+        except ValueError: continue
+        if p is None or (now - t).days > MAX_AGE_DAYS: continue
+        sid = str(r.get('Id'))
+        brand = (r.get('Marca') or '').strip()
+        if brand.lower() in ('', 'genérico', 'generico'): brand = (r.get('Nome') or '').strip()
+        s = acc.setdefault(sid, {'lon': lon, 'lat': lat, 'brand': brand, 'slot': {}, 'extra': {}, 'updated': None,
+                                 'flags': MOTORWAY if r.get('TipoPosto') == 'Auto-estrada' else 0, 'id': sid,
+                                 'town': (r.get('Localidade') or r.get('Municipio') or '').strip(),
+                                 'address': ', '.join(x.strip() for x in str(r.get('Morada') or '').splitlines() if x.strip())})
+        if fuel in PT_SLOT: s['slot'][PT_SLOT[fuel]] = p
+        else: s['extra'][PT_EXTRA.index(fuel)] = p
+        s['updated'] = max(s['updated'] or t, t)
+        newest = max(newest or t, t)
+    out = [dict(s, extra=[[k, v] for k, v in sorted(s['extra'].items())]) for s in acc.values()]
+    return out, PT_EXTRA, newest
+
+
 # ---------------- output ----------------
 
 def quantiles(vals):
@@ -387,6 +440,7 @@ def collect(iso, now, files=None):
     if iso == 'MEX':
         places, prices = f.get('MEX') or (get(COUNTRIES['MEX']['url'][0]), get(COUNTRIES['MEX']['url'][1]))
         return parse_mx(places, prices, now)
+    if iso == 'PRT': return parse_pt(f.get('PRT') or get(COUNTRIES['PRT']['url']), now)
     raise KeyError(iso)
 
 
@@ -448,7 +502,7 @@ def main(files=None, now=None):
     note = ('Pump prices with tax at individual stations, per litre in euros (Mexico: pesos). Prices older than '
             f'{MAX_AGE_DAYS} days are left out where the source dates them.')
     if failed: note += ' Kept previous data for: ' + ', '.join(failed) + '.'
-    health.publish('fuel_stations', payload, 'Government fuel price feeds: France, Spain, Italy, Mexico', 'reported', note)
+    health.publish('fuel_stations', payload, 'Government fuel price feeds: France, Spain, Italy, Mexico, Portugal', 'reported', note)
     print('fuel_stations: updated', done or 'none', '| failed', failed or 'none')
 
 
@@ -458,6 +512,7 @@ def files_from_dir(d):
     out = {'FRA': gz('fr_instant_json.gz'), 'ESP': gz('es_stations.json.gz'),
            'ITA': (gz('it_anagrafica.csv.gz'), gz('it_prezzo_alle_8.csv.gz'))}
     if (d / 'mx_places.xml.gz').exists(): out['MEX'] = (gz('mx_places.xml.gz'), gz('mx_prices.xml.gz'))
+    if (d / 'dgeg_postos.json.gz').exists(): out['PRT'] = gz('dgeg_postos.json.gz')
     if (d / 'ecb_daily.xml').exists(): out['ecb'] = (d / 'ecb_daily.xml').read_bytes()
     return out
 

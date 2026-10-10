@@ -1,4 +1,4 @@
-"""Station-level fuel prices: France, Spain, Italy, Mexico.
+"""Station-level fuel prices: France, Spain, Italy, Mexico, Portugal.
 
 Fixtures in fixtures/stations/ are cut from the real feeds downloaded on 10 Oct 2026:
 - fr_instant.json.gz: prix-carburants instant feed v2 (data.gouv.fr, Licence Ouverte 2.0), 50 stations
@@ -11,6 +11,9 @@ Fixtures in fixtures/stations/ are cut from the real feeds downloaded on 10 Oct 
   product, two with a 0.01 peso price), plus three made-up entries: a station with no price, one at 0,0 and a
   price for a station that is not in the list.
 - ecb_daily.xml: the ECB daily reference-rate file, shortened to three currencies.
+- pt_postos.json: the DGEG's PesquisarPostos response (free use, no commercial use), 51 stations and 221 rows,
+  including motorway and unbranded stations, an address over two lines, prices from 2025, coloured diesel
+  and biodiesel rows that are not road fuels. Records unchanged.
 """
 import datetime, gzip, json, pathlib, sys, tempfile, unittest
 from unittest.mock import patch
@@ -20,7 +23,7 @@ import fetch_fuel_stations as st
 
 FIX = pathlib.Path(__file__).resolve().parent / 'fixtures' / 'stations'
 NOW = datetime.datetime(2026, 10, 10, 4, 37, tzinfo=datetime.UTC)
-LOW = {'FRA': 20, 'ESP': 20, 'ITA': 20, 'MEX': 20}
+LOW = {'FRA': 20, 'ESP': 20, 'ITA': 20, 'MEX': 20, 'PRT': 20}
 
 
 def samples():
@@ -28,6 +31,7 @@ def samples():
             'ESP': (FIX / 'es_stations.json').read_bytes(),
             'ITA': ((FIX / 'it_anagrafica.csv').read_bytes(), (FIX / 'it_prezzo_alle_8.csv').read_bytes()),
             'MEX': ((FIX / 'mx_places.xml').read_bytes(), (FIX / 'mx_prices.xml').read_bytes()),
+            'PRT': (FIX / 'pt_postos.json').read_bytes(),
             'ecb': (FIX / 'ecb_daily.xml').read_bytes()}
 
 
@@ -48,10 +52,10 @@ class StationTests(unittest.TestCase):
     def run_all(self, files=None):
         self.assertTrue(health.run('fuel_stations', lambda: st.main(files or samples(), NOW)))
 
-    def test_four_countries_publish_with_index(self):
+    def test_five_countries_publish_with_index(self):
         self.run_all()
         idx = self.data('fuel_stations')
-        self.assertEqual(set(idx['countries']), {'FRA', 'ESP', 'ITA', 'MEX'})
+        self.assertEqual(set(idx['countries']), {'FRA', 'ESP', 'ITA', 'MEX', 'PRT'})
         for iso, c in idx['countries'].items():
             self.assertEqual(c['file'], f'fuel/stations/{iso}.json')
             self.assertEqual(c['count'], len(self.country(iso)['items']))
@@ -135,6 +139,24 @@ class StationTests(unittest.TestCase):
         self.assertEqual(st.mx_published(before).date(), datetime.date(2026, 10, 9))
         self.assertEqual(st.mx_published(after).date(), datetime.date(2026, 10, 10))
 
+    def test_portugal_columns_brands_addresses_and_age(self):
+        self.run_all()
+        j = self.country('PRT')
+        self.assertEqual(j['fuels'], {'PETROL': 'Gasolina simples 95', 'DIESEL': 'Gasóleo simples', 'LPG': 'GPL Auto'})
+        self.assertIn('commercial use prohibited', j['licence']); self.assertIn('fins comerciais', j['attribution'])
+        self.assertIn('Azores', j['note']); self.assertEqual(j['currency'], 'EUR'); self.assertEqual(j['zones'], ['Mainland Portugal'])
+        by_id = {r[8]: r for r in j['items']}
+        mw = by_id['86964']
+        self.assertTrue(mw[3] & st.MOTORWAY)
+        self.assertEqual((mw[4], mw[6]), (2.119, 0.939)); self.assertIsNone(mw[5])
+        self.assertEqual(mw[11], [[0, 2.084], [3, 2.179]])          # biodiesel B15 is not a road fuel here
+        self.assertEqual(j['brands'][by_id['68221'][2]], 'PA PETROZONA São João da Madeira')   # 'Genérico' -> station name
+        self.assertEqual(by_id['87129'][10], 'Urb. Terras Compridas, Lote 8, Estrada da Várzea')
+        old = by_id.get('66968')
+        self.assertTrue(old is None or not any(k == 2 for k, _ in (old[11] or [])), 'a 2025 price is not current')
+        self.assertTrue(all(-9.6 <= r[0] <= -6.1 and 36.9 <= r[1] <= 42.2 for r in j['items']))
+        self.assertTrue(all(r[7] for r in j['items']))
+
     def test_implausible_column_value_is_dropped(self):
         files = samples()
         fr = json.loads(files['FRA']); fr[5]['gazole_prix'] = '9.999'; fr[6]['gplc_prix'] = '2.31'
@@ -152,7 +174,7 @@ class StationTests(unittest.TestCase):
 
     def test_too_few_stations_refused(self):
         with patch.dict(st.MIN_STATIONS, {'ESP': 10000}):
-            files = samples(); del files['FRA'], files['ITA'], files['MEX']
+            files = samples(); del files['FRA'], files['ITA'], files['MEX'], files['PRT']
             self.assertFalse(health.run('fuel_stations', lambda: st.main(files, NOW)))
 
     def test_recent_country_not_downloaded_again(self):
