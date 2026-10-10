@@ -1,7 +1,7 @@
 """Atomic data and public health reports; never expose credential-bearing errors."""
 import datetime, json, os, pathlib, tempfile
 OUT = pathlib.Path(__file__).resolve().parents[1] / 'data'
-EXPECTED = ('quakes','storms','alerts','space','fires','flights','sats','lightning','ships','fishing','outages')
+EXPECTED = ('quakes','storms','alerts','space','fires','flights','sats','lightning','ships','fishing','outages','fuel')
 
 def now():
     return datetime.datetime.now(datetime.UTC).isoformat(timespec='seconds')

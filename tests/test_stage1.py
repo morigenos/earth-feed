@@ -58,9 +58,12 @@ class FeedTests(unittest.TestCase):
         response=Mock();response.json.return_value={'features':[feature]}
         with patch.object(feeds,'get',return_value=response):feeds.alerts()
         self.assertEqual(self.data('alerts')['items'][0]['t'],'fire')
+        # An empty collection from both GDACS endpoints is treated as an outage, not as
+        # "no hazards": the previous file stays and health reports the failure.
         response.json.return_value={'features':[]}
-        with patch.object(feeds,'get',return_value=response):feeds.alerts()
-        self.assertEqual(self.data('alerts')['items'],[])
+        with patch.object(feeds,'get',return_value=response):self.assertFalse(health.run('alerts',feeds.alerts))
+        self.assertEqual(self.data('alerts')['items'][0]['t'],'fire')
+        self.assertEqual(self.data('health')['datasets']['alerts']['status'],'failed')
     def test_lightning_no_files_is_failure(self):
         # No dependency or network is required to test the missing-file branch.
         with patch.dict(sys.modules,{'netCDF4':Mock()}),patch.object(lightning,'list_keys',return_value=[]):

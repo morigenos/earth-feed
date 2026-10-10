@@ -25,19 +25,26 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: pip install requests numpy netCDF4
+      - run: pip install requests numpy netCDF4 openpyxl
 
       # Data now lives only on the gh-pages branch, published as a single commit.
       # Bring back the last published copy so collectors can keep "last good" data,
       # the 6-hour satellite cache and the Deep Time reconstructions.
+      # Only a branch that truly does not exist may start from main's data folder. Any other
+      # failure (network, permissions) fails this step, and the publish step below then refuses
+      # to run, so a blip can never force-push main's frozen data over the live site.
       - name: Restore last published data
+        id: restore
         run: |
-          if git fetch --depth=1 origin gh-pages 2>/dev/null; then
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git fetch --depth=1 origin gh-pages
             rm -rf data
             git checkout origin/gh-pages -- data
             git reset -q
             echo "restored $(find data -type f | wc -l) files from gh-pages"
           else
+            code=$?
+            if [ "$code" -ne 2 ]; then echo "could not reach gh-pages (git exit $code); stopping before anything is published"; exit 1; fi
             echo "no gh-pages branch yet, starting from the data folder on main"
           fi
 
@@ -66,6 +73,11 @@ jobs:
         continue-on-error: true
         run: python scripts/fetch_coral.py
 
+      - name: EU fuel prices (Weekly Oil Bulletin; downloads at most every 12 hours)
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scripts/fetch_fuel_eu.py
+
       - name: Deep Time reconstructions (caches; fetches at most 40 new ages per run)
         continue-on-error: true
         timeout-minutes: 8
@@ -79,7 +91,7 @@ jobs:
       # Force-pushing a single commit means the branch never accumulates history,
       # so the repository stays small no matter how often this runs.
       - name: Publish site
-        if: always()
+        if: always() && steps.restore.outcome == 'success'
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

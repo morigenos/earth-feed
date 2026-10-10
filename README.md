@@ -47,6 +47,7 @@ pushes these files, and prints the feed address to paste into Earth Now.
 | `fishing.json` | Global Fishing Watch effort (token needed) | calculated | 15 min, data is days behind |
 | `outages.json` | IODA internet disruption alerts | reported | 15 min |
 | `sats.json` | CelesTrak orbital elements (OMM JSON) for stations, weather, navigation, Earth observation, science and 300 Starlink | calculated | every 6 h |
+| `fuel.json` + `fuel/history/` | EU Weekly Oil Bulletin: 95, diesel, LPG by country, with and without taxes; weekly history since 2005 | reported | checked twice a day, data weekly |
 | `lightning.json` | GOES GLM flashes, past ~20 min | observed | 15 min |
 | `index.json` | List of available files | reference | every run |
 
