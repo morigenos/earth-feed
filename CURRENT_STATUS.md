@@ -34,7 +34,8 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
   own snapshot (bulletin of 5 Oct 2026, history since 2005).
 - Fuel timeline (10 Oct 2026): scrub or play the fuel map through the bulletins (2 years, 5 years, since 2005),
   1-year change metric, 1/3/5-year changes in the country panel. Selecting a country flies to it and pauses
-  auto-rotation until the selection is cleared.
+  auto-rotation until the selection is cleared. A Fuel ranking window in the dock ranks the EU countries for the
+  fuel, metric and date on the map and re-sorts as the timeline plays.
 - Published page: https://claude.ai/artifact/HBtwLbZx8kKKbZ3c1RVzDh
 - Roadmap: https://claude.ai/artifact/1zi4qa2CYpQqieQZNSDNB7
 

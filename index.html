@@ -323,6 +323,22 @@ body.cine.settled .cn-hint{opacity:0}
 .fchg b{font-weight:600;font-variant-numeric:tabular-nums}
 #fuelStamp{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;pointer-events:none}
 #fuelStamp[hidden]{display:none}
+#wFuelRank[hidden]{display:none}
+.frank{position:relative;margin-top:2px;transition:height .35s ease}
+.frank .zero{position:absolute;top:0;bottom:0;left:calc(100px + (100% - 170px) / 2);width:1px;background:rgba(255,255,255,.22)}
+.frank .zero[hidden]{display:none}
+.frow{position:absolute;left:0;right:0;top:0;height:16px;display:grid;grid-template-columns:94px 1fr 64px;gap:6px;align-items:center;background:none;border:0;padding:0;font-size:11.5px;text-align:left;transition:transform .35s ease;cursor:pointer}
+.frow[hidden]{display:none}
+.frow .fn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.frow .fb{position:relative;height:9px}
+.frow .fb i{position:absolute;top:0;bottom:0;border-radius:3px;transition:width .35s ease,left .35s ease,background-color .35s}
+.frow .fv{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.frow.eu{cursor:default}
+.frow.eu .fn{color:var(--ink);font-style:italic}
+.frow.eu .fb i{background:repeating-linear-gradient(90deg,#9AA8BC 0 4px,transparent 4px 7px)}
+.frow.sel .fn{color:#9AE8FF;font-weight:600}
+.frow:not(.eu):hover .fn{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){ .frow,.frow .fb i,.frank{transition:none} }
 #fuelStamp b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.2vw,58px);line-height:1;letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.75)}
 #fuelStamp span{display:block;font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:.03em;text-shadow:0 1px 8px rgba(0,0,0,.9)}
 @media (max-width:760px){ #fuelStamp{top:auto;bottom:150px} #fuelStamp b{font-size:30px} }
@@ -407,6 +423,10 @@ body.cine.settled .cn-hint{opacity:0}
   <section class="win min" style="--dc:#7FE3C0" id="wPlace">
     <button class="win-t" aria-expanded="false"><span class="gl">⌖</span><span class="wn">Selected place</span><span class="ws" id="placeSum">none</span><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></button>
     <div class="win-b" id="placeBody"><div class="empty">Click the globe or search for a country to see its details and what is happening there.</div></div>
+  </section>
+  <section class="win" style="--dc:#EF8A32" id="wFuelRank" hidden>
+    <button class="win-t" aria-expanded="true"><span class="gl">€</span><span class="wn">Fuel ranking</span><span class="ws" id="fuelRankSum"></span><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></button>
+    <div class="win-b"><div class="frank" id="fuelRank" role="list" aria-label="EU countries ranked by the fuel value on the map"></div><div class="fine" id="fuelRankNote"></div></div>
   </section>
   <section class="win min" style="--dc:#9AD8FF" id="wSrc">
     <button class="win-t" aria-expanded="false"><span class="gl">⇅</span><span class="wn">Data sources</span><span class="ws" id="srcSum"></span><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></button>
@@ -1290,6 +1310,7 @@ function fuelFmt(v,metric){
 }
 function fuelName(k){ const f=FUEL_TYPES.find(x=>x[0]===k); return f?f[1]:k; }
 function drawFuel(){
+  fuelRankSync();
   if(!L.fuel||!L.fuel.on||!state.fuel||!NE) return;
   const ms=fuelNow(), {fuel,metric}=fuelUI;
   if(!fuelHatch){
@@ -1436,6 +1457,7 @@ function fuelTimelineSync(){
   const n=$('fuelLatest'); if(n) n.disabled=fuelUI.at==null;
 }
 function fuelStampSync(){
+  fuelRankSync();
   let el=$('fuelStamp');
   const show=!!(L.fuel&&L.fuel.on&&fuelUI.at!=null&&state.view==='earth');
   if(!el){ if(!show) return; el=document.createElement('div'); el.id='fuelStamp'; document.body.appendChild(el); }
@@ -1544,6 +1566,73 @@ function fuelPlaceHTML(c){
     ${fuelChangesHTML(area)}
     ${fuelSpark(area,c.n)}
     <div class="fine">${esc(fuelName(fuelUI.fuel))}, with taxes, ${r&&r[2]?'last '+r[1]:'since 2005'} (the timeline range). National average of the most frequently charged prices; stations differ. Source: European Commission, Weekly Oil Bulletin (reproduction authorised with acknowledgement).${F.full[area]?'':' Chart from the embedded snapshot: monthly points before the last two years.'}</div></div>`;
+}
+/* ---- fuel ranking race (Stage 6) ---- */
+// A dock window listing the EU countries from the highest value down, for the fuel, metric and
+// date on the map. Rows slide to their new place as the timeline plays. Click a row to focus it.
+const FUEL_ROW=16;
+const fuelRankEls=new Map();
+let fuelRankNames=null;
+function fuelRankName(a){
+  if(a==='EU') return 'EU average';
+  if(!fuelRankNames){ fuelRankNames=new Map(); if(NE) NE.countries.forEach(c=>fuelRankNames.set(c.a3,c.n)); }
+  return fuelRankNames.get(a)||a;
+}
+function fuelShort(v,metric){
+  if(metric==='tax') return Math.round(v*100)+'%';
+  if(fuelIsDiv(metric)) return fuelPct(v);
+  return '€'+v.toFixed(3);
+}
+function fuelRankSync(){
+  const win=$('wFuelRank'); if(!win) return;
+  const on=!!(L.fuel&&L.fuel.on&&state.fuel&&state.view==='earth');
+  win.hidden=!on; if(!on) return;
+  const box=$('fuelRank'); if(!box) return;
+  const F=state.fuel, ms=fuelNow(), {fuel,metric}=fuelUI, div=fuelIsDiv(metric);
+  const areas=[...new Set([...(F.latest.items||[]).map(i=>i[0]),...(F.latest.stale||[]).map(s=>s[0])])];
+  const rows=[];
+  for(const a of areas){ const m=fuelMetric(a,fuel,metric,ms); if(m) rows.push({a,v:m.v,t:m.t}); }
+  const eu=fuelMetric('EU',fuel,metric,ms); if(eu) rows.push({a:'EU',v:eu.v,t:eu.t,eu:true});
+  rows.sort((x,y)=>y.v-x.v||(x.a<y.a?-1:1));
+  const [d0,d1]=fuelDomain(metric,fuel), full=div?Math.max(Math.abs(d0),Math.abs(d1))*1.25:d1*1.12;
+  let zero=box.querySelector('.zero');
+  if(div&&!zero){ zero=document.createElement('div'); zero.className='zero'; box.appendChild(zero); }
+  if(zero) zero.hidden=!div;
+  const seen=new Set();
+  rows.forEach((r,i)=>{
+    let el=fuelRankEls.get(r.a);
+    if(!el){
+      el=document.createElement('button'); el.type='button'; el.className='frow'+(r.eu?' eu':''); el.dataset.a3=r.a;
+      el.innerHTML='<span class="fn"></span><span class="fb"><i></i></span><span class="fv"></span>';
+      el.querySelector('.fn').textContent=fuelRankName(r.a);
+      el.style.transform=`translateY(${i*FUEL_ROW}px)`;
+      box.appendChild(el); fuelRankEls.set(r.a,el);
+    }
+    seen.add(r.a);
+    el.hidden=false;
+    el.style.transform=`translateY(${i*FUEL_ROW}px)`;
+    el.classList.toggle('sel',!!(geo.sel&&geo.sel.a3===r.a));
+    const bar=el.querySelector('.fb i'), [cr,cg,cb]=fuelColor(metric,fuel,r.v);
+    if(div){ const x=Math.max(-1,Math.min(1,r.v/full)); bar.style.left=(x>=0?50:50+x*50)+'%'; bar.style.width=Math.abs(x)*50+'%'; }
+    else { bar.style.left='0%'; bar.style.width=Math.max(0,Math.min(1,r.v/full))*100+'%'; }
+    if(!r.eu) bar.style.background=`rgb(${cr},${cg},${cb})`;
+    el.querySelector('.fv').textContent=fuelShort(r.v,metric);
+    el.title=`${fuelRankName(r.a)}: ${fuelFmt(r.v,metric)}, bulletin of ${dstr(new Date(r.t))}`;
+  });
+  fuelRankEls.forEach((el,a)=>{ if(!seen.has(a)) el.hidden=true; });
+  box.style.height=rows.length*FUEL_ROW+'px';
+  const newest=rows.reduce((m,r)=>Math.max(m,r.t),0);
+  const sum=$('fuelRankSum'); if(sum) sum.textContent=newest?dstr(new Date(newest)):'';
+  const m=FUEL_METRICS.find(x=>x[0]===metric);
+  const note=$('fuelRankNote');
+  if(note) note.textContent=rows.length?`${fuelName(fuel)}, ${m?m[1].toLowerCase():''}, highest first. Dashed: EU weighted average. Click a country to focus it.`:`No ${fuelName(fuel)} values for this date.`;
+}
+function fuelBindRank(){
+  const box=$('fuelRank'); if(!box) return;
+  box.addEventListener('click',e=>{
+    const row=e.target.closest('.frow'); if(!row||row.dataset.a3==='EU'||!NE) return;
+    const c=NE.countries.find(x=>x.a3===row.dataset.a3); if(c) selectCountry(c,true);
+  });
 }
 function drawGeo(){
   gx.clearRect(0,0,4096,2048);
@@ -3973,7 +4062,7 @@ if(innerWidth/innerHeight<1){ cam.dist=cam.tDist=clampD(3.9*0.85/(innerWidth/inn
     });
   }
 })();
-fuelInit();
+fuelInit(); fuelBindRank();
 state.restoring=true;
 (async()=>{
   let saved=null; try{ saved=JSON.parse($('portableIsland').textContent); }catch(e){}
