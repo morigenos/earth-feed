@@ -36,6 +36,11 @@ Every file is a JSON object carrying at least:
 | `paleo/<MODEL>_<age>.json` | `{age, model, features: GeoJSON}` | ages every 10 Ma (20 for CAO2024) |
 | `fuel.json` | `[iso3, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPerL]` | `fuel` ∈ GASOLINE_95, DIESEL, LPG; plus `validTime` (bulletin date), `ref` (EU and euro-area averages), `stale` (`[iso3, lastDate]`, history only), `attribution` |
 | `fuel/history/<ISO3>.json` | `{dates:[yyyymmdd…], series:{FUEL:{tax:[…], net:[…]}}}` | weekly since 2005, ascending, EUR/L, `null` where not reported; also `EU.json` and `EUR.json` |
+| `fuel_world.json` | `[area, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPrice, localUnit, gradeLabel]` | areas USA, GBR, CAN, NZL, MYS and the sub-area `MYS-E` (Sabah, Sarawak, Labuan); plus `standard` (area → standard petrol id), `sources` (per source: name, licence, attribution, url, cadence, maxAgeDays, level, fetched), `asOf`, `extra` (Malaysia's subsidised RON95) |
+| `fuel/history/<AREA>.json` (national) | as above, plus `grades`, `unit`, `source`, `attribution`, `maxAgeDays` | same path as the EU histories; written by `fetch_fuel_world.py` for its areas; Canada monthly since 2006 |
+| `fuel_stations.json` | `[iso3, stationCount, validTime]` | plus `countries` (per country: source, licence, attribution, url, level, cadence, validTime, fuels, zones, stats, bbox, fetched, maxAgeDays, file, count, bytes) |
+| `fuel/stations/<ISO3>.json` | `[lon, lat, brandIdx\|-1, flags, petrol\|null, diesel\|null, lpg\|null, updatedEpoch, id, town, address, extra\|null]` | FRA, ESP, ITA; plus `brands`, `fuels`, `extraFuels`, `zones`, `fields`, `flagBits`, `stats` |
+| `fuel/fx.json` | `{CCY: [[yyyymmdd…], [rate…]]}` | cache of ECB euro reference rates, used when the ECB is unreachable |
 | `health.json` | `{datasets: {name: {status, lastAttempt, lastSuccess, recordCount, validTime}}}` | `status` ∈ ok, not_configured, error strings |
 | `index.json` | `{files: [...]}` | manifest |
 
@@ -64,3 +69,31 @@ Every file is a JSON object carrying at least:
 - `validTime` is the bulletin date (a Monday), never the fetch time. The page treats the layer as stale
   after `staleAfterDays` (21: the Commission skips weeks around holidays).
 - Attribution is required: "Source: European Commission, Weekly Oil Bulletin."
+- The United Kingdom is not in `fuel.json` any more: `fetch_fuel_world.py` owns `GBR` and its history
+  (DESNZ weekly series since 2003), so the bulletin's frozen UK rows never overwrite it.
+
+## National fuel prices outside the EU (`fuel_world.json`)
+
+- Fuel ids: `GASOLINE_95`, `GASOLINE_91`, `GASOLINE_97`, `GASOLINE_REGULAR` (US and Canadian regular, 87 AKI,
+  about 91 RON), `GASOLINE_PREMIUM`, `DIESEL`, `LPG`. `standard` names the petrol a country's petrol map uses;
+  absent means `GASOLINE_95`. Every item carries its own `gradeLabel`, shown to the reader as is.
+- Euros per litre at the ECB reference rate on the observation date (monthly average for Canada's monthly
+  data). `localPrice` is in the national currency per `localUnit` (`gal` for the US, `L` elsewhere).
+- `eurPerLExTax` is `null` where the source publishes no tax split (US, Canada, Malaysia).
+- `maxAgeDays` per source decides when a value stops showing on the map: 35 for weekly sources, 100 for
+  Statistics Canada (monthly, about seven weeks behind).
+- Sub-areas use `ISO3-X` keys (`MYS-E`); the globe paints them over the matching part of the country.
+- Each source's `attribution` and `licence` must be shown wherever its numbers are.
+
+## Station prices (`fuel_stations.json`, `fuel/stations/`)
+
+- France (prix-carburants, Licence Ouverte 2.0), Spain (MITECO Geoportal, reuse with attribution),
+  Italy (MIMIT Osservatorio prezzi, IODL 2.0). Pump prices with tax, euros per litre, three decimals.
+- `flags`: bit 0 motorway, bit 1 attended service only, bit 2 open 24 hours; `flags >> 3` is the zone index
+  into `zones` (Spain: mainland and Balearics, Canary Islands, Ceuta and Melilla, ranked separately).
+- Columns `petrol`, `diesel`, `lpg` hold each country's standard product (labels in `fuels`);
+  other products are `extra` pairs `[extraFuelIdx, price]` with names in `extraFuels`.
+- `updatedEpoch` is the station's own last price change, epoch seconds UTC. France publishes Paris local
+  time labelled as UTC; the collector reads it as Europe/Paris.
+- Prices older than `maxAgeDays` (30) and prices outside a plausible range per product are dropped
+  (`rejected` counts them). A country whose feed returns too few stations keeps its previous file.

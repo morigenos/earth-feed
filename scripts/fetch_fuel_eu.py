@@ -28,7 +28,7 @@ SOURCE = 'European Commission, Weekly Oil Bulletin (prices history since 2005)'
 SOURCE_ID = 'eu_wob'
 ATTRIBUTION = 'Source: European Commission, Weekly Oil Bulletin. Reproduction authorised with acknowledgement.'
 # A country whose newest value is older than this, relative to the newest bulletin,
-# is history only (for example the United Kingdom after December 2020).
+# is history only.
 STALE_DAYS = 35
 MIN_CURRENT_COUNTRIES = 20
 
@@ -40,6 +40,10 @@ ISO3 = {'AT': 'AUT', 'BE': 'BEL', 'BG': 'BGR', 'CY': 'CYP', 'CZ': 'CZE', 'DE': '
         'NL': 'NLD', 'PL': 'POL', 'PT': 'PRT', 'RO': 'ROU', 'SE': 'SWE', 'SI': 'SVN', 'SK': 'SVK',
         'UK': 'GBR', 'GB': 'GBR'}
 AGGREGATES = {'EU': 'EU', 'EUR': 'EUR'}   # EU weighted average and euro-area average
+# Areas another collector owns. The bulletin stopped reporting the United Kingdom in December
+# 2020; fetch_fuel_world.py publishes the UK's own weekly series (DESNZ, 2003 onward) under GBR,
+# so this collector writes neither a history file nor a stale entry for it.
+OWNED_ELSEWHERE = {'GBR'}
 # Currencies of members still outside the euro, used only for the local-price line.
 LOCAL_CCY = {'BG': 'BGN', 'CZ': 'CZK', 'DK': 'DKK', 'HU': 'HUF', 'PL': 'PLN', 'RO': 'RON',
              'SE': 'SEK', 'HR': 'HRK', 'UK': 'GBP', 'GB': 'GBP'}
@@ -151,6 +155,8 @@ def build(parsed):
         area = ISO3.get(code) or AGGREGATES.get(code)
         if not area:
             unknown.append(code); continue
+        if area in OWNED_ELSEWHERE:
+            continue
         hist = {'dates': [int(d.strftime('%Y%m%d')) for d in dates], 'series': {}}
         for fuel, kinds in fuels.items():
             tax, net = kinds.get('tax', [None] * len(dates)), kinds.get('net', [None] * len(dates))

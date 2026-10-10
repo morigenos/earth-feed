@@ -1,6 +1,6 @@
 # Current status
 
-Last verified: 20 September 2026, against a live workflow run. Fuel row and globe section updated 10 October 2026 (fuel verified locally, not yet by a scheduled run).
+Last verified: 20 September 2026, against a live workflow run. Fuel rows and globe section updated 10 October 2026 (the national and station collectors ran against the live sources on GitHub's runners from a test branch; not yet by a scheduled run).
 
 ## Feed repository
 
@@ -15,6 +15,8 @@ Last verified: 20 September 2026, against a live workflow run. Fuel row and glob
 | flights | ok | 5,000 | OpenSky, anonymous access working |
 | outages | ok | 0 | IODA reported nothing in the window |
 | fuel | pending first scheduled run | 73 | 27 EU states, bulletin of 5 Oct 2026; verified locally against the Commission workbook, 10 Oct 2026 |
+| fuel_world | pending first scheduled run | 13 | US, UK, Canada, New Zealand, Malaysia (plus East Malaysia diesel); live run on GitHub, 10 Oct 2026 |
+| fuel_stations | pending first scheduled run | 42,257 | France 9,194, Spain 11,462, Italy 21,601 stations; live run on GitHub, 10 Oct 2026 |
 | fires | not configured | — | needs `FIRMS_KEY` |
 | ships | not configured | — | no collector: free AIS is websocket-only |
 | fishing | not configured | — | needs `GFW_TOKEN` |
@@ -36,6 +38,11 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
   1-year change metric, 1/3/5-year changes in the country panel. Selecting a country flies to it and pauses
   auto-rotation until the selection is cleared. A Fuel ranking window in the dock ranks the EU countries for the
   fuel, metric and date on the map and re-sorts as the timeline plays.
+- Fuel beyond the EU (10 Oct 2026): national averages for the US, UK, Canada, New Zealand and Malaysia on the same
+  map, each country's standard petrol named (° in the ranking where it is about 91 RON), East Malaysia's diesel
+  painted separately, local currency in the country panel. Selecting France, Spain or Italy, or zooming close,
+  shows its stations as dots ranked cheap to dear within their area; click one for its prices. The page embeds a
+  station snapshot (10 Oct 2026) for when the feed is out of reach.
 - Published page: https://claude.ai/artifact/HBtwLbZx8kKKbZ3c1RVzDh
 - Roadmap: https://claude.ai/artifact/1zi4qa2CYpQqieQZNSDNB7
 
@@ -45,3 +52,4 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
 2. Ships need a separate collector, since free AIS streams over websockets.
 3. Pipelines and submarine cables remain blocked on licence and a dead data source.
 4. Fuel: Phase 1b (GlobalPetrolPrices, private channel) waits on written licence terms; see the fuel plan in the project folder.
+5. Fuel: Statistics Canada publishes only regular petrol nationally; diesel and premium are city-level and not used yet.
