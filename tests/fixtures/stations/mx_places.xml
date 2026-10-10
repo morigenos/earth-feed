@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<places>
+  <place place_id="11703">
+    <name>SERVICIO LAS TORRES SUR SA DE CV</name>
+    <cre_id>PL/9999/EXP/ES/2015</cre_id>
+    <location>
+      <x>-101.6634</x>
+      <y>21.14916</y>
+    </location>
+  </place>
+  <place place_id="11702">
+    <name>VIGO HIDROCARBUROS SA DE CV</name>
+    <cre_id>PL/9998/EXP/ES/2015</cre_id>
+    <location>
+      <x>-107.7192</x>
+      <y>24.75731</y>
+    </location>
+  </place>
+  <place place_id="11701">
+    <name>ENERGETICOS VALLE HERMOSO SA DE CV</name>
+    <cre_id>PL/9997/EXP/ES/2015</cre_id>
+    <location>
+      <x>-97.50779</x>
+      <y>25.84436</y>
+    </location>
+  </place>
+  <place place_id="11700">
+    <name>CARLOS CESARIN ORTEGA TRUJILLO</name>
+    <cre_id>PL/9996/EXP/ES/2015</cre_id>
+    <location>
+      <x>-92.89879</x>
+      <y>16.54859</y>
+    </location>
+  </place>
+  <place place_id="11699">
+    <name>GASOLINERA EL COYOTE SA DE CV</name>
+    <cre_id>PL/9995/EXP/ES/2015</cre_id>
+    <location>
+      <x>-112.1722</x>
+      <y>30.72127</y>
+    </location>
+  </place>
+  <place place_id="11697">
+    <name>LOS CAFETOS DE FORTIN SA DE CV</name>
+    <cre_id>PL/9993/EXP/ES/2015</cre_id>
+    <location>
+      <x>-96.98308</x>
+      <y>18.90257</y>
+    </location>
+  </place>
+  <place place_id="11695">
+    <name>SERVICIO LOS CAFETOS SA DE CV</name>
+    <cre_id>PL/9991/EXP/ES/2015</cre_id>
+    <location>
+      <x>-96.96716</x>
+      <y>18.88644</y>
+    </location>
+  </place>
+  <place place_id="11694">
+    <name>GASOLINERIA LOS CAFETOS SA DE CV</name>
+    <cre_id>PL/9990/EXP/ES/2015</cre_id>
+    <location>
+      <x>-96.85984</x>
+      <y>18.85467</y>
+    </location>
+  </place>
+  <place place_id="3153">
+    <name>SERVICIO CIBOLA SA DE CV</name>
+    <cre_id>PL/999/EXP/ES/2015</cre_id>
+    <location>
+      <x>-115.4234</x>
+      <y>32.56962</y>
+    </location>
+  </place>
+  <place place_id="11693">
+    <name>SUPER GAS DE FORTIN SA DE CV</name>
+    <cre_id>PL/9989/EXP/ES/2015</cre_id>
+    <location>
+      <x>-96.9775</x>
+      <y>18.90248</y>
+    </location>
+  </place>
+  <place place_id="11692">
+    <name>SERVICIO Y COMBUSTIBLES NORORIENTAL S DE RL DE CV</name>
+    <cre_id>PL/9988/EXP/ES/2015</cre_id>
+    <location>
+      <x>-97.57682</x>
+      <y>19.84059</y>
+    </location>
+  </place>
+  <place place_id="11691">
+    <name>BELLAS ARTES GASOLINERA SA DE CV</name>
+    <cre_id>PL/9987/EXP/ES/2015</cre_id>
+    <location>
+      <x>-116.9167</x>
+      <y>32.54488</y>
+    </location>
+  </place>
+  <place place_id="11690">
+    <name>LUIS IGNACIO LIBREROS TREJO</name>
+    <cre_id>PL/9986/EXP/ES/2015</cre_id>
+    <location>
+      <x>-96.92522</x>
+      <y>18.88586</y>
+    </location>
+  </place>
+  <place place_id="11395">
+    <name>COMBUSTIBLES PLATANITO SA DE CV</name>
+    <cre_id>PL/9985/EXP/ES/2015</cre_id>
+    <location>
+      <x>-103.2458</x>
+      <y>20.44519</y>
+    </location>
+  </place>
+  <place place_id="11394">
+    <name>SERVICIOS GASOLINEROS DE MEXICO SA DE CV</name>
+    <cre_id>PL/9984/EXP/ES/2015</cre_id>
+    <location>
+      <x>-100.4155</x>
+      <y>20.64242</y>
+    </location>
+  </place>
+  <place place_id="11393">
+    <name>GASOLINERA LAS TRUCHAS SA DE CV</name>
+    <cre_id>PL/9983/EXP/ES/2015</cre_id>
+    <location>
+      <x>-102.2159</x>
+      <y>17.95762</y>
+    </location>
+  </place>
+  <place place_id="11392">
+    <name>OPERADORA ADCLA SA DE CV</name>
+    <cre_id>PL/9982/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.27259</x>
+      <y>19.54499</y>
+    </location>
+  </place>
+  <place place_id="11391">
+    <name>ESTACION DE SERVICIO PUERTA GRANDE S DE RL DE CV</name>
+    <cre_id>PL/9981/EXP/ES/2015</cre_id>
+    <location>
+      <x>-116.8113</x>
+      <y>32.46336</y>
+    </location>
+  </place>
+  <place place_id="11390">
+    <name>GASOLINERA FAZA SA DE CV</name>
+    <cre_id>PL/9980/EXP/ES/2015</cre_id>
+    <location>
+      <x>-106.143</x>
+      <y>28.72277</y>
+    </location>
+  </place>
+  <place place_id="2802">
+    <name>ESTACION DE SERVICIO PUERTA DE MEXICO S DE RL DE CV</name>
+    <cre_id>PL/998/EXP/ES/2015</cre_id>
+    <location>
+      <x>-116.9096</x>
+      <y>32.5456</y>
+    </location>
+  </place>
+  <place place_id="11389">
+    <name>CARBURANTES EL CARRIZO SA DE CV</name>
+    <cre_id>PL/9979/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.55907</x>
+      <y>27.51252</y>
+    </location>
+  </place>
+  <place place_id="11388">
+    <name>SERVICIO VILLANUEVA SA DE CV</name>
+    <cre_id>PL/9978/EXP/ES/2015</cre_id>
+    <location>
+      <x>-102.8845</x>
+      <y>22.36256</y>
+    </location>
+  </place>
+  <place place_id="11387">
+    <name>AUTOSERVICIO QUERETANO SA DE CV</name>
+    <cre_id>PL/9977/EXP/ES/2015</cre_id>
+    <location>
+      <x>-100.3441</x>
+      <y>20.65376</y>
+    </location>
+  </place>
+  <place place_id="11386">
+    <name>SERVICIOS LA VIRGEN SA DE CV</name>
+    <cre_id>PL/9976/EXP/ES/2015</cre_id>
+    <location>
+      <x>-100.0988</x>
+      <y>20.46232</y>
+    </location>
+  </place>
+  <place place_id="11385">
+    <name>MARGARITA SOLIS MUÑIZ</name>
+    <cre_id>PL/9975/EXP/ES/2015</cre_id>
+    <location>
+      <x>-106.0024</x>
+      <y>28.68087</y>
+    </location>
+  </place>
+  <place place_id="11384">
+    <name>PETRO SERVICIOS DE OCCIDENTE SA DE CV</name>
+    <cre_id>PL/9974/EXP/ES/2015</cre_id>
+    <location>
+      <x>-103.3401</x>
+      <y>20.49921</y>
+    </location>
+  </place>
+  <place place_id="11382">
+    <name>GPDC ESTACIONES DE SERVICIO SA DE CV</name>
+    <cre_id>PL/9972/EXP/ES/2015</cre_id>
+    <location>
+      <x>-98.22421</x>
+      <y>18.99373</y>
+    </location>
+  </place>
+  <place place_id="11381">
+    <name>GASOLINERA ALLAS SA DE CV</name>
+    <cre_id>PL/9971/EXP/ES/2015</cre_id>
+    <location>
+      <x>-98.19596</x>
+      <y>18.98086</y>
+    </location>
+  </place>
+  <place place_id="2848">
+    <name>GRUPO GASOLINERO COMBUSERVICIOS SA DE CV</name>
+    <cre_id>PL/997/EXP/ES/2015</cre_id>
+    <location>
+      <x>-117.0136</x>
+      <y>32.44267</y>
+    </location>
+  </place>
+  <place place_id="11379">
+    <name>ESTACION DE SERVICIO LAS FLORES SA DE CV</name>
+    <cre_id>PL/9969/EXP/ES/2015</cre_id>
+    <location>
+      <x>-108.892</x>
+      <y>25.97002</y>
+    </location>
+  </place>
+  <place place_id="11378">
+    <name>OPERADORA RIO COLORADO S DE RL DE CV</name>
+    <cre_id>PL/9968/EXP/ES/2015</cre_id>
+    <location>
+      <x>-109.9432</x>
+      <y>27.48315</y>
+    </location>
+  </place>
+  <place place_id="11376">
+    <name>ENERGETICOS EL INGENIO SA DE CV</name>
+    <cre_id>PL/9967/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.03283</x>
+      <y>22.00731</y>
+    </location>
+  </place>
+  <place place_id="11377">
+    <name>MANUEL MARTINEZ MARQUEZ</name>
+    <cre_id>PL/9966/EXP/ES/2015</cre_id>
+    <location>
+      <x>-105.4395</x>
+      <y>28.38552</y>
+    </location>
+  </place>
+  <place place_id="11375">
+    <name>SERVICIOS FRONTERA SUR SA DE CV</name>
+    <cre_id>PL/9965/EXP/ES/2015</cre_id>
+    <location>
+      <x>-92.14404</x>
+      <y>15.65085</y>
+    </location>
+  </place>
+  <place place_id="11374">
+    <name>COMBUSTIBLES Y REFINADOS JARDINES SA DE CV</name>
+    <cre_id>PL/9964/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.17805</x>
+      <y>17.59987</y>
+    </location>
+  </place>
+  <place place_id="11373">
+    <name>GASOLINERA LA LINEA SA DE CV</name>
+    <cre_id>PL/9963/EXP/ES/2015</cre_id>
+    <location>
+      <x>-92.04084</x>
+      <y>15.68581</y>
+    </location>
+  </place>
+  <place place_id="11372">
+    <name>ENERGETICOS DE LA HUASTECA SA DE CV</name>
+    <cre_id>PL/9962/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.00449</x>
+      <y>21.97791</y>
+    </location>
+  </place>
+  <place place_id="11371">
+    <name>GASOLINERA LA LINEA SA DE CV</name>
+    <cre_id>PL/9961/EXP/ES/2015</cre_id>
+    <location>
+      <x>-92.00428</x>
+      <y>15.68327</y>
+    </location>
+  </place>
+  <place place_id="11370">
+    <name>SERVICIO IZAMAL SA DE CV</name>
+    <cre_id>PL/9960/EXP/ES/2015</cre_id>
+    <location>
+      <x>-89.02056</x>
+      <y>20.93346</y>
+    </location>
+  </place>
+  <place place_id="2789">
+    <name>ESTACION DE SERVICIO LEON S DE RL DE CV</name>
+    <cre_id>PL/996/EXP/ES/2015</cre_id>
+    <location>
+      <x>-101.6885</x>
+      <y>21.09397</y>
+    </location>
+  </place>
+  <place place_id="11367">
+    <name>ENERGETICOS DE VALLES SA DE CV</name>
+    <cre_id>PL/9957/EXP/ES/2015</cre_id>
+    <location>
+      <x>-99.01095</x>
+      <y>21.9984</y>
+    </location>
+  </place>
+  <place place_id="11366">
+    <name>SERVICIO ACOSTA SA DE CV</name>
+    <cre_id>PL/9956/EXP/ES/2015</cre_id>
+    <location>
+      <x>-98.78646</x>
+      <y>21.26046</y>
+    </location>
+  </place>
+  <place place_id="11696">
+    <name>AUTO SERVICIO OSMAR SA DE CV</name>
+    <cre_id>PL/9992/EXP/ES/2015</cre_id>
+    <location>
+      <x>-115.413</x>
+      <y>32.63746</y>
+    </location>
+  </place>
+  <place place_id="11383">
+    <name>HERMILA ASCENCIO RUEDA</name>
+    <cre_id>PL/9973/EXP/ES/2015</cre_id>
+    <location>
+      <x>-101.1843</x>
+      <y>20.56469</y>
+    </location>
+  </place>
+  <place place_id="11380">
+    <name>GUILLERMO MARTINEZ MARQUEZ</name>
+    <cre_id>PL/9970/EXP/ES/2015</cre_id>
+    <location>
+      <x>-105.6214</x>
+      <y>28.39145</y>
+    </location>
+  </place>
+  <place place_id="2133">
+    <name>MARA ESTACION DE SERVICIOS SA DE CV</name>
+    <cre_id>PL/766/EXP/ES/2015</cre_id>
+    <location>
+      <x>-102.2631</x>
+      <y>21.89202</y>
+    </location>
+  </place>
+  <place place_id="10615">
+    <name>JOSE ANTONIO HERNANDEZ ESPINOSA</name>
+    <cre_id>PL/9412/EXP/ES/2015</cre_id>
+    <location>
+      <x>-101.844</x>
+      <y>20.97978</y>
+    </location>
+  </place>
+  <place place_id="2162">
+    <name>PETROMAX SA DE CV</name>
+    <cre_id>PL/510/EXP/ES/2015</cre_id>
+    <location>
+      <x>-103.4574</x>
+      <y>25.55805</y>
+    </location>
+  </place>
+  <place place_id="2205">
+    <name>GRUPO LONOR, S.A. DE C.V.  E11919</name>
+    <cre_id>PL/874/EXP/ES/2015</cre_id>
+    <location>
+      <x>-91.96599</x>
+      <y>15.8336</y>
+    </location>
+  </place>
+</places>

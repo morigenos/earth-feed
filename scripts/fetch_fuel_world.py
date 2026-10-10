@@ -5,7 +5,8 @@ Five open official sources, each with history back to at least 2005:
   us_eia      United States   U.S. Energy Information Administration, weekly retail prices (USD/gal)
   uk_desnz    United Kingdom  Department for Energy Security and Net Zero, weekly road fuel prices
   ca_statcan  Canada          Statistics Canada table 18-10-0001-01, monthly average retail prices
-                              (national figure for regular petrol only; diesel and premium are per city)
+                              (national figure for regular petrol only; 18 cities have regular,
+                              premium and diesel)
   nz_mbie     New Zealand     MBIE weekly fuel price monitoring (with taxes and margins)
   my_mof      Malaysia        Ministry of Finance via data.gov.my, weekly fuel prices
 
@@ -16,6 +17,11 @@ same scale as the EU bulletin. The local price is kept too.
 Grades are not forced into one: US and Canadian "regular" is 87 AKI (about 91 RON) and New
 Zealand's regular is 91 RON. Each country's standard petrol is named in `standard` and every
 item carries its grade label, so the globe can show one petrol map and say what it compares.
+
+Below the national level (Stage 8): EIA's PADD regions and sub-regions, nine states and ten cities,
+and Statistics Canada's 18 cities. They are areas named COUNTRY-PART (USA-PADD1A, USA-CA,
+CAN-TORONTO) with the same item and history shapes, plus a `regions` block that says which
+states or provinces each one covers, so the globe can colour states and provinces when zoomed in.
 
 Every source is fetched and parsed on its own. A source that fails keeps its last good file
 (data/fuel/national/<source>.json); the merged fuel_world.json is rebuilt from whatever is on
@@ -35,13 +41,87 @@ REFRESH_HOURS = 12
 START = datetime.date(2005, 1, 1)
 L_PER_GAL = 3.785411784
 FX_URL = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip'
-CURRENCIES = ('USD', 'GBP', 'CAD', 'NZD', 'MYR')
+CURRENCIES = ('USD', 'GBP', 'CAD', 'NZD', 'MYR', 'MXN')   # MXN: Mexican station prices
 EIA = 'https://www.eia.gov/dnav/pet/hist_xls/{code}w.xls'
 EIA_SERIES = {   # all formulations first; conventional-only as a fallback with the same layout
     'GASOLINE_REGULAR': ('EMM_EPMR_PTE_NUS_DPG', 'EMM_EPMRU_PTE_NUS_DPG'),
     'GASOLINE_PREMIUM': ('EMM_EPMP_PTE_NUS_DPG', 'EMM_EPMPU_PTE_NUS_DPG'),
     'DIESEL': ('EMD_EPD2D_PTE_NUS_DPG',),
 }
+# Below the national level. Codes are EIA's area codes; states use ISO 3166-2 codes.
+P1A = ['US-CT', 'US-ME', 'US-MA', 'US-NH', 'US-RI', 'US-VT']
+P1B = ['US-DE', 'US-DC', 'US-MD', 'US-NJ', 'US-NY', 'US-PA']
+P1C = ['US-FL', 'US-GA', 'US-NC', 'US-SC', 'US-VA', 'US-WV']
+P2 = ['US-IL', 'US-IN', 'US-IA', 'US-KS', 'US-KY', 'US-MI', 'US-MN', 'US-MO', 'US-NE', 'US-ND', 'US-SD', 'US-OH',
+      'US-OK', 'US-TN', 'US-WI']
+P3 = ['US-AL', 'US-AR', 'US-LA', 'US-MS', 'US-NM', 'US-TX']
+P4 = ['US-CO', 'US-ID', 'US-MT', 'US-UT', 'US-WY']
+P5X = ['US-AK', 'US-AZ', 'US-HI', 'US-NV', 'US-OR', 'US-WA']
+# (area key, EIA code, name, kind, states covered); kind decides precedence when colouring a state:
+# state > subregion > region. Cities are listed in the panel only.
+EIA_AREAS = [
+    ('USA-PADD1', 'R10', 'East Coast (PADD 1)', 'region', P1A + P1B + P1C),
+    ('USA-PADD1A', 'R1X', 'New England (PADD 1A)', 'subregion', P1A),
+    ('USA-PADD1B', 'R1Y', 'Central Atlantic (PADD 1B)', 'subregion', P1B),
+    ('USA-PADD1C', 'R1Z', 'Lower Atlantic (PADD 1C)', 'subregion', P1C),
+    ('USA-PADD2', 'R20', 'Midwest (PADD 2)', 'region', P2),
+    ('USA-PADD3', 'R30', 'Gulf Coast (PADD 3)', 'region', P3),
+    ('USA-PADD4', 'R40', 'Rocky Mountain (PADD 4)', 'region', P4),
+    ('USA-PADD5', 'R50', 'West Coast (PADD 5)', 'region', P5X + ['US-CA']),
+    ('USA-PADD5X', 'R5XCA', 'West Coast except California', 'subregion', P5X),
+    ('USA-CA', 'SCA', 'California', 'state', ['US-CA']),
+    ('USA-CO', 'SCO', 'Colorado', 'state', ['US-CO']),
+    ('USA-FL', 'SFL', 'Florida', 'state', ['US-FL']),
+    ('USA-MA', 'SMA', 'Massachusetts', 'state', ['US-MA']),
+    ('USA-MN', 'SMN', 'Minnesota', 'state', ['US-MN']),
+    ('USA-NY', 'SNY', 'New York', 'state', ['US-NY']),
+    ('USA-OH', 'SOH', 'Ohio', 'state', ['US-OH']),
+    ('USA-TX', 'STX', 'Texas', 'state', ['US-TX']),
+    ('USA-WA', 'SWA', 'Washington', 'state', ['US-WA']),
+    ('USA-BOSTON', 'YBOS', 'Boston', 'city', ['US-MA']),
+    ('USA-CHICAGO', 'YORD', 'Chicago', 'city', ['US-IL']),
+    ('USA-CLEVELAND', 'YCLE', 'Cleveland', 'city', ['US-OH']),
+    ('USA-DENVER', 'YDEN', 'Denver', 'city', ['US-CO']),
+    ('USA-HOUSTON', 'Y44HO', 'Houston', 'city', ['US-TX']),
+    ('USA-LOSANGELES', 'Y05LA', 'Los Angeles', 'city', ['US-CA']),
+    ('USA-MIAMI', 'YMIA', 'Miami', 'city', ['US-FL']),
+    ('USA-NYC', 'Y35NY', 'New York City', 'city', ['US-NY']),
+    ('USA-SANFRANCISCO', 'Y05SF', 'San Francisco', 'city', ['US-CA']),
+    ('USA-SEATTLE', 'Y48SE', 'Seattle', 'city', ['US-WA']),
+]
+EIA_AREA_CODE = {'GASOLINE_REGULAR': 'EMM_EPMR_PTE_{a}_DPG', 'GASOLINE_PREMIUM': 'EMM_EPMP_PTE_{a}_DPG',
+                 'DIESEL': 'EMD_EPD2D_PTE_{a}_DPG'}
+EIA_DIESEL = {'R10', 'R1X', 'R1Y', 'R1Z', 'R20', 'R30', 'R40', 'R50', 'R5XCA', 'SCA'}   # EIA publishes no other diesel areas
+# Statistics Canada cities: GEO -> (area key, short name, province)
+CA_CITIES = {
+    "St. John's, Newfoundland and Labrador": ('CAN-STJOHNS', "St. John's", 'CA-NL'),
+    'Charlottetown and Summerside, Prince Edward Island': ('CAN-CHARLOTTETOWN', 'Charlottetown and Summerside', 'CA-PE'),
+    'Halifax, Nova Scotia': ('CAN-HALIFAX', 'Halifax', 'CA-NS'),
+    'Saint John, New Brunswick': ('CAN-SAINTJOHN', 'Saint John', 'CA-NB'),
+    'Québec, Quebec': ('CAN-QUEBEC', 'Québec', 'CA-QC'),
+    'Montréal, Quebec': ('CAN-MONTREAL', 'Montréal', 'CA-QC'),
+    'Ottawa-Gatineau, Ontario part, Ontario/Quebec': ('CAN-OTTAWA', 'Ottawa (Ontario part of Ottawa–Gatineau)', 'CA-ON'),
+    'Toronto, Ontario': ('CAN-TORONTO', 'Toronto', 'CA-ON'),
+    'Thunder Bay, Ontario': ('CAN-THUNDERBAY', 'Thunder Bay', 'CA-ON'),
+    'Winnipeg, Manitoba': ('CAN-WINNIPEG', 'Winnipeg', 'CA-MB'),
+    'Regina, Saskatchewan': ('CAN-REGINA', 'Regina', 'CA-SK'),
+    'Saskatoon, Saskatchewan': ('CAN-SASKATOON', 'Saskatoon', 'CA-SK'),
+    'Edmonton, Alberta': ('CAN-EDMONTON', 'Edmonton', 'CA-AB'),
+    'Calgary, Alberta': ('CAN-CALGARY', 'Calgary', 'CA-AB'),
+    'Vancouver, British Columbia': ('CAN-VANCOUVER', 'Vancouver', 'CA-BC'),
+    'Victoria, British Columbia': ('CAN-VICTORIA', 'Victoria', 'CA-BC'),
+    'Whitehorse, Yukon': ('CAN-WHITEHORSE', 'Whitehorse', 'CA-YT'),
+    'Yellowknife, Northwest Territories': ('CAN-YELLOWKNIFE', 'Yellowknife', 'CA-NT'),
+}
+# How the globe colours states and provinces from these areas: the US uses the most specific area
+# covering a state; Canada averages the cities in a province (unweighted), since it has no
+# provincial series.
+REGION_RULES = {'USA': {'fill': 'specific', 'order': ['region', 'subregion', 'state'],
+                        'note': 'Each state takes its own EIA series where one exists (nine states), otherwise its '
+                                'sub-region or region. Cities are listed, not painted.'},
+                'CAN': {'fill': 'mean', 'order': ['city'],
+                        'note': 'Statistics Canada reports 18 cities, not provinces. Each province shows the plain '
+                                'average of its cities; Nunavut has none and keeps the national colour.'}}
 UK_CONTENT = 'https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices'
 CA_ZIP = 'https://www150.statcan.gc.ca/n1/tbl/csv/18100001-eng.zip'
 NZ_CSV = 'https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv'
@@ -52,7 +132,7 @@ RANGE = (0.05, 6.0)
 
 SOURCES = {
     'us_eia': {'name': 'U.S. Energy Information Administration, weekly retail gasoline and diesel prices',
-               'areas': ['USA'], 'licence': 'Public domain (U.S. government work)',
+               'areas': ['USA'] + [a[0] for a in EIA_AREAS], 'licence': 'Public domain (U.S. government work)',
                'attribution': 'Source: U.S. Energy Information Administration.',
                'url': 'https://www.eia.gov/petroleum/gasdiesel/', 'cadence': 'weekly, Monday prices',
                'maxAgeDays': 35, 'currency': 'USD', 'unit': 'gal', 'level': 1},
@@ -62,7 +142,7 @@ SOURCES = {
                  'url': 'https://www.gov.uk/government/statistics/weekly-road-fuel-prices', 'cadence': 'weekly, Monday prices',
                  'maxAgeDays': 35, 'currency': 'GBP', 'unit': 'L', 'level': 1},
     'ca_statcan': {'name': 'Statistics Canada, table 18-10-0001-01, monthly average retail prices',
-                   'areas': ['CAN'], 'licence': 'Statistics Canada Open Licence',
+                   'areas': ['CAN'] + [c[0] for c in CA_CITIES.values()], 'licence': 'Statistics Canada Open Licence',
                    'attribution': 'Source: Statistics Canada, Table 18-10-0001-01.',
                    'url': 'https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000101', 'cadence': 'monthly averages, about seven weeks behind',
                    'maxAgeDays': 100, 'currency': 'CAD', 'unit': 'L', 'level': 1},
@@ -240,12 +320,16 @@ CA_TYPES = {'Regular unleaded gasoline at self service filling stations': 'GASOL
 
 
 def parse_ca(blob):
-    """StatCan table zip: monthly cents per litre; national rows only (GEO == 'Canada')."""
+    """StatCan table zip: monthly cents per litre. The national row (GEO == 'Canada') has regular petrol
+    only; the 18 cities have regular, premium and diesel."""
     z = zipfile.ZipFile(io.BytesIO(blob))
     name = [n for n in z.namelist() if re.fullmatch(r'\d+\.csv', n)][0]
-    out = {f: [] for f in CA_TYPES.values()}
+    res = {'CAN': {f: [] for f in CA_TYPES.values()}}
     for r in csv.DictReader(io.TextIOWrapper(z.open(name), encoding='utf-8-sig')):
-        if r.get('GEO') != 'Canada': continue
+        geo = r.get('GEO')
+        if geo == 'Canada': out = res['CAN']
+        elif geo in CA_CITIES: out = res.setdefault(CA_CITIES[geo][0], {f: [] for f in CA_TYPES.values()})
+        else: continue
         fuel = CA_TYPES.get(r.get('Type of fuel'))
         if not fuel: continue
         if 'cents per litre' not in (r.get('UOM') or '').lower():
@@ -255,10 +339,12 @@ def parse_ca(blob):
         y, m = map(int, r['REF_DATE'].split('-')[:2])
         day = datetime.date(y, m, 1)
         if day >= START: out[fuel].append((day, v / 100.0, None))
-    for f in out: out[f].sort()
-    if len(out['GASOLINE_REGULAR']) < 24:
+    for area in res:
+        for f in res[area]: res[area][f].sort()
+        res[area] = {f: v for f, v in res[area].items() if v}
+    if len(res['CAN'].get('GASOLINE_REGULAR', [])) < 24:
         raise ValueError('StatCan national series too short')
-    return {'CAN': out}
+    return res
 
 
 NZ_FUELS = {'Regular Petrol': 'GASOLINE_91', 'Premium Petrol 95R': 'GASOLINE_95', 'Diesel': 'DIESEL'}
@@ -341,12 +427,26 @@ def to_euro(src, parsed, fx, monthly=False):
     return areas, rejected
 
 
-def national_file(src, areas, extra=None, rejected=0):
+def regions_for(src, areas):
+    """Which states or provinces each sub-national area covers, for the areas actually present."""
+    if src == 'us_eia':
+        defs = {k: {'n': n, 'kind': kind, 'eia': code, 'st': st} for k, code, n, kind, st in EIA_AREAS if k in areas}
+        return {'USA': dict(REGION_RULES['USA'], areas=defs)} if defs else {}
+    if src == 'ca_statcan':
+        defs = {k: {'n': n, 'kind': 'city', 'st': [prov]} for k, n, prov in CA_CITIES.values() if k in areas}
+        return {'CAN': dict(REGION_RULES['CAN'], areas=defs)} if defs else {}
+    return {}
+
+
+def national_file(src, areas, extra=None, rejected=0, skipped=None):
     out = {'source': src, 'fetched': health.now(), 'meta': SOURCES[src], 'rejected': rejected, 'areas': {}}
+    regions = regions_for(src, areas)
+    if regions: out['regions'] = regions
+    if skipped: out['skipped'] = skipped
     for area, fuels in areas.items():
         out['areas'][area] = {fuel: {'dates': [ymd(d) for d, *_ in pts], 'tax': [p[1] for p in pts],
                                      'net': [p[2] for p in pts], 'local': [round(p[3], 3) for p in pts],
-                                     'grade': GRADES.get((area, fuel), fuel)}
+                                     'grade': GRADES.get((area, fuel)) or GRADES.get((area.split('-')[0], fuel), fuel)}
                               for fuel, pts in fuels.items()}
     if extra: out['extra'] = extra
     return out
@@ -367,8 +467,19 @@ def fetch_source(src, fx, files=None):
                     last = e
             if fuel not in parsed['USA'] and fuel != 'GASOLINE_PREMIUM':
                 raise last or ValueError('EIA ' + fuel)
+        skipped = []
+        for key, code, _n, _k, _st in EIA_AREAS:      # regions, states, cities: a missing one is skipped, not fatal
+            for fuel, pattern in EIA_AREA_CODE.items():
+                if fuel == 'DIESEL' and code not in EIA_DIESEL: continue
+                c = pattern.format(a=code)
+                try:
+                    blob = f.get(c) if files is not None else get(EIA.format(code=c)).content
+                    if blob is None: continue
+                    parsed.setdefault(key, {})[fuel] = parse_eia(blob)
+                except Exception as e:
+                    skipped.append(f'{c} ({type(e).__name__})')
         areas, rej = to_euro(src, parsed, fx)
-        return national_file(src, areas, rejected=rej)
+        return national_file(src, areas, rejected=rej, skipped=skipped)
     if src == 'uk_desnz':
         blobs = f.get('uk_csv') or [get(u).content for u in uk_csv_urls(get(UK_CONTENT).json())]
         areas, rej = to_euro(src, parse_uk(blobs), fx)
@@ -392,7 +503,7 @@ def fetch_source(src, fx, files=None):
 
 def merge(folder):
     """All national files on disk -> fuel_world.json payload and per-area history files."""
-    items, history, asof, extra, sources = [], {}, {}, {}, {}
+    items, history, asof, extra, sources, regions = [], {}, {}, {}, {}, {}
     for path in sorted((folder / 'national').glob('*.json')):
         nat = json.loads(path.read_text(encoding='utf-8'))
         src, meta = nat['source'], nat['meta']
@@ -418,6 +529,7 @@ def merge(folder):
                                  maxAgeDays=meta['maxAgeDays'])
         asof[src] = newest
         extra.update(nat.get('extra') or {})
+        regions.update(nat.get('regions') or {})
     payload = {
         'items': items,
         'validTime': max(asof.values()) if asof else None,
@@ -425,6 +537,7 @@ def merge(folder):
         'standard': STANDARD,
         'sources': sources,
         'extra': extra,
+        'regions': regions,
         'unit': 'EUR/L',
         'history': 'fuel/history/{iso3}.json',
         'fx': 'European Central Bank euro reference rates, on the observation date (monthly average for monthly data)',
@@ -448,10 +561,15 @@ def fx_table(files=None):
 
 
 def fresh_enough():
+    """Recent enough to skip downloading, unless the published files predate a format change
+    (no `regions` block, or a currency missing from the cached rates)."""
     try:
-        got = datetime.datetime.fromisoformat(json.loads((health.OUT / 'fuel_world.json').read_text())['fetched'])
+        j = json.loads((health.OUT / 'fuel_world.json').read_text())
+        got = datetime.datetime.fromisoformat(j['fetched'])
+        fx = json.loads((health.OUT / 'fuel' / 'fx.json').read_text())
     except Exception:
         return False
+    if 'regions' not in j or any(c not in fx for c in CURRENCIES): return False
     return (datetime.datetime.now(datetime.UTC) - got).total_seconds() < REFRESH_HOURS * 3600
 
 
@@ -477,7 +595,8 @@ def main(files=None):
         raise ValueError('No national source succeeded and none is cached')
     for area, hist in history.items():
         health.atomic_json(folder / 'history' / f'{area}.json', hist)
-    note = 'National averages, converted to euros per litre at ECB reference rates. Grades differ: see each item.'
+    note = ('National averages, plus US regions, states and cities and Canadian cities, converted to euros per litre '
+            'at ECB reference rates. Grades differ: see each item.')
     if failed: note += ' Kept last good data for: ' + ', '.join(failed) + '.'
     if fx_note: note += ' ' + fx_note + '.'
     health.publish('fuel_world', payload, 'Official national fuel price statistics (US, UK, Canada, New Zealand, Malaysia)',

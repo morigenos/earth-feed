@@ -1,4 +1,4 @@
-"""Station-level fuel prices from three open government feeds.
+"""Station-level fuel prices from four open government feeds.
 
   FRA  prix-carburants (Ministère de l'Économie), instant feed v2 on data.gouv.fr, Licence Ouverte 2.0.
        About 9,800 stations; each price carries its own update time. Motorway stations are flagged.
@@ -6,6 +6,13 @@
        Reuse allowed with the source cited (MITECO open data notice).
   ITA  Osservatorio prezzi carburanti (MIMIT), daily registry and 8 a.m. prices, IODL 2.0.
        About 22,000 stations; self-service prices are used where a station has them.
+  MEX  Precios de gasolinas y diésel por estación (Comisión Nacional de Energía, formerly the CRE),
+       daily XML lists of station locations and prices, published as open data (free use with the
+       source cited, Mexico's 2015 open data decree). About 12,800 stations. Prices are in pesos and
+       carry no per-station time; they are converted to euros at the latest ECB rate and kept to four
+       decimals so the peso price can be shown back exactly. Mexico has no official national average
+       in this feed, so the globe uses the median of these stations for Mexico's country colour and
+       says so.
 
 One file per country, fuel/stations/<ISO3>.json, plus a small index fuel_stations.json the globe
 reads first. Each station is a compact array; prices are euros per litre with tax, as at the pump.
@@ -29,11 +36,11 @@ import feed_health as health
 
 UA = {'User-Agent': 'earth-observatory-feed (personal, non-commercial)',
       'Accept': 'application/json, text/csv, */*', 'Accept-Language': 'en;q=0.9, es;q=0.8, fr;q=0.8, it;q=0.8'}
-REFRESH_MINUTES = {'FRA': 50, 'ESP': 50, 'ITA': 360}
+REFRESH_MINUTES = {'FRA': 50, 'ESP': 50, 'ITA': 360, 'MEX': 360}
 MAX_AGE_DAYS = 30
 RANGE = (0.3, 4.5)          # euros per litre; outside is rejected
 SLOT_RANGE = {'PETROL': (0.8, 4.0), 'DIESEL': (0.8, 4.0), 'LPG': (0.3, 1.8)}   # tighter, per column
-MIN_STATIONS = {'FRA': 5000, 'ESP': 6000, 'ITA': 10000}
+MIN_STATIONS = {'FRA': 5000, 'ESP': 6000, 'ITA': 10000, 'MEX': 8000}
 SLOTS = ('PETROL', 'DIESEL', 'LPG')
 # flags: bit 0 motorway, bit 1 attended service only (no self-service price), bit 2 open 24 hours,
 # bits 3-4 zone index (see `zones`)
@@ -63,8 +70,18 @@ COUNTRIES = {
             'page': 'https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti',
             'fuels': {'PETROL': 'Benzina (self-service)', 'DIESEL': 'Gasolio (self-service)', 'LPG': 'GPL'},
             'zones': ['Italy'], 'level': 3, 'cadence': 'daily, prices in force at 8 a.m.'},
+    'MEX': {'url': ('https://publicacionexterna.azurewebsites.net/publicaciones/places',
+                    'https://publicacionexterna.azurewebsites.net/publicaciones/prices'),
+            'name': 'Precios de gasolinas y diésel por estación de servicio (Comisión Nacional de Energía, formerly CRE)',
+            'licence': "Mexican federal open data: free use with the source cited (2015 open data decree)",
+            'attribution': 'Fuente: Comisión Nacional de Energía (antes Comisión Reguladora de Energía), precios de gasolinas y diésel por estación de servicio, datos abiertos.',
+            'page': 'https://www.cne.gob.mx/ConsultaPrecios/GasolinasyDiesel/GasolinasyDiesel.html',
+            'fuels': {'PETROL': 'Gasolina regular (87 octanos)', 'DIESEL': 'Diésel'},
+            'zones': ['Mexico'], 'level': 3, 'cadence': 'daily list, published at 18:00 Mexico City time',
+            'currency': 'MXN', 'stationTimes': False, 'nationalFromStations': True},
 }
-BOUNDS = {'FRA': (-5.3, 41.2, 9.7, 51.2), 'ESP': (-18.5, 27.5, 4.5, 44.0), 'ITA': (6.5, 35.4, 18.6, 47.2)}
+BOUNDS = {'FRA': (-5.3, 41.2, 9.7, 51.2), 'ESP': (-18.5, 27.5, 4.5, 44.0), 'ITA': (6.5, 35.4, 18.6, 47.2),
+          'MEX': (-118.6, 14.3, -86.5, 32.8)}
 
 
 def get(url, tries=3):
@@ -246,6 +263,53 @@ def parse_it(registry, prices, now):
     return out, IT_EXTRA, newest
 
 
+# ---------------- Mexico ----------------
+MX_SLOT = {'regular': 'PETROL', 'diesel': 'DIESEL'}
+MX_EXTRA = ['Gasolina premium (91 octanos)']
+MX_RANGE = (8.0, 60.0)     # pesos per litre; outside is rejected
+
+
+def mx_rate(now, files=None):
+    """Pesos per euro: the ECB rate cached by fetch_fuel_world.py (data/fuel/fx.json), at most ten days old."""
+    if files and files.get('MXN_PER_EUR'): return files['MXN_PER_EUR'], (files.get('MXN_DATE') or now.date())
+    raw = json.loads((health.OUT / 'fuel' / 'fx.json').read_text(encoding='utf-8'))
+    dates, vals = raw['MXN']
+    d = datetime.datetime.strptime(str(dates[-1]), '%Y%m%d').date()
+    if (now.date() - d).days > 10: raise ValueError(f'Mexico: newest peso rate is from {d}')
+    return vals[-1], d
+
+
+def parse_mx(places, prices, now, per_eur, rate_day):
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(places.lstrip(b'\xef\xbb\xbf'))
+    if root.tag != 'places': raise ValueError('Mexico: places list changed')
+    where = {}
+    for p in root.iter('place'):
+        x, y = coord(p.findtext('location/x')), coord(p.findtext('location/y'))
+        if not inside('MEX', x, y): continue
+        where[p.get('place_id')] = (x, y, (p.findtext('name') or '').strip(), (p.findtext('cre_id') or '').strip())
+    root = ET.fromstring(prices.lstrip(b'\xef\xbb\xbf'))
+    if root.tag != 'places': raise ValueError('Mexico: price list changed')
+    acc = {}   # a station can appear in several <place> blocks, one per product
+    for p in root.iter('place'):
+        pid = p.get('place_id')
+        if pid not in where: continue
+        a = acc.setdefault(pid, {})
+        for g in p.iter('gas_price'):
+            try: v = float(g.text)
+            except (TypeError, ValueError): continue
+            if MX_RANGE[0] <= v <= MX_RANGE[1]: a[(g.get('type') or '').lower()] = v
+    out = []
+    for pid, a in acc.items():
+        w = where[pid]
+        slot = {MX_SLOT[k]: round(v / per_eur, 4) for k, v in a.items() if k in MX_SLOT}
+        extra = [[0, round(a['premium'] / per_eur, 4)]] if 'premium' in a else []
+        if not slot and not extra: continue
+        out.append({'lon': w[0], 'lat': w[1], 'brand': w[2], 'flags': 0, 'slot': slot, 'extra': extra,
+                    'updated': None, 'id': pid, 'town': '', 'address': ('Permiso ' + w[3]) if w[3] else ''})
+    return out, MX_EXTRA, now, {'perEur': per_eur, 'rateDate': rate_day.isoformat()}
+
+
 # ---------------- output ----------------
 
 def quantiles(vals):
@@ -255,7 +319,7 @@ def quantiles(vals):
     return {'n': len(v), 'min': v[0], 'p10': q(.1), 'median': round(statistics.median(v), 3), 'p90': q(.9), 'max': v[-1]}
 
 
-def build(iso, stations, extras, newest, fetched=None):
+def build(iso, stations, extras, newest, fetched=None, info=None):
     meta = COUNTRIES[iso]
     if len(stations) < MIN_STATIONS[iso]:
         raise ValueError(f'{iso}: only {len(stations)} stations with a current price; refusing to publish')
@@ -288,6 +352,8 @@ def build(iso, stations, extras, newest, fetched=None):
         'flagBits': {'motorway': MOTORWAY, 'servedOnly': SERVED, 'open24h': H24, 'zoneShift': 3},
         'maxAgeDays': MAX_AGE_DAYS, 'stats': stats, 'bbox': [min(lon), min(lat), max(lon), max(lat)], 'rejected': rejected,
         'items': items, 'fetched': fetched or health.now(),
+        **{k: meta[k] for k in ('currency', 'stationTimes', 'nationalFromStations') if k in meta},
+        **(info or {}),
     }
 
 
@@ -298,6 +364,9 @@ def collect(iso, now, files=None):
     if iso == 'ITA':
         reg, pr = f.get('ITA') or (get(COUNTRIES['ITA']['url'][0]), get(COUNTRIES['ITA']['url'][1]))
         return parse_it(reg, pr, now)
+    if iso == 'MEX':
+        places, prices = f.get('MEX') or (get(COUNTRIES['MEX']['url'][0]), get(COUNTRIES['MEX']['url'][1]))
+        return parse_mx(places, prices, now, *mx_rate(now, f))
     raise KeyError(iso)
 
 
@@ -318,6 +387,7 @@ def index():
         j = json.loads(path.read_text(encoding='utf-8'))
         countries[iso] = {k: j[k] for k in ('source', 'licence', 'attribution', 'url', 'level', 'cadence', 'validTime',
                                              'fuels', 'zones', 'stats', 'bbox', 'fetched', 'maxAgeDays')}
+        countries[iso].update({k: j[k] for k in ('currency', 'perEur', 'rateDate', 'stationTimes', 'nationalFromStations') if k in j})
         countries[iso].update(file=f'fuel/stations/{iso}.json', count=len(j['items']), bytes=path.stat().st_size)
         newest = max(newest or j['validTime'], j['validTime'])
     return {'items': [[iso, c['count'], c['validTime']] for iso, c in countries.items()], 'countries': countries,
@@ -331,8 +401,9 @@ def main(files=None, now=None):
         if files is None and not due(iso): continue
         if files is not None and iso not in files: continue
         try:
-            stations, extras, newest = collect(iso, now, files)
-            health.atomic_json(health.OUT / 'fuel' / 'stations' / f'{iso}.json', build(iso, stations, extras, newest))
+            stations, extras, newest, *info = collect(iso, now, files)
+            health.atomic_json(health.OUT / 'fuel' / 'stations' / f'{iso}.json',
+                               build(iso, stations, extras, newest, info=info[0] if info else None))
             done.append(f'{iso} {len(stations)}')
         except Exception as e:
             status = getattr(getattr(e, 'response', None), 'status_code', None)
@@ -341,10 +412,10 @@ def main(files=None, now=None):
     payload = index()
     if not payload['countries']:
         raise ValueError('No station feed succeeded and none is cached')
-    note = ('Pump prices with tax at individual stations, euros per litre. Prices older than '
-            f'{MAX_AGE_DAYS} days are left out.')
+    note = ('Pump prices with tax at individual stations, euros per litre (Mexico converted from pesos at the ECB rate). '
+            f'Prices older than {MAX_AGE_DAYS} days are left out where stations report a time.')
     if failed: note += ' Kept previous data for: ' + ', '.join(failed) + '.'
-    health.publish('fuel_stations', payload, 'Government fuel price feeds: France, Spain, Italy', 'reported', note)
+    health.publish('fuel_stations', payload, 'Government fuel price feeds: France, Spain, Italy, Mexico', 'reported', note)
     print('fuel_stations: updated', done or 'none', '| failed', failed or 'none')
 
 
@@ -352,7 +423,8 @@ def files_from_dir(d):
     d = pathlib.Path(d)
     gz = lambda n: gzip.decompress((d / n).read_bytes())
     return {'FRA': gz('fr_instant_json.gz'), 'ESP': gz('es_stations.json.gz'),
-            'ITA': (gz('it_anagrafica.csv.gz'), gz('it_prezzo_alle_8.csv.gz'))}
+            'ITA': (gz('it_anagrafica.csv.gz'), gz('it_prezzo_alle_8.csv.gz')),
+            'MEX': (gz('cre_places.xml.gz'), gz('cre_prices.xml.gz'))}
 
 
 if __name__ == '__main__':
