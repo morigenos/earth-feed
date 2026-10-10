@@ -121,7 +121,7 @@ REGION_RULES = {'USA': {'fill': 'specific', 'order': ['region', 'subregion', 'st
                                 'sub-region or region. Cities are listed, not painted.'},
                 'CAN': {'fill': 'mean', 'order': ['city'],
                         'note': 'Statistics Canada reports 18 cities, not provinces. Each province shows the plain '
-                                'average of its cities; Nunavut has none and keeps the national colour.'}}
+                                'average of its cities; Nunavut has none and keeps the national colour where there is one.'}}
 UK_CONTENT = 'https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices'
 CA_ZIP = 'https://www150.statcan.gc.ca/n1/tbl/csv/18100001-eng.zip'
 NZ_CSV = 'https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv'

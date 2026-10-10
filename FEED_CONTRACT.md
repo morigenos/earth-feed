@@ -36,7 +36,7 @@ Every file is a JSON object carrying at least:
 | `paleo/<MODEL>_<age>.json` | `{age, model, features: GeoJSON}` | ages every 10 Ma (20 for CAO2024) |
 | `fuel.json` | `[iso3, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPerL]` | `fuel` ∈ GASOLINE_95, DIESEL, LPG; plus `validTime` (bulletin date), `ref` (EU and euro-area averages), `stale` (`[iso3, lastDate]`, history only), `attribution` |
 | `fuel/history/<ISO3>.json` | `{dates:[yyyymmdd…], series:{FUEL:{tax:[…], net:[…]}}}` | weekly since 2005, ascending, EUR/L, `null` where not reported; also `EU.json` and `EUR.json` |
-| `fuel_world.json` | `[area, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPrice, localUnit, gradeLabel]` | areas USA, GBR, CAN, NZL, MYS and the sub-area `MYS-E` (Sabah, Sarawak, Labuan); plus `standard` (area → standard petrol id), `sources` (per source: name, licence, attribution, url, cadence, maxAgeDays, level, fetched), `asOf`, `extra` (Malaysia's subsidised RON95) |
+| `fuel_world.json` | `[area, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPrice, localUnit, gradeLabel]` | areas USA, GBR, CAN, NZL, MYS, the sub-area `MYS-E` (Sabah, Sarawak, Labuan), 28 US areas (`USA-PADD1A`, `USA-CA`, `USA-LOSANGELES`…) and 18 Canadian cities (`CAN-TORONTO`…); plus `regions` (see below), `standard` (area → standard petrol id), `sources` (per source: name, licence, attribution, url, cadence, maxAgeDays, level, fetched), `asOf`, `extra` (Malaysia's subsidised RON95) |
 | `fuel/history/<AREA>.json` (national) | as above, plus `grades`, `unit`, `source`, `attribution`, `maxAgeDays` | same path as the EU histories; written by `fetch_fuel_world.py` for its areas; Canada monthly since 2006 |
 | `fuel_stations.json` | `[iso3, stationCount, validTime]` | plus `countries` (per country: source, licence, attribution, url, level, cadence, validTime, fuels, zones, stats, bbox, fetched, maxAgeDays, file, count, bytes, `currency`; outside the euro also `eurPerUnit`, `fxDate`; optional `note`, `undated`) |
 | `fuel/stations/<ISO3>.json` | `[lon, lat, brandIdx\|-1, flags, petrol\|null, diesel\|null, lpg\|null, updatedEpoch, id, town, address, extra\|null]` | FRA, ESP, ITA, MEX; plus `brands`, `fuels`, `extraFuels`, `zones`, `fields`, `flagBits`, `stats`, `currency` (and the index's optional fields) |
@@ -83,6 +83,19 @@ Every file is a JSON object carrying at least:
 - `maxAgeDays` per source decides when a value stops showing on the map: 35 for weekly sources, 100 for
   Statistics Canada (monthly, about seven weeks behind).
 - Sub-areas use `ISO3-X` keys (`MYS-E`); the globe paints them over the matching part of the country.
+  A sub-area shares its country's `standard` petrol.
+
+## Regions below the national level (`regions` in `fuel_world.json`)
+
+- `regions.USA` and `regions.CAN`: `{fill, order, note, areas: {areaKey: {n, kind, st, eia?}}}`. `kind` is
+  `region`, `subregion`, `state` or `city`; `st` lists the ISO 3166-2 codes the area covers (`US-CA`, `CA-ON`).
+- `fill: "specific"` (US): a state takes the area of the highest `order` kind that covers it and has a value
+  (state, then sub-region, then region). Cities are listed only.
+- `fill: "mean"` (Canada): a province takes the plain average of its cities with a value; Statistics Canada
+  publishes no provincial series. A province without a city (Nunavut) has no regional value.
+- EIA publishes diesel for the regions, sub-regions and California only; other states and cities have petrol only.
+- Regional series are downloaded once per published EIA week; a missing regional workbook is skipped (listed in
+  the national file's `skipped`) and never fails the source.
 - Each source's `attribution` and `licence` must be shown wherever its numbers are.
 
 ## Station prices (`fuel_stations.json`, `fuel/stations/`)
