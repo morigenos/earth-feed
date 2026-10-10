@@ -1,0 +1,26 @@
+name: Probe fuel sources (one-off)
+on:
+  push:
+    branches: [probe-fuel]
+    paths: ['probe/probe.py', '.github/workflows/probe.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python probe/probe.py
+      - name: Commit results to this branch
+        if: always()
+        run: |
+          git config user.name "earth-feed bot"
+          git config user.email "actions@github.com"
+          git add probe/out
+          git diff --staged --quiet || git commit -qm "probe results $(date -u +%FT%TZ)"
+          git push
