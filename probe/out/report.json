@@ -1,0 +1,192 @@
+{
+ "uk_content.json": {
+  "url": "https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices",
+  "seconds": 0.7,
+  "status": 200,
+  "type": "application/json; charset=utf-8",
+  "bytes": 43359,
+  "final": "https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices"
+ },
+ "uk_attachments": [
+  "Weekly_Fuel_Prices_05-10-26.xlsx",
+  "Weekly_Fuel_Prices_05-10-26.xlsx",
+  "https://assets.publishing.service.gov.uk/media/6ac3b5941ef3e896de979384/Weekly_Fuel_Prices_05-10-26.xlsx",
+  "CSV__2018_-__.csv",
+  "CSV__2018_-__.csv",
+  "https://assets.publishing.service.gov.uk/media/6ac3b5951ef3e896de979385/CSV__2018_-__.csv",
+  "weekly_road_fuel_prices_2003_to_2017.csv",
+  "weekly_road_fuel_prices_2003_to_2017.csv",
+  "https://assets.publishing.service.gov.uk/media/68a3326b32d2c63f869343a3/weekly_road_fuel_prices_2003_to_2017.csv"
+ ],
+ "uk_weekly.csv": {
+  "url": "CSV__2018_-__.csv",
+  "seconds": 0.0,
+  "error": "MissingSchema: Invalid URL 'CSV__2018_-__.csv': No scheme supplied. Perhaps you meant https://CSV__2018_-__.csv?"
+ },
+ "licence_uk_gov_statistics": {
+  "url": "https://www.gov.uk/government/statistics/weekly-road-fuel-prices",
+  "status": 200,
+  "error": null
+ },
+ "licence_uk_ogl": {
+  "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "status": 200,
+  "error": null
+ },
+ "us_regular.xls": {
+  "url": "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPMRU_PTE_NUS_DPGw.xls",
+  "seconds": 9.1,
+  "status": 200,
+  "type": "application/vnd.ms-excel",
+  "bytes": 127488,
+  "final": "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPMRU_PTE_NUS_DPGw.xls"
+ },
+ "us_premium.xls": {
+  "url": "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPMPU_PTE_NUS_DPGw.xls",
+  "seconds": 8.1,
+  "status": 200,
+  "type": "application/vnd.ms-excel",
+  "bytes": 115712,
+  "final": "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPMPU_PTE_NUS_DPGw.xls"
+ },
+ "us_diesel.xls": {
+  "url": "https://www.eia.gov/dnav/pet/hist_xls/EMD_EPD2D_PTE_NUS_DPGw.xls",
+  "seconds": 8.1,
+  "status": 200,
+  "type": "application/vnd.ms-excel",
+  "bytes": 117760,
+  "final": "https://www.eia.gov/dnav/pet/hist_xls/EMD_EPD2D_PTE_NUS_DPGw.xls"
+ },
+ "us_leaf.html": {
+  "url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=pet&s=emm_epmru_pte_nus_dpg&f=w",
+  "seconds": 11.4,
+  "status": 200,
+  "type": "text/html; charset=utf-8",
+  "bytes": 197515,
+  "final": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=pet&s=emm_epmru_pte_nus_dpg&f=w"
+ },
+ "licence_us_eia_copyright": {
+  "url": "https://www.eia.gov/about/copyrights_reuse.php",
+  "status": 200,
+  "error": null
+ },
+ "ca_18100001.zip": {
+  "url": "https://www150.statcan.gc.ca/n1/tbl/csv/18100001-eng.zip",
+  "seconds": 0.4,
+  "status": 200,
+  "type": "application/zip",
+  "bytes": 304902,
+  "final": "https://www150.statcan.gc.ca/n1/tbl/csv/18100001-eng.zip"
+ },
+ "licence_ca_statcan_licence": {
+  "url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+  "status": 200,
+  "error": null
+ },
+ "nz_weekly.csv": {
+  "url": "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv",
+  "seconds": 1.1,
+  "status": 200,
+  "type": "application/octet-stream",
+  "bytes": 2894320,
+  "final": "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv"
+ },
+ "licence_nz_mbie_page": {
+  "url": "https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-price-monitoring",
+  "status": 200,
+  "error": null
+ },
+ "licence_nz_mbie_copyright": {
+  "url": "https://www.mbie.govt.nz/about/this-site/copyright",
+  "status": 404,
+  "error": null
+ },
+ "my_fuelprice.json": {
+  "url": "https://api.data.gov.my/data-catalogue?id=fuelprice&limit=5000",
+  "seconds": 2.5,
+  "status": 200,
+  "type": "application/json",
+  "bytes": 208828,
+  "final": "https://api.data.gov.my/data-catalogue/?id=fuelprice&limit=5000"
+ },
+ "licence_my_terms": {
+  "url": "https://data.gov.my/terms-of-use",
+  "status": 404,
+  "error": null
+ },
+ "licence_my_catalogue": {
+  "url": "https://data.gov.my/data-catalogue/fuelprice",
+  "status": 200,
+  "error": null
+ },
+ "licence_jp_anre_page": {
+  "url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html",
+  "status": 403,
+  "error": null
+ },
+ "licence_au_aip_page": {
+  "url": "https://www.aip.com.au/pricing/national-retail-petrol-prices",
+  "status": 404,
+  "error": null
+ },
+ "ecb_eurofxref_hist.zip": {
+  "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip",
+  "seconds": 1.2,
+  "status": 200,
+  "type": "application/zip",
+  "bytes": 640894,
+  "final": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip"
+ },
+ "licence_ecb_copyright": {
+  "url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+  "status": 200,
+  "error": null
+ },
+ "fr_instant.zip": {
+  "url": "https://www.data.gouv.fr/api/1/datasets/r/e4c436eb-0a7d-4b77-8a64-9ed898da0122",
+  "seconds": 8.1,
+  "status": 200,
+  "type": "application/zip; charset=utf-8",
+  "bytes": 3339673,
+  "final": "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/shp"
+ },
+ "fr_instant_json": {
+  "url": "https://www.data.gouv.fr/api/1/datasets/r/b0561905-7b5e-4f38-be50-df05708acb80",
+  "seconds": 1.7,
+  "status": 200,
+  "type": "application/json; charset=utf-8",
+  "bytes": 29224055,
+  "final": "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/json"
+ },
+ "es_stations.json": {
+  "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
+  "seconds": 0.3,
+  "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+ },
+ "licence_es_aviso_legal": {
+  "url": "https://geoportalgasolineras.es/geoportal-instalaciones/AvisoLegal",
+  "status": 200,
+  "error": null
+ },
+ "it_prezzo_alle_8.csv": {
+  "url": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv",
+  "seconds": 9.5,
+  "status": 200,
+  "type": "text/csv",
+  "bytes": 3945181,
+  "final": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv"
+ },
+ "it_anagrafica.csv": {
+  "url": "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv",
+  "seconds": 8.5,
+  "status": 200,
+  "type": "text/csv",
+  "bytes": 3574293,
+  "final": "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv"
+ },
+ "licence_it_mimit_page": {
+  "url": "https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti",
+  "status": 200,
+  "error": null
+ }
+}
