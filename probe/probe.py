@@ -38,62 +38,11 @@ def licence(name, url):
         (OUT / 'licences' / (name + '.txt')).write_text(text_of(r.text)[:60000], encoding='utf-8')
     report['licence_' + name] = {'url': url, 'status': None if r is None else r.status_code, 'error': err}
 
-# UK: gov.uk content API lists the current CSV attachment
-r = save('uk_content.json', 'https://www.gov.uk/api/content/government/statistics/weekly-road-fuel-prices')
-try:
-    j = r.json(); urls = []
-    def walk(o):
-        if isinstance(o, dict):
-            for k, v in o.items():
-                if isinstance(v, str) and re.search(r'\.(csv|ods|xlsx)(\?|$)', v): urls.append(v)
-                walk(v)
-        elif isinstance(o, list):
-            for v in o: walk(v)
-    walk(j); report['uk_attachments'] = urls
-    for u in urls:
-        if u.endswith('.csv'): save('uk_weekly.csv', u); break
-except Exception as e: report['uk_parse'] = str(e)
-licence('uk_gov_statistics', 'https://www.gov.uk/government/statistics/weekly-road-fuel-prices')
-licence('uk_ogl', 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/')
-
-# US EIA weekly retail prices (history spreadsheets)
-for code, name in [('EMM_EPMRU_PTE_NUS_DPG', 'us_regular'), ('EMM_EPMPU_PTE_NUS_DPG', 'us_premium'), ('EMD_EPD2D_PTE_NUS_DPG', 'us_diesel')]:
-    save(name + '.xls', f'https://www.eia.gov/dnav/pet/hist_xls/{code}w.xls')
-save('us_leaf.html', 'https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=pet&s=emm_epmru_pte_nus_dpg&f=w', keep='head')
-licence('us_eia_copyright', 'https://www.eia.gov/about/copyrights_reuse.php')
-
-# Canada: Statistics Canada table 18-10-0001-01 (monthly retail prices)
-save('ca_18100001.zip', 'https://www150.statcan.gc.ca/n1/tbl/csv/18100001-eng.zip')
-licence('ca_statcan_licence', 'https://www.statcan.gc.ca/en/terms-conditions/open-licence')
-
-# New Zealand: MBIE weekly fuel price monitoring
-save('nz_weekly.csv', 'https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv')
-licence('nz_mbie_page', 'https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-price-monitoring')
-licence('nz_mbie_copyright', 'https://www.mbie.govt.nz/about/this-site/copyright')
-
-# Malaysia: data.gov.my open API
-save('my_fuelprice.json', 'https://api.data.gov.my/data-catalogue?id=fuelprice&limit=5000')
-licence('my_terms', 'https://data.gov.my/terms-of-use')
-licence('my_catalogue', 'https://data.gov.my/data-catalogue/fuelprice')
-
-# Japan: ANRE weekly petroleum product price survey page
-licence('jp_anre_page', 'https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html')
-
-# Australia: AIP national average prices page
-licence('au_aip_page', 'https://www.aip.com.au/pricing/national-retail-petrol-prices')
-
-# FX: ECB reference rates, full history
-save('ecb_eurofxref_hist.zip', 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip')
-licence('ecb_copyright', 'https://www.ecb.europa.eu/services/disclaimer/html/index.en.html')
-
-# Stations: France (data.gouv.fr ZIP, Licence Ouverte), Spain (MITECO REST), Italy (MIMIT CSV)
-save('fr_instant.zip', 'https://www.data.gouv.fr/api/1/datasets/r/e4c436eb-0a7d-4b77-8a64-9ed898da0122')
-save('fr_instant_json', 'https://www.data.gouv.fr/api/1/datasets/r/b0561905-7b5e-4f38-be50-df05708acb80', keep='gz')
+# Round 2: UK CSVs by absolute URL, Spain with browser-like headers
+for name, u in [('uk_weekly_2018.csv', 'https://assets.publishing.service.gov.uk/media/6ac3b5951ef3e896de979385/CSV__2018_-__.csv'),
+                ('uk_weekly_2003_2017.csv', 'https://assets.publishing.service.gov.uk/media/68a3326b32d2c63f869343a3/weekly_road_fuel_prices_2003_to_2017.csv')]:
+    save(name, u)
+UA.update({'Accept': 'application/json', 'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'})
 save('es_stations.json', 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/', keep='gz')
-licence('es_aviso_legal', 'https://geoportalgasolineras.es/geoportal-instalaciones/AvisoLegal')
-save('it_prezzo_alle_8.csv', 'https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv', keep='gz')
-save('it_anagrafica.csv', 'https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv', keep='gz')
-licence('it_mimit_page', 'https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti')
-
-(OUT / 'report.json').write_text(json.dumps(report, indent=1), encoding='utf-8')
+(OUT / 'report2.json').write_text(json.dumps(report, indent=1), encoding='utf-8')
 print(json.dumps(report, indent=1))
