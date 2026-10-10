@@ -117,6 +117,7 @@ class StationTests(unittest.TestCase):
         idx = self.data('fuel_stations')['countries']['MEX']
         self.assertEqual((idx['currency'], idx['fxDate']), ('MXN', '2026-10-09'))
         self.assertIn('8%', idx['note'])
+        self.assertTrue(idx['undated']); self.assertNotIn('undated', self.data('fuel_stations')['countries']['ITA'])
         fra = self.data('fuel_stations')['countries']['FRA']
         self.assertEqual(fra['currency'], 'EUR'); self.assertNotIn('eurPerUnit', fra)
 

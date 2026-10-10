@@ -81,7 +81,7 @@ COUNTRIES = {
             'page': 'https://www.cne.gob.mx/ConsultaPrecios/GasolinasyDiesel/GasolinasyDiesel.html',
             'fuels': {'PETROL': 'Gasolina regular (87 AKI)', 'DIESEL': 'Diésel'},
             'zones': ['Mexico'], 'level': 3, 'cadence': 'daily, published at 18:00 Mexico City time',
-            'currency': 'MXN', 'slotRange': {'PETROL': (12.0, 45.0), 'DIESEL': (12.0, 45.0), 'LPG': (5.0, 30.0)},
+            'currency': 'MXN', 'undated': True, 'slotRange': {'PETROL': (12.0, 45.0), 'DIESEL': (12.0, 45.0), 'LPG': (5.0, 30.0)},
             'note': ('Stations in the northern and southern border regions pay VAT at 8% instead of 16% (a federal stimulus '
                      'extended to 31 December 2026), so many rank cheaper than the rest of Mexico. The CNE list gives each '
                      "station's registered price, not the date it last changed.")},
@@ -363,6 +363,7 @@ def build(iso, stations, extras, newest, fetched=None, fx=(None, None)):
     extra = {'currency': meta.get('currency', 'EUR')}
     if extra['currency'] != 'EUR': extra.update(eurPerUnit=fx[0], fxDate=fx[1])
     if meta.get('note'): extra['note'] = meta['note']
+    if meta.get('undated'): extra['undated'] = True     # no per-station dates, so no age filter is possible
     return dict({
         'country': iso, 'source': meta['name'], 'licence': meta['licence'],
         'attribution': meta['attribution'].replace('{date}', fetched[:10]),
@@ -419,7 +420,7 @@ def index():
         j = json.loads(path.read_text(encoding='utf-8'))
         countries[iso] = {k: j[k] for k in ('source', 'licence', 'attribution', 'url', 'level', 'cadence', 'validTime',
                                              'fuels', 'zones', 'stats', 'bbox', 'fetched', 'maxAgeDays')}
-        countries[iso].update({k: j[k] for k in ('currency', 'eurPerUnit', 'fxDate', 'note') if j.get(k) is not None})
+        countries[iso].update({k: j[k] for k in ('currency', 'eurPerUnit', 'fxDate', 'note', 'undated') if j.get(k) is not None})
         countries[iso].update(file=f'fuel/stations/{iso}.json', count=len(j['items']), bytes=path.stat().st_size)
         newest = max(newest or j['validTime'], j['validTime'])
     return {'items': [[iso, c['count'], c['validTime']] for iso, c in countries.items()], 'countries': countries,
