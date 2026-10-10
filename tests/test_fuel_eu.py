@@ -54,18 +54,19 @@ class FuelTests(unittest.TestCase):
         self.assertEqual(self.item('SVN', 'GASOLINE_95')[2:5], [1.763, 1.005, '2026-10-05'])
         self.assertEqual(self.data('health')['datasets']['fuel']['status'], 'ok')
 
-    def test_greece_and_uk_codes_map_to_iso3(self):
+    def test_greece_code_maps_to_iso3(self):
         fuel.main(self.blob)
         areas = {i[0] for i in self.data('fuel')['items']}
         self.assertIn('GRC', areas)
         self.assertNotIn('GR', areas)
-        self.assertTrue((health.OUT / 'fuel' / 'history' / 'GBR.json').exists())
 
-    def test_uk_is_history_only_after_2020(self):
+    def test_uk_is_left_to_its_own_source(self):
+        # The bulletin's UK columns end in 2020; fetch_fuel_world.py owns GBR (DESNZ weekly series).
         fuel.main(self.blob)
         j = self.data('fuel')
         self.assertNotIn('GBR', {i[0] for i in j['items']})
-        self.assertIn(['GBR', '2020-12-21'], j['stale'])
+        self.assertNotIn('GBR', [s[0] for s in j['stale']])
+        self.assertFalse((health.OUT / 'fuel' / 'history' / 'GBR.json').exists())
 
     def test_local_currency_for_non_euro_members(self):
         fuel.main(self.blob)
