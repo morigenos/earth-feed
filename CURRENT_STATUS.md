@@ -16,7 +16,7 @@ Last verified: 20 September 2026, against a live workflow run. Fuel rows and glo
 | outages | ok | 0 | IODA reported nothing in the window |
 | fuel | pending first scheduled run | 73 | 27 EU states, bulletin of 5 Oct 2026; verified locally against the Commission workbook, 10 Oct 2026 |
 | fuel_world | pending first scheduled run | 13 | US, UK, Canada, New Zealand, Malaysia (plus East Malaysia diesel); live run on GitHub, 10 Oct 2026 |
-| fuel_stations | pending first scheduled run | 42,257 | France 9,194, Spain 11,462, Italy 21,601 stations; live run on GitHub, 10 Oct 2026 |
+| fuel_stations | ok, Spain pending | 30,775 | First run from main, 10 Oct 2026: France 9,174 and Italy 21,601 published; Spain's server refused the runner's connection, so the globe shows Spain from its embedded snapshot until a run gets through |
 | fires | not configured | — | needs `FIRMS_KEY` |
 | ships | not configured | — | no collector: free AIS is websocket-only |
 | fishing | not configured | — | needs `GFW_TOKEN` |

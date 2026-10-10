@@ -1799,19 +1799,23 @@ function fuelBindRank(){
 // on their own): blue cheaper than most, red dearer, grey no price for the chosen fuel.
 // Stations show today's prices only, so they hide while the fuel timeline or the main date is in the past.
 const FUEL_ST_COL={PETROL:4,DIESEL:5,LPG:6};
-const fst={index:null,src:null,data:{},loading:{},gl:null,shown:null,shownKey:null,builtKey:null,sel:null,syncAt:0,snapP:null};
+const fst={index:null,snapIndex:null,src:null,data:{},loading:{},gl:null,shown:null,shownKey:null,builtKey:null,sel:null,syncAt:0,snapP:null};
 const fstV=typeof THREE!=='undefined'?new THREE.Vector3():null;
 function fuelStCountry(iso){ return fst.index&&fst.index.countries&&fst.index.countries[iso]||null; }
 function fuelStInit(){
   const el=$('fuelStIndex'); if(!el) return;
-  try{ const j=JSON.parse(el.textContent); if(j&&j.countries){ fst.index=j; fst.src='snap'; } }catch(e){}
+  try{ const j=JSON.parse(el.textContent); if(j&&j.countries){ fst.index=fst.snapIndex=j; fst.src='snap'; } }catch(e){}
 }
-// fuel_stations.json from the feed: replaces the snapshot index; stations already unpacked from the
-// snapshot are dropped so the next view loads the feed's fresher file.
+// fuel_stations.json from the feed: its countries replace the snapshot's; a country the feed lacks (its
+// source failed before it was ever published) keeps the embedded snapshot. Stations already unpacked from
+// the snapshot are dropped for countries the feed now covers, so the next view loads the fresher file.
 function setFuelStations(j,restored){
   if(!j||!j.countries) return;
-  fst.index=j; fst.src=restored?'restored':'feed'; state.fuelStIndex=j;
-  for(const iso of Object.keys(fst.data)) if(fst.data[iso].src!=='feed'){ delete fst.data[iso]; fst.builtKey=null; }
+  const via=restored?'restored':'feed', countries={};
+  for(const [iso,c] of Object.entries((fst.snapIndex&&fst.snapIndex.countries)||{})) countries[iso]=Object.assign({},c,{via:'snap'});
+  for(const [iso,c] of Object.entries(j.countries)) countries[iso]=Object.assign({},c,{via});
+  fst.index=Object.assign({},j,{countries}); fst.src=via; state.fuelStIndex=j;
+  for(const iso of Object.keys(fst.data)) if(fst.data[iso].src!=='feed'&&countries[iso].via==='feed'){ delete fst.data[iso]; fst.builtKey=null; }
   fuelStSync(true);
   if(geo.sel&&L.fuel&&L.fuel.on) renderPlace();
 }
@@ -1849,7 +1853,7 @@ async function fuelStLoad(iso){
   fst.loading[iso]=true;
   try{
     let file=null, src='feed';
-    if(fst.src==='feed'&&LIVE_OK&&!state.frozen){
+    if(fuelStCountry(iso).via==='feed'&&LIVE_OK&&!state.frozen){
       const base=fuelBase();
       if(base){ try{ file=await getJSON(base+(fuelStCountry(iso).file||`fuel/stations/${iso}.json`),30000); }catch(e){ file=null; } }
     }
@@ -1997,7 +2001,7 @@ function fuelStPlaceHTML(area){
   const level=c.level===4?'updated within minutes to hours at source':'updated daily';
   return `<div class="fstbox"><div class="fuelhd">Stations · ${fmt(c.count)} · ${esc(c.fuels&&c.fuels[slot]||fuelName(slot))}</div>
     ${rows?`<table class="fsttab"><thead><tr><th>Area</th><th>Priced</th><th>Lowest</th><th>Median</th><th>Highest</th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="fine" style="margin-top:0">No station sells ${esc(fuelName(slot).toLowerCase())} with a current price here.</div>`}
-    <div class="fine">Individual pump prices with tax, ${esc(level)}; prices of ${esc(dstr(new Date(c.validTime)))}${fst.src==='snap'?' (embedded snapshot)':''}. Prices older than ${c.maxAgeDays||30} days are left out.${why} ${esc(c.attribution||'')}</div></div>`;
+    <div class="fine">Individual pump prices with tax, ${esc(level)}; prices of ${esc(dstr(new Date(c.validTime)))}${c.via!=='feed'?' (embedded snapshot)':''}. Prices older than ${c.maxAgeDays||30} days are left out.${why} ${esc(c.attribution||'')}</div></div>`;
 }
 function drawGeo(){
   gx.clearRect(0,0,4096,2048);
