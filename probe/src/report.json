@@ -1,0 +1,366 @@
+{
+ "eia": {
+  "combined": {
+   "status": 200,
+   "bytes": 498176,
+   "sec": 0.1,
+   "saved": 498176
+  },
+  "sheets": {
+   "Contents": {
+    "nrows": 16,
+    "ncols": 7,
+    "head": [
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Workbook Contents",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "U.S. Gasoline and Diesel Retail Prices",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "Data 1": {
+    "nrows": 1889,
+    "ncols": 16,
+    "head": [
+     [
+      "Back to Contents",
+      "Data 1: U.S. Gasoline and Diesel Retail Prices",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Sourcekey",
+      "EMM_EPM0_PTE_NUS_DPG",
+      "EMM_EPM0U_PTE_NUS_DPG",
+      "EMM_EPM0R_PTE_NUS_DPG",
+      "EMM_EPMR_PTE_NUS_DPG",
+      "EMM_EPMRU_PTE_NUS_DPG",
+      "EMM_EPMRR_PTE_NUS_DPG",
+      "EMM_EPMM_PTE_NUS_DPG",
+      "EMM_EPMMU_PTE_NUS_DPG",
+      "EMM_EPMMR_PTE_NUS_DPG",
+      "EMM_EPMP_PTE_NUS_DPG",
+      "EMM_EPMPU_PTE_NUS_DPG",
+      "EMM_EPMPR_PTE_NUS_DPG",
+      "EMD_EPD2D_PTE_NUS_DPG",
+      "EMD_EPD2DXL0_PTE_NUS_DPG",
+      "EMD_EPD2DM10_PTE_NUS_DPG"
+     ],
+     [
+      "Date",
+      "Weekly U.S. All Grades All Formulations Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. All Grades Conventional Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. All Grades Reformulated Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Regular All Formulations Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Regular Conventional Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Regular Reformulated Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Midgrade All Formulations Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Midgrade Conventional Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Midgrade Reformulated Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Premium All Formulations Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Premium Conventional Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. Premium Reformulated Retail Gasoline Prices  (Dollars per Gallon)",
+      "Weekly U.S. No 2 Diesel Retail Prices  (Dollars per Gallon)",
+      "Weekly U.S. No 2 Diesel Ultra Low Sulfur (0-15 ppm) Retail Prices  (Dollars per Gallon)",
+      "Weekly U.S. No 2 Diesel Low Sulfur (15-500 ppm) Retail Prices  (Dollars per Gallon)"
+     ]
+    ]
+   }
+  },
+  "EMM_EPMR_PTE_Y05LA_DPG": {
+   "status": 200,
+   "bytes": 100352
+  },
+  "EMM_EPMR_PTE_R1X_DPG": {
+   "status": 200,
+   "bytes": 120320
+  },
+  "EMD_EPD2D_PTE_R5XCA_DPG": {
+   "status": 200,
+   "bytes": 68608
+  },
+  "EMM_EPMR_PTE_SCA_DPG": {
+   "status": 200,
+   "bytes": 100864
+  }
+ },
+ "statcan": {
+  "bytes": 304902,
+  "header": [
+   "REF_DATE",
+   "GEO",
+   "DGUID",
+   "Type of fuel",
+   "UOM",
+   "UOM_ID",
+   "SCALAR_FACTOR",
+   "SCALAR_ID",
+   "VECTOR",
+   "COORDINATE",
+   "VALUE",
+   "STATUS",
+   "SYMBOL",
+   "TERMINATED",
+   "DECIMALS"
+  ],
+  "geos": {
+   "St. John's, Newfoundland and Labrador": 2447,
+   "Charlottetown and Summerside, Prince Edward Island": 2723,
+   "Halifax, Nova Scotia": 2395,
+   "Saint John, New Brunswick": 2379,
+   "Québec, Quebec": 2723,
+   "Montréal, Quebec": 2723,
+   "Ottawa-Gatineau, Ontario part, Ontario/Quebec": 2723,
+   "Toronto, Ontario": 2723,
+   "Thunder Bay, Ontario": 2006,
+   "Winnipeg, Manitoba": 2723,
+   "Regina, Saskatchewan": 2723,
+   "Saskatoon, Saskatchewan": 2506,
+   "Edmonton, Alberta": 2283,
+   "Calgary, Alberta": 2283,
+   "Vancouver, British Columbia": 2723,
+   "Victoria, British Columbia": 2699,
+   "Whitehorse, Yukon": 2591,
+   "Yellowknife, Northwest Territories": 2571,
+   "Canada": 248
+  },
+  "fuels": {
+   "Regular unleaded gasoline at full service filling stations": 7086,
+   "Regular unleaded gasoline at self service filling stations": 8108,
+   "Premium unleaded gasoline at full service filling stations": 4986,
+   "Premium unleaded gasoline at self service filling stations": 7840,
+   "Diesel fuel at full service filling stations": 4492,
+   "Household heating fuel": 7040,
+   "Diesel fuel at self service filling stations": 6640
+  },
+  "latest": {
+   "Calgary, Alberta | Diesel fuel at self service filling stations": "2026-08",
+   "Calgary, Alberta | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Calgary, Alberta | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Canada | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Charlottetown and Summerside, Prince Edward Island | Diesel fuel at self service filling stations": "2026-08",
+   "Charlottetown and Summerside, Prince Edward Island | Household heating fuel": "2026-08",
+   "Charlottetown and Summerside, Prince Edward Island | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Charlottetown and Summerside, Prince Edward Island | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Edmonton, Alberta | Diesel fuel at self service filling stations": "2026-08",
+   "Edmonton, Alberta | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Edmonton, Alberta | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Halifax, Nova Scotia | Diesel fuel at self service filling stations": "2026-08",
+   "Halifax, Nova Scotia | Household heating fuel": "2026-08",
+   "Halifax, Nova Scotia | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Halifax, Nova Scotia | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Montréal, Quebec | Diesel fuel at self service filling stations": "2026-08",
+   "Montréal, Quebec | Household heating fuel": "2026-08",
+   "Montréal, Quebec | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Montréal, Quebec | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Ottawa-Gatineau, Ontario part, Ontario/Quebec | Diesel fuel at self service filling stations": "2026-08",
+   "Ottawa-Gatineau, Ontario part, Ontario/Quebec | Household heating fuel": "2026-08",
+   "Ottawa-Gatineau, Ontario part, Ontario/Quebec | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Ottawa-Gatineau, Ontario part, Ontario/Quebec | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Québec, Quebec | Diesel fuel at self service filling stations": "2026-08",
+   "Québec, Quebec | Household heating fuel": "2026-08",
+   "Québec, Quebec | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Québec, Quebec | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Regina, Saskatchewan | Diesel fuel at self service filling stations": "2026-08",
+   "Regina, Saskatchewan | Household heating fuel": "2026-08",
+   "Regina, Saskatchewan | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Regina, Saskatchewan | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Saint John, New Brunswick | Diesel fuel at self service filling stations": "2026-08",
+   "Saint John, New Brunswick | Household heating fuel": "2026-08",
+   "Saint John, New Brunswick | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Saint John, New Brunswick | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Saskatoon, Saskatchewan | Diesel fuel at self service filling stations": "2026-08",
+   "Saskatoon, Saskatchewan | Household heating fuel": "2026-08",
+   "Saskatoon, Saskatchewan | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Saskatoon, Saskatchewan | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "St. John's, Newfoundland and Labrador | Diesel fuel at self service filling stations": "2026-08",
+   "St. John's, Newfoundland and Labrador | Household heating fuel": "2026-08",
+   "St. John's, Newfoundland and Labrador | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "St. John's, Newfoundland and Labrador | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Thunder Bay, Ontario | Household heating fuel": "2026-08",
+   "Thunder Bay, Ontario | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Thunder Bay, Ontario | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Toronto, Ontario | Diesel fuel at self service filling stations": "2026-08",
+   "Toronto, Ontario | Household heating fuel": "2026-08",
+   "Toronto, Ontario | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Toronto, Ontario | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Vancouver, British Columbia | Diesel fuel at self service filling stations": "2026-08",
+   "Vancouver, British Columbia | Household heating fuel": "2026-08",
+   "Vancouver, British Columbia | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Vancouver, British Columbia | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Victoria, British Columbia | Diesel fuel at self service filling stations": "2026-08",
+   "Victoria, British Columbia | Household heating fuel": "2026-08",
+   "Victoria, British Columbia | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Victoria, British Columbia | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Whitehorse, Yukon | Diesel fuel at self service filling stations": "2026-08",
+   "Whitehorse, Yukon | Household heating fuel": "2026-08",
+   "Whitehorse, Yukon | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Whitehorse, Yukon | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Winnipeg, Manitoba | Diesel fuel at self service filling stations": "2026-08",
+   "Winnipeg, Manitoba | Household heating fuel": "2026-08",
+   "Winnipeg, Manitoba | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Winnipeg, Manitoba | Regular unleaded gasoline at self service filling stations": "2026-08",
+   "Yellowknife, Northwest Territories | Diesel fuel at self service filling stations": "2026-08",
+   "Yellowknife, Northwest Territories | Household heating fuel": "2026-08",
+   "Yellowknife, Northwest Territories | Premium unleaded gasoline at self service filling stations": "2026-08",
+   "Yellowknife, Northwest Territories | Regular unleaded gasoline at self service filling stations": "2026-08"
+  }
+ },
+ "cre": {
+  "places": {
+   "status": 200,
+   "bytes": 3181581,
+   "sec": 0.5,
+   "ctype": "text/html",
+   "head": "ï»¿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<places>\r\n  <place place_id=\"2039\">\r\n    <name>ESTACION HIPODROMO SA DE CV</name>\r\n    <cre_id>PL/658/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-116.9214</x>\r\n      <y>32.47641</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2040\">\r\n    <name>LAS MEJORES ESTACIONES SA DE CV</name>\r\n    <cre_id>PL/902/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-99.74484</x>\r\n      <y>20.3037</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2041\">\r\n    <name>DIAZ GAS SA DE CV</name>\r\n    <cre_id>PL/760/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-106.4514</x>\r\n      <y>31.71947</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2042\">\r\n    <name>COMBU-EXPRESS SA DE CV</name>\r\n    <cre_id>PL/825/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-103.3042</x>\r\n      <y>20.71413</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2043\">\r\n    <name>PETROMAX SA DE CV</name>\r\n    <cre_id>PL/585/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-98.29977</x>\r\n      <y>26.03787</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2044\">\r\n    <name>ESTACION RAEL S DE RL DE CV</name>\r\n    <cre_id>PL/842/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-117.0715</x>\r\n      <y>32.51342</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2045\">\r\n    <name>MULTISERVICIOS LA PILARICA SA DE CV</name>\r\n    <cre_id>PL/371/EXP/ES/2015</cre_id>\r\n    <location>\r\n      <x>-108.9685</x>\r\n      <y>25.7558</y>\r\n    </location>\r\n  </place>\r\n  <place place_id=\"2",
+   "saved": 378593
+  },
+  "prices": {
+   "status": 200,
+   "bytes": 2411916,
+   "sec": 1.1,
+   "ctype": "text/html",
+   "head": "ï»¿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<places>\r\n  <place place_id=\"11703\">\r\n    <gas_price type=\"regular\">22.95</gas_price>\r\n    <gas_price type=\"premium\">27.9</gas_price>\r\n  </place>\r\n  <place place_id=\"11702\">\r\n    <gas_price type=\"regular\">24.5</gas_price>\r\n    <gas_price type=\"premium\">30.5</gas_price>\r\n    <gas_price type=\"diesel\">27</gas_price>\r\n  </place>\r\n  <place place_id=\"11701\">\r\n    <gas_price type=\"regular\">20.4</gas_price>\r\n    <gas_price type=\"diesel\">26.99</gas_price>\r\n  </place>\r\n  <place place_id=\"11700\">\r\n    <gas_price type=\"regular\">23.58</gas_price>\r\n    <gas_price type=\"premium\">27.84</gas_price>\r\n    <gas_price type=\"diesel\">26.95</gas_price>\r\n  </place>\r\n  <place place_id=\"11699\">\r\n    <gas_price type=\"regular\">21.99</gas_price>\r\n    <gas_price type=\"premium\">27.45</gas_price>\r\n  </place>\r\n  <place place_id=\"11697\">\r\n    <gas_price type=\"regular\">23.69</gas_price>\r\n    <gas_price type=\"premium\">27.79</gas_price>\r\n    <gas_price type=\"diesel\">27.29</gas_price>\r\n  </place>\r\n  <place place_id=\"11696\">\r\n    <gas_price type=\"premium\">27.41</gas_price>\r\n  </place>\r\n  <place place_id=\"11696\">\r\n    <gas_price type=\"regular\">21.99</gas_price>\r\n    <gas_price type=\"diesel\">25.39</gas_price>\r\n  </place>\r\n  <place place_id=\"11695\">\r\n    <gas_price type=\"regular\">23.99</gas_price>\r\n    <gas_price type=\"premium\">27.29</gas_price>\r\n    <gas_price type=\"diesel\">27.29</gas_price>\r\n  </place>\r\n  <place place_id=\"11694\">\r\n    <gas_price type=\"regular\">23.99</gas_pr",
+   "saved": 103578
+  },
+  "https://historico.datos.gob.mx/busca/api/3/action/package_show?id=estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel": {
+   "status": 403,
+   "text": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;historico&#46;datos&#46;gob&#46;mx&#47;busca&#47;api&#47;3&#47;action&#47;package&#95;show&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;871c1602&#46;1791650017&#46;285d2e44\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;871c1602&#46;1791650017&#46;285d2e44</P>\n</BODY>\n</HTML>\n"
+  },
+  "https://www.datos.gob.mx/api/3/action/package_search?q=gasolineras%20precios": {
+   "status": 403,
+   "text": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;www&#46;datos&#46;gob&#46;mx&#47;api&#47;3&#47;action&#47;package&#95;search&#63;\" on this server.<P>\nReference&#32;&#35;18&#46;8c1c1602&#46;1791650017&#46;485bde8a\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;8c1c1602&#46;1791650017&#46;485bde8a</P>\n</BODY>\n</HTML>\n"
+  }
+ },
+ "dgeg": {
+  "GetTiposCombustiveis": {
+   "status": 200,
+   "text": "{\"status\":true,\"mensagem\":\"sucesso\",\"resultado\":[{\"Descritivo\":\"Biodiesel B15\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":false,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":2115},{\"Descritivo\":\"Gasóleo colorido\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":2150},{\"Descritivo\":\"Gasóleo de aquecimento\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":false,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":2155},{\"Descritivo\":\"Gasóleo especial\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":2105},{\"Descritivo\":\"Gasóleo simples\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":2101},{\"Descritivo\":\"Gasolina 98\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":3400},{\"Descritivo\":\"Gasolina de mistura (motores a 2 tempos)\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":3210},{\"Descritivo\":\"Gasolina especial 95\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":3205},{\"Descritivo\":\"Gasolina especial 98\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":3405},{\"Descritivo\":\"Gasolina simples 95\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":3201},{\"Descritivo\":\"GNC (gás natural comprimido) - €/kg\",\"UnidadeMedida\":\"kg\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":1143},{\"Descritivo\":\"GNC (gás natural comprimido) - €/m3\",\"UnidadeMedida\":\"m3\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":1141},{\"Descritivo\":\"GNL (gás natural liquefeito) - €/kg\",\"UnidadeMedida\":\"kg\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":1142},{\"Descritivo\":\"GPL Auto\",\"UnidadeMedida\":\"litro\",\"fl_ViewWebSite\":true,\"fl_rodoviario\":true,\"fl_ativo\":true,\"BackGroundColor\":null,\"Id\":1120}],\"token\":null}"
+  },
+  "GetMarcas": {
+   "status": 200,
+   "text": "{\"status\":true,\"mensagem\":\"sucesso\",\"resultado\":[{\"Descritivo\":\"AGIP\",\"Id\":1},{\"Descritivo\":\"ALVES BANDEIRA\",\"Id\":2},{\"Descritivo\":\"ANIBAL ANTUNES BANDEIRA\",\"Id\":3},{\"Descritivo\":\"ASF\",\"Id\":75},{\"Descritivo\":\"ATLANTIC OIL\",\"Id\":4},{\"Descritivo\":\"AUCHAN\",\"Id\":5},{\"Descritivo\":\"AUTO JULIO\",\"Id\":6},{\"Descritivo\":\"AVIA\",\"Id\":7},{\"Descritivo\":\"AZORIA\",\"Id\":8},{\"Descritivo\":\"BEQ\",\"Id\":9},{\"Descritivo\":\"BOMBAGÁS\",\"Id\":10},{\"Descritivo\":\"BP\",\"Id\":11},{\"Descritivo\":\"BXPRESS\",\"Id\":12},{\"Descritivo\":\"CARLOS BALTAZAR\",\"Id\":13},{\"Descritivo\":\"CARRASQUINHO & FILHOS\",\"Id\":14},{\"Descritivo\":\"CEPSA\",\"Id\":15},{\"Descritivo\":\"CHAMAGÁS\",\"Id\":73},{\"Descritivo\":\"CIDADE N'ALDEIA\",\"Id\":16},{\"Descritivo\":\"CIPOL\",\"Id\":17},{\"Descritivo\":\"CONTINENTE\",\"Id\":18},{\"Descritivo\":\"CREIXOAUTO\",\"Id\":19},{\"Descritivo\":\"DOUROGAS NATURAL\",\"Id\":20},{\"Descritivo\":\"DPC\",\"Id\":21},{\"Descritivo\":\"DPP\",\"Id\":22},{\"Descritivo\":\"ECOBRENT\",\"Id\":23},{\"Descritivo\":\"ECOMARCHÉ\",\"Id\":24},{\"Descritivo\":\"EFICE ENERGY\",\"Id\":76},{\"Descritivo\":\"ESSO\",\"Id\":25},{\"Descritivo\":\"ETC\",\"Id\":26},{\"Descritivo\":\"FG COMBUSTÍVEIS\",\"Id\":67},{\"Descritivo\":\"FLUA\",\"Id\":81},{\"Descritivo\":\"FREITAS\",\"Id\":27},{\"Descritivo\":\"FUELTEJO\",\"Id\":28},{\"Descritivo\":\"GALP\",\"Id\":29},{\"Descritivo\":\"GAPOR\",\"Id\":30},{\"Descritivo\":\"GASOLAR\",\"Id\":31},{\"Descritivo\":\"GASPE\",\"Id\":32},{\"Descritivo\":\"GASPROCAR\",\"Id\":33},{\"Descritivo\":\"G-ENERGY\",\"Id\":34},{\"Descritivo\":\"Genérico\",\"Id\":35},{\"Descritivo\":\"GESTROIL ENERGY\",\"Id\":82},{\"Descritivo\":\"GOTA\",\"Id\":36},{\"Descritivo\":\"ILÍDIO MOTA\",\"Id\":37},{\"Descritivo\":\"INTERMARCHÉ\",\"Id\":38},{\"Descritivo\":\"JUMBO\",\"Id\":39},{\"Descritivo\":\"LECLERC\",\"Id\":40},{\"Descritivo\":\"LUBRIDÃO\",\"Id\":41},{\"Descritivo\":\"LUSIADAGÁS\",\"Id\":42},{\"Descritivo\":\"MOEVE\",\"Id\":72},{\"Descritivo\":\"NOVA\",\"Id\":78},{\"Descritivo\":\"OFIMAQ\",\"Id\":43},{\"Descritivo\":\"OLEOFAT\",\"Id\":44},{\"Descritivo\":\"OZ Energia\",\"Id\":45},{\"Descritivo\":\"PETRIN\",\"Id\":46},{\"Descritivo\":\"PETRO BASTO\",\"Id\":47},{\"Descritivo\":\"PETROALVA\",\"Id\":48},{\"Descritivo\":\"PETROIBÉRICA\",\"Id\":49},{\"Descritivo\":\"PETROPRIX \",\"Id\":71},{\"Descritivo\":\"PETROVARIANTE\",\"Id\":50},{\"Descritivo\":\"PETROVAZ\",\"Id\":51},{\"Descritivo\":\"PINGO DOCE\",\"Id\":52},{\"Descritivo\":\"PLENERGY\",\"Id\":74},{\"Descritivo\":\"PRIO\",\"Id\":53},{\"Descritivo\":\"PRONTO\",\"Id\":70},{\"Descritivo\":\"Q8\",\"Id\":54},{\"Descritivo\":\"RAPEL\",\"Id\":77},{\"Descritivo\":\"RECHEIO\",\"Id\":55},{\"Descritivo\":\"REDE ENERGIA\",\"Id\":56},{\"Descritivo\":\"REDIL\",\"Id\":57},{\"Descritivo\":\"REPSOL\",\"Id\":58},{\"Descritivo\":\"SCAM\",\"Id\":59},{\"Descritivo\":\"SHELL\",\"Id\":60},{\"Descritivo\":\"SOPOR\",\"Id\":61},{\"Descritivo\":\"TFUEL\",\"Id\":62},{\"Descritivo\":\"TRANSFORPEL\",\"Id\":63},{\"Descritivo\":\"TRAVESSO\",\"Id\":64},{\"Descritivo\":\"TUACAR\",\"Id\":65},{\"Descritivo\":\"TUTIGÁS\",\"Id\":80},{\"Descritivo\":\"VALCARCE\",\"Id\":68},{\"Descritivo\":\"VIA\",\"Id\":69},{\"Descritivo\":\"VIBAGÁS\",\"Id\":66},{\"Descritivo\":\"VMF Energia\",\"Id\":79}],\"token\":null}"
+  },
+  "GetDistritos": {
+   "status": 200,
+   "text": "{\"status\":true,\"mensagem\":\"sucesso\",\"resultado\":[{\"Descritivo\":\"Aveiro\",\"Id\":1},{\"Descritivo\":\"Beja\",\"Id\":2},{\"Descritivo\":\"Braga\",\"Id\":3},{\"Descritivo\":\"Bragança\",\"Id\":4},{\"Descritivo\":\"Castelo Branco\",\"Id\":5},{\"Descritivo\":\"Coimbra\",\"Id\":6},{\"Descritivo\":\"Évora\",\"Id\":7},{\"Descritivo\":\"Faro\",\"Id\":8},{\"Descritivo\":\"Guarda\",\"Id\":9},{\"Descritivo\":\"Leiria\",\"Id\":10},{\"Descritivo\":\"Lisboa\",\"Id\":11},{\"Descritivo\":\"Portalegre\",\"Id\":12},{\"Descritivo\":\"Porto\",\"Id\":13},{\"Descritivo\":\"Santarém\",\"Id\":14},{\"Descritivo\":\"Setúbal\",\"Id\":15},{\"Descritivo\":\"Viana do Castelo\",\"Id\":16},{\"Descritivo\":\"Vila Real\",\"Id\":17},{\"Descritivo\":\"Viseu\",\"Id\":18}],\"token\":null}"
+  },
+  "PesquisarPostos": {
+   "status": 200,
+   "bytes": 5200422,
+   "sec": 3.3,
+   "head": "{\"status\":true,\"mensagem\":\"sucesso\",\"resultado\":[{\"Id\":81862,\"Nome\":\"AUCHAN Santo Tirso\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Santo Tirso\",\"Preco\":\"0,849 €\",\"Marca\":\"AUCHAN\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 09:00\",\"Distrito\":\"Porto\",\"Morada\":\"Rua das Rãs\",\"Localidade\":\"Santa Cristina Couto\",\"CodPostal\":\"4780-219\",\"Latitude\":41.33237,\"Longitude\":-8.476991,\"Quantidade\":13978},{\"Id\":87129,\"Nome\":\"Intermarché Vialonga\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Vila Franca de Xira\",\"Preco\":\"0,869 €\",\"Marca\":\"INTERMARCHÉ\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 17:40\",\"Distrito\":\"Lisboa\",\"Morada\":\"Urb. Terras Compridas, Lote 8\\nEstrada da Várzea\",\"Localidade\":\"Vialonga\",\"CodPostal\":\"2625-716\",\"Latitude\":38.86376,\"Longitude\":-9.09955,\"Quantidade\":13978},{\"Id\":68221,\"Nome\":\"PA PETROZONA São João da Madeira\",\"TipoPosto\":\"Outro\",\"Municipio\":\"São João da Madeira\",\"Preco\":\"0,888 €\",\"Marca\":\"Genérico\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-05 23:05\",\"Distrito\":\"Aveiro\",\"Morada\":\"Rua Domingos Jose de Oliveira\",\"Localidade\":\"São João da Madeira\",\"CodPostal\":\"3700-317\",\"Latitude\":40.898796,\"Longitude\":-8.477838,\"Quantidade\":13978},{\"Id\":67263,\"Nome\":\"AUCHAN Alverca \",\"TipoPosto\":\"Outro\",\"Municipio\":\"Vila Franca de Xira\",\"Preco\":\"0,889 €\",\"Marca\":\"AUCHAN\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 09:00\",\"Distrito\":\"Lisboa\",\"Morada\":\"Qta. Drogas da Verdelha E.N.10\",\"Localidade\":\"Alverca do Ribatejo\",\"CodPostal\":\"2615-170\",\"Latitude\":38.888622,\"Longitude\":-9.041957,\"Quantidade\":13978},{\"Id\":84656,\"Nome\":\"AUCHAN Sintra\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Sintra\",\"Preco\":\"0,889 €\",\"Marca\":\"AUCHAN\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 09:00\",\"Distrito\":\"Lisboa\",\"Morada\":\"Rua francisco lyon de castro\",\"Localidade\":\"São Pedro\",\"CodPostal\":\"2710-116\",\"Latitude\":38.778625,\"Longitude\":-9.345505,\"Quantidade\":13978},{\"Id\":93093,\"Nome\":\"INTERMARCHÉ Algueirão - Mem Martins\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Sintra\",\"Preco\":\"0,889 €\",\"Marca\":\"INTERMARCHÉ\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 09:00\",\"Distrito\":\"Lisboa\",\"Morada\":\"Avenida Capitães de Abril, Lote 103\",\"Localidade\":\"Algueirão\",\"CodPostal\":\"2725-037\",\"Latitude\":38.802612,\"Longitude\":-9.336308,\"Quantidade\":13978},{\"Id\":93463,\"Nome\":\"OZ ENERGIA -  MASSAMÁ\",\"TipoPosto\":\"Outro\",\"Municipio\":\"Sintra\",\"Preco\":\"0,889 €\",\"Marca\":\"OZ Energia\",\"Combustivel\":\"GPL Auto\",\"DataAtualizacao\":\"2026-10-06 15:05\",\"Distrito\":\"Lisboa\",\"Morada\":\"Rua Sebastião e Silva,",
+   "saved": 888890
+  },
+  "https://precoscombustiveis.dgeg.gov.pt/": {
+   "status": 200,
+   "bytes": 24422,
+   "hits": [
+    "6\">\r\n                    <div class=\"footer-info\">\r\n                        <h3>Pol&#237;tica de Privacidade e Seguran&#231;a</h3>\r\n                        <p class=\"margem_top_10\"><p>A actualização dos preços de combustíveis rodoviários disponível neste sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internac",
+    " sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                   ",
+    "bilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-",
+    "res de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-info margem_top_10\"",
+    "  </div>\r\n            </div>\r\n            <div class=\"row progress bar margem_top_10\">\r\n                <div class=\"progress-bar bar-gray\"></div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-lg-8 text-sm-left\">\r\n                    <p>\r\n                        Copyright 2021. All Rights Reserved. Powered by <a class=\"link_Red\"\r\n                                                                           href=\"http://www.dgeg.gov.pt/\">DGEG</a>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-lg-4 text-sm-right\">\r\n                    <p>N.º visitas: <span class=\"span-ec2035\">  <a id=\"count\">0</a> </span></p>\r\n              "
+   ],
+   "text": ""
+  },
+  "https://precoscombustiveis.dgeg.gov.pt/termos-e-condicoes/": {
+   "status": 200,
+   "bytes": 24422,
+   "hits": [
+    "6\">\r\n                    <div class=\"footer-info\">\r\n                        <h3>Pol&#237;tica de Privacidade e Seguran&#231;a</h3>\r\n                        <p class=\"margem_top_10\"><p>A actualização dos preços de combustíveis rodoviários disponível neste sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internac",
+    " sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                   ",
+    "bilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-",
+    "res de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-info margem_top_10\"",
+    "  </div>\r\n            </div>\r\n            <div class=\"row progress bar margem_top_10\">\r\n                <div class=\"progress-bar bar-gray\"></div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-lg-8 text-sm-left\">\r\n                    <p>\r\n                        Copyright 2021. All Rights Reserved. Powered by <a class=\"link_Red\"\r\n                                                                           href=\"http://www.dgeg.gov.pt/\">DGEG</a>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-lg-4 text-sm-right\">\r\n                    <p>N.º visitas: <span class=\"span-ec2035\">  <a id=\"count\">0</a> </span></p>\r\n              "
+   ],
+   "text": ""
+  },
+  "https://precoscombustiveis.dgeg.gov.pt/api/": {
+   "status": 200,
+   "bytes": 24422,
+   "hits": [
+    "6\">\r\n                    <div class=\"footer-info\">\r\n                        <h3>Pol&#237;tica de Privacidade e Seguran&#231;a</h3>\r\n                        <p class=\"margem_top_10\"><p>A actualização dos preços de combustíveis rodoviários disponível neste sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internac",
+    " sítio é da responsabilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                   ",
+    "bilidade dos titulares de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-",
+    "res de licença de exploração dos postos de abastecimento de combustíveis.</p>\n<p>A informação disponível neste sítio é gratuita, podendo ser utilizada livremente. É proibida a sua utilização para fins comerciais.</p>\n<p>O conteúdo deste sítio é protegido pelos Direitos de Autor e Direitos Conexos e Direitos de Propriedade Industrial ao abrigo das leis portuguesas e da União Europeia e Convenções internacionais.</p></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3\">\r\n                    <div class=\"footer-info\">\r\n                        <p><h3>Contactos</h3></p>\r\n                    </div>\r\n                    <div class=\"footer-info margem_top_10\"",
+    "  </div>\r\n            </div>\r\n            <div class=\"row progress bar margem_top_10\">\r\n                <div class=\"progress-bar bar-gray\"></div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-lg-8 text-sm-left\">\r\n                    <p>\r\n                        Copyright 2021. All Rights Reserved. Powered by <a class=\"link_Red\"\r\n                                                                           href=\"http://www.dgeg.gov.pt/\">DGEG</a>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-lg-4 text-sm-right\">\r\n                    <p>N.º visitas: <span class=\"span-ec2035\">  <a id=\"count\">0</a> </span></p>\r\n              "
+   ],
+   "text": "\r\n\r\n<!doctype html>\r\n<html lang=\"pt\">\r\n<head>\r\n    <!-- Global site tag (gtag.js) - Google Analytics -->\r\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-GXE3NPJVR6\"></script>\r\n    <script>\r\n        window.dataLayer = window.dataLayer || [];\r\n        function gtag() { dataLayer.push(arguments); }\r\n        gtag('js', new Date());\r\n\r\n        gtag('config', 'G-GXE3NPJVR6');\r\n    </script>\r\n\r\n    <meta charset=\"utf-8\">\r\n    <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <title>DGEG</title>\r\n    <meta content=\"\" name=\"description\">\r\n    <meta content=\"\" name=\"keywords\">\r\n\r\n    <!-- Favicons -->\r\n    <link href=\"/assets/img/favicon.png\" rel=\"icon\">\r\n    <!-- Vendor CSS Files -->\r\n    <link href=\"/assets/vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/bootstrap/css/bootstrap-select.min.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/icofont/icofont.min.css\" rel=\"stylesheet\">\r\n    <!-- Template Main CSS File -->\r\n    <link href=\"/assets/css/style.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/css/custom.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/css/table.css\" rel=\"stylesheet\">\r\n    <link href=\"/assets/vendor/multiSelect/css/multiSelect.css\" rel=\"stylesheet\">\r\n    \r\n\r\n\r\n</head>\r\n<body>\r\n    <!-- ======= Header ======= -->\r\n    \r\n\r\n<header id=\"header\" class=\"fixed-top\">\r\n    <div class=\"tamanhoNav\">\r\n        <div class=\"row col-md-12 just_navbar alt_items_nav\">\r\n            <div class=\"row col-md-12 text-center imagens_nav\">\r\n                <div class=\"col-md-3 preco_logo row\">\r\n                    <a href=\"/\"><img src=\"/assets/img/Logo_Preco.gif\" alt=\"\" class=\"img-fluid\"></a>\r\n                    <div class=\"hide_menu\">\r\n                        <nav class=\"navbar navbar-expand-lg navbar-light bg-white justify-right\" style=\"justify-content: right;\">\r\n                            <button class=\"navbar-toggler hidden-lg-up pull-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                                <span class=\"navbar-toggler-icon\"></span>\r\n                            </button>\r\n                            <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n                                <ul class=\"navbar-nav\">\r\n                                        <li class=\"nav-item\"><a class=\"nav-link navMenuEspaco items_navbar nav_select\" href=\"/\">Início</a></li>\r\n\r\n                                                <li class=\"nav-item\">\r\n                                                    <a class=\"nav-link navMenuEspaco items_navbar \" href=\"/apresentacao/\">Apresenta&#231;&#227;o</a>\r\n                                                </li>\r\n                                                <li class=\"nav-item\">\r\n                                                    <a class=\"nav-link navMenuEspaco items_navbar \" href=\"/dicas/\">Dicas</a>\r\n                                                </li>\r\n                                                <li class=\"nav-item\">\r\n                                                    <a class=\"nav-link navMenuEspaco items_navbar \" href=\"/estatistica/preco-medio-diario/\">Estat&#237;stica</a>\r\n                                                </li>\r\n                                                <li class=\"nav-item\">\r\n                                                    <a class=\"nav-link navMenuEspaco items_navbar \" href=\"/registo/\">Registo</a>\r\n                                                </li>\r\n                                                <li class=\"nav-item\">\r\n                                                    <a class=\"nav-link navMenuEspaco items_navbar \" href=\"/area-reservada/\">&#193;rea Reservada</a>\r\n                                                </li>\r\n                                </ul>\r\n                     "
+  },
+  "https://www.dgeg.gov.pt/pt/termos-e-condicoes/": {
+   "status": 200,
+   "bytes": 26939,
+   "hits": [
+    "calable=no\">\r\n<meta http-equiv=\"cache-control\" content=\"max-age=0\" />\r\n<meta http-equiv=\"cache-control\" content=\"no-cache\" />\r\n<meta http-equiv=\"expires\" content=\"0\" />\r\n<meta http-equiv=\"expires\" content=\"Tue, 01 Jan 1980 1:00:00 GMT\" />\r\n<meta http-equiv=\"pragma\" content=\"no-cache\" />\r\n    <title>Termos e condi&#231;&#245;es</title>\r\n        <meta name=\"description\" content=\"\">\r\n            <meta name=\"keywords\" content=\"Termos e condi&#231;&#245;es\">\r\n    <link href=\"/images/favicon.png\" rel=\"icon\">\r\n    <!-- Stylesheets -->\r\n    <link href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css\" type=\"text/css\" rel=\"stylesheet\"/><link href=\"https://cdnjs.cloudflare.com/ajax/libs/fo",
+    "<meta http-equiv=\"expires\" content=\"0\" />\r\n<meta http-equiv=\"expires\" content=\"Tue, 01 Jan 1980 1:00:00 GMT\" />\r\n<meta http-equiv=\"pragma\" content=\"no-cache\" />\r\n    <title>Termos e condi&#231;&#245;es</title>\r\n        <meta name=\"description\" content=\"\">\r\n            <meta name=\"keywords\" content=\"Termos e condi&#231;&#245;es\">\r\n    <link href=\"/images/favicon.png\" rel=\"icon\">\r\n    <!-- Stylesheets -->\r\n    <link href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css\" type=\"text/css\" rel=\"stylesheet\"/><link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\" type=\"text/css\" rel=\"stylesheet\"/><link href=\"https://stackpath.bootstrapcdn.com/boo",
+    "!-- /header -->\r\n\r\n    <div class=\"under-header\"></div>\r\n\r\n    <main>\r\n        \r\n\r\n\r\n\r\n\r\n<section class=\"breadcrumb-content\">\r\n    <ul class=\"breadcrumb\">\r\n\r\n                <li><a href=\"/pt/\"><i class=\"fa fa-home\"></i><span class=\"sr-only\">Home</span></a></li>\r\n                    <li><a href=\"/pt/termos-e-condicoes/\">Termos e condi&#231;&#245;es</a></li>\r\n    </ul>\r\n</section>\r\n\r\n<section class=\"main-content\" id=\"skip-main\" tabindex=\"-1\">\r\n    <div>\r\n        <div class=\"umbraco-image\">\r\n                <h1>Termos e condi&#231;&#245;es</h1>\r\n                <div class=\"progress bar\">\r\n                    <div class=\"progress-bar bar-red\"></div>\r\n                    <div class=\"progress-bar ",
+    "er -->\r\n\r\n    <div class=\"under-header\"></div>\r\n\r\n    <main>\r\n        \r\n\r\n\r\n\r\n\r\n<section class=\"breadcrumb-content\">\r\n    <ul class=\"breadcrumb\">\r\n\r\n                <li><a href=\"/pt/\"><i class=\"fa fa-home\"></i><span class=\"sr-only\">Home</span></a></li>\r\n                    <li><a href=\"/pt/termos-e-condicoes/\">Termos e condi&#231;&#245;es</a></li>\r\n    </ul>\r\n</section>\r\n\r\n<section class=\"main-content\" id=\"skip-main\" tabindex=\"-1\">\r\n    <div>\r\n        <div class=\"umbraco-image\">\r\n                <h1>Termos e condi&#231;&#245;es</h1>\r\n                <div class=\"progress bar\">\r\n                    <div class=\"progress-bar bar-red\"></div>\r\n                    <div class=\"progress-bar bar-gray\"",
+    "  <div class=\"under-header\"></div>\r\n\r\n    <main>\r\n        \r\n\r\n\r\n\r\n\r\n<section class=\"breadcrumb-content\">\r\n    <ul class=\"breadcrumb\">\r\n\r\n                <li><a href=\"/pt/\"><i class=\"fa fa-home\"></i><span class=\"sr-only\">Home</span></a></li>\r\n                    <li><a href=\"/pt/termos-e-condicoes/\">Termos e condi&#231;&#245;es</a></li>\r\n    </ul>\r\n</section>\r\n\r\n<section class=\"main-content\" id=\"skip-main\" tabindex=\"-1\">\r\n    <div>\r\n        <div class=\"umbraco-image\">\r\n                <h1>Termos e condi&#231;&#245;es</h1>\r\n                <div class=\"progress bar\">\r\n                    <div class=\"progress-bar bar-red\"></div>\r\n                    <div class=\"progress-bar bar-gray\"></div>\r\n   ",
+    "></i><span class=\"sr-only\">Home</span></a></li>\r\n                    <li><a href=\"/pt/termos-e-condicoes/\">Termos e condi&#231;&#245;es</a></li>\r\n    </ul>\r\n</section>\r\n\r\n<section class=\"main-content\" id=\"skip-main\" tabindex=\"-1\">\r\n    <div>\r\n        <div class=\"umbraco-image\">\r\n                <h1>Termos e condi&#231;&#245;es</h1>\r\n                <div class=\"progress bar\">\r\n                    <div class=\"progress-bar bar-red\"></div>\r\n                    <div class=\"progress-bar bar-gray\"></div>\r\n                </div>\r\n                <div>\r\n                    <p> </p>\n<p> </p>\r\n\r\n                </div>\r\n                <div class=\"row justify-content-center\">\r\n\r\n\r\n                </div>",
+    "       </div>\r\n                <div class=\"row justify-content-center\">\r\n\r\n\r\n                </div>\r\n\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n    <script src=\"/scripts/HistoricoPesquisas.js\"></script>\r\n    <script>\r\n        var nome = \"\";\r\n        if (2== 6) {\r\n            nome = \"DGEG\" +\" - \"+ \"Termos e condi&#231;&#245;es\";\r\n        } else {\r\n            nome=\"Termos e condi&#231;&#245;es\";\r\n        }\r\n        console.log(nome);\r\n        InsereHistoricoVisita(\"/pt/termos-e-condicoes/\", nome, 20, \"pt\", \"/umbraco/Api/HistoricoPesquisa/InsereHistoricoVisita\");\r\n    </script>\r\n\r\n\r\n    </main>\r\n\r\n\r\n    <!-- footer -->\r\n\r\n    <footer>\r\n        <div class=\"footer bg-footer\">\r\n            <div ",
+    "r\">\r\n\r\n\r\n                </div>\r\n\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n    <script src=\"/scripts/HistoricoPesquisas.js\"></script>\r\n    <script>\r\n        var nome = \"\";\r\n        if (2== 6) {\r\n            nome = \"DGEG\" +\" - \"+ \"Termos e condi&#231;&#245;es\";\r\n        } else {\r\n            nome=\"Termos e condi&#231;&#245;es\";\r\n        }\r\n        console.log(nome);\r\n        InsereHistoricoVisita(\"/pt/termos-e-condicoes/\", nome, 20, \"pt\", \"/umbraco/Api/HistoricoPesquisa/InsereHistoricoVisita\");\r\n    </script>\r\n\r\n\r\n    </main>\r\n\r\n\r\n    <!-- footer -->\r\n\r\n    <footer>\r\n        <div class=\"footer bg-footer\">\r\n            <div class=\"border-bottom\">\r\n                <div class=\"row\">\r\n         ",
+    "toricoPesquisas.js\"></script>\r\n    <script>\r\n        var nome = \"\";\r\n        if (2== 6) {\r\n            nome = \"DGEG\" +\" - \"+ \"Termos e condi&#231;&#245;es\";\r\n        } else {\r\n            nome=\"Termos e condi&#231;&#245;es\";\r\n        }\r\n        console.log(nome);\r\n        InsereHistoricoVisita(\"/pt/termos-e-condicoes/\", nome, 20, \"pt\", \"/umbraco/Api/HistoricoPesquisa/InsereHistoricoVisita\");\r\n    </script>\r\n\r\n\r\n    </main>\r\n\r\n\r\n    <!-- footer -->\r\n\r\n    <footer>\r\n        <div class=\"footer bg-footer\">\r\n            <div class=\"border-bottom\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-3 col-md-6 col-sm-8 mb-5 mb-lg-0\">\r\n                        <!-- Sobre nós -",
+    "quisas.js\"></script>\r\n    <script>\r\n        var nome = \"\";\r\n        if (2== 6) {\r\n            nome = \"DGEG\" +\" - \"+ \"Termos e condi&#231;&#245;es\";\r\n        } else {\r\n            nome=\"Termos e condi&#231;&#245;es\";\r\n        }\r\n        console.log(nome);\r\n        InsereHistoricoVisita(\"/pt/termos-e-condicoes/\", nome, 20, \"pt\", \"/umbraco/Api/HistoricoPesquisa/InsereHistoricoVisita\");\r\n    </script>\r\n\r\n\r\n    </main>\r\n\r\n\r\n    <!-- footer -->\r\n\r\n    <footer>\r\n        <div class=\"footer bg-footer\">\r\n            <div class=\"border-bottom\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-3 col-md-6 col-sm-8 mb-5 mb-lg-0\">\r\n                        <!-- Sobre nós -->\r\n     ",
+    "letter-dgeg\" class=\"btn btn-primary\" target=\"_blank\">Subscrever</a>\r\n        </li>\r\n        <a class=\"color-red\" href=\"/pt/comunicacao/newsletter-dgeg/arquivo-newsletters/\">Ver todas as newsletters </a>\r\n    </ul>\r\n</div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- copyright -->\r\n        <div class=\"copyright sm-footer\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 text-sm-left\">\r\n\r\n            <ul class=\"list-inline\">\r\n                <li class=\"list-inline-item info\">Copyright 2026. All Rights Reserved. Powered by <a class=\"color-red\" href=\"http://www.dgeg.gov.pt/\">DGEG</a></li>\r\n            </ul>\r\n        </div>\r\n        <div class=\"col-md-6 text-",
+    "\" target=\"_blank\">Subscrever</a>\r\n        </li>\r\n        <a class=\"color-red\" href=\"/pt/comunicacao/newsletter-dgeg/arquivo-newsletters/\">Ver todas as newsletters </a>\r\n    </ul>\r\n</div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- copyright -->\r\n        <div class=\"copyright sm-footer\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 text-sm-left\">\r\n\r\n            <ul class=\"list-inline\">\r\n                <li class=\"list-inline-item info\">Copyright 2026. All Rights Reserved. Powered by <a class=\"color-red\" href=\"http://www.dgeg.gov.pt/\">DGEG</a></li>\r\n            </ul>\r\n        </div>\r\n        <div class=\"col-md-6 text-sm-right mb-0\">\r\n            <ul cl"
+   ],
+   "text": ""
+  },
+  "https://dados.gov.pt/api/1/datasets/?q=pre%C3%A7os%20combust%C3%ADveis&page_size=20": {
+   "status": 200,
+   "bytes": 94,
+   "hits": [],
+   "text": "{\"data\": [], \"next_page\": null, \"page\": 1, \"page_size\": 20, \"previous_page\": null, \"total\": 0}"
+  },
+  "https://dados.gov.pt/api/1/datasets/postos-de-abastecimento-de-combustiveis-para-veiculos-rodoviarios/": {
+   "status": 200,
+   "bytes": 6367,
+   "hits": [
+    "\"}], \"created_at\": \"2016-04-11T00:00:00+00:00\", \"deleted\": null, \"description\": \"Postos de abastecimento de combust\\u00edveis localizados no territ\\u00f3rio continental de Portugal, para o consumo p\\u00fablico e cooperativo, cuja responsabilidade pelo cumprimento \\u00e9 dos titulares das respetivas licen\\u00e7as de explora\\u00e7\\u00e3o (Titular). Este conjunto de dados integra os Conjuntos de Dados de Elevado Valor/HVD identificados de acordo com o Regulamento de Execu\\u00e7\\u00e3o n.\\u00ba 2023/138 da Diretiva (UE) 2019/1024, relativa aos dados abertos e \\u00e0 reutiliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_lic",
+    "9 dos titulares das respetivas licen\\u00e7as de explora\\u00e7\\u00e3o (Titular). Este conjunto de dados integra os Conjuntos de Dados de Elevado Valor/HVD identificados de acordo com o Regulamento de Execu\\u00e7\\u00e3o n.\\u00ba 2023/138 da Diretiva (UE) 2019/1024, relativa aos dados abertos e \\u00e0 reutiliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_license\": \"cc-by\", \"harvest:legal_constraints\": [\"Acesso p\\u00fablico sem restri\\u00e7\\u00f5es\", \"Licen\\u00e7a de utiliza\\u00e7\\u00e3o - CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)\"], \"harvest:name\": \"DGEG - Dire\\u00e7\\u00e3o-Geral de Energia e Geologia (DGT)",
+    "ados de Elevado Valor/HVD identificados de acordo com o Regulamento de Execu\\u00e7\\u00e3o n.\\u00ba 2023/138 da Diretiva (UE) 2019/1024, relativa aos dados abertos e \\u00e0 reutiliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_license\": \"cc-by\", \"harvest:legal_constraints\": [\"Acesso p\\u00fablico sem restri\\u00e7\\u00f5es\", \"Licen\\u00e7a de utiliza\\u00e7\\u00e3o - CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)\"], \"harvest:name\": \"DGEG - Dire\\u00e7\\u00e3o-Geral de Energia e Geologia (DGT)\"}, \"featured\": false, \"frequency\": \"punctual\", \"frequency_date\": null, \"harvest\": {\"backend\": \"Harvester DGT\", \"created_at\": \"2",
+    " 2023/138 da Diretiva (UE) 2019/1024, relativa aos dados abertos e \\u00e0 reutiliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_license\": \"cc-by\", \"harvest:legal_constraints\": [\"Acesso p\\u00fablico sem restri\\u00e7\\u00f5es\", \"Licen\\u00e7a de utiliza\\u00e7\\u00e3o - CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)\"], \"harvest:name\": \"DGEG - Dire\\u00e7\\u00e3o-Geral de Energia e Geologia (DGT)\"}, \"featured\": false, \"frequency\": \"punctual\", \"frequency_date\": null, \"harvest\": {\"backend\": \"Harvester DGT\", \"created_at\": \"2016-04-11T00:00:00+00:00\", \"domain\": \"snig.dgterritorio.gov.pt\", \"last_update\": \"2026-10-09T23:15:",
+    "iliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_license\": \"cc-by\", \"harvest:legal_constraints\": [\"Acesso p\\u00fablico sem restri\\u00e7\\u00f5es\", \"Licen\\u00e7a de utiliza\\u00e7\\u00e3o - CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)\"], \"harvest:name\": \"DGEG - Dire\\u00e7\\u00e3o-Geral de Energia e Geologia (DGT)\"}, \"featured\": false, \"frequency\": \"punctual\", \"frequency_date\": null, \"harvest\": {\"backend\": \"Harvester DGT\", \"created_at\": \"2016-04-11T00:00:00+00:00\", \"domain\": \"snig.dgterritorio.gov.pt\", \"last_update\": \"2026-10-09T23:15:00.625000+00:00\", \"modified_at\": \"2024-12-30T00:00:00+00:00\", \"remote_id\": \"0a",
+    "22c06819b\", \"source_id\": \"6543c37fc4057dd95a583c75\"}, \"id\": \"6543c38d2836e3b63c65fca4\", \"internal\": {\"created_at_internal\": \"2016-04-11T00:00:00+00:00\", \"last_modified_internal\": \"2024-12-30T00:00:00+00:00\"}, \"last_modified\": \"2024-12-30T00:00:00+00:00\", \"last_update\": \"2024-12-30T00:00:00+00:00\", \"license\": \"cc-by\", \"license_title\": \"Creative Commons Attribution 4.0 - CC BY 4.0\", \"metrics\": {\"dataservices\": 0, \"discussions\": 0, \"discussions_open\": 0, \"followers\": 0, \"followers_by_months\": {\"2025-06\": 0, \"2025-07\": 0, \"2025-08\": 0, \"2025-09\": 0, \"2025-10\": 0, \"2025-11\": 0, \"2025-12\": 0, \"2026-01\": 0, \"2026-02\": 0, \"2026-03\": 0, \"2026-04\": 0, \"2026-05\": 0, \"2026-06\": 0}, \"resources_downloads\"",
+    "id\": \"6543c37fc4057dd95a583c75\"}, \"id\": \"6543c38d2836e3b63c65fca4\", \"internal\": {\"created_at_internal\": \"2016-04-11T00:00:00+00:00\", \"last_modified_internal\": \"2024-12-30T00:00:00+00:00\"}, \"last_modified\": \"2024-12-30T00:00:00+00:00\", \"last_update\": \"2024-12-30T00:00:00+00:00\", \"license\": \"cc-by\", \"license_title\": \"Creative Commons Attribution 4.0 - CC BY 4.0\", \"metrics\": {\"dataservices\": 0, \"discussions\": 0, \"discussions_open\": 0, \"followers\": 0, \"followers_by_months\": {\"2025-06\": 0, \"2025-07\": 0, \"2025-08\": 0, \"2025-09\": 0, \"2025-10\": 0, \"2025-11\": 0, \"2025-12\": 0, \"2026-01\": 0, \"2026-02\": 0, \"2026-03\": 0, \"2026-04\": 0, \"2026-05\": 0, \"2026-06\": 0}, \"resources_downloads\": 77, \"reuses\": 0, \"",
+    "datasets/postos-de-abastecimento-de-combustiveis-para-veiculos-rodoviarios\", \"permissions\": {\"delete\": false, \"edit\": false, \"edit_resources\": false}, \"private\": false, \"quality\": {\"all_resources_available\": true, \"dataset_description_quality\": true, \"has_open_format\": true, \"has_resources\": true, \"license\": true, \"resources_documentation\": false, \"score\": 0.7777777777777778, \"spatial\": true, \"temporal_coverage\": false, \"update_frequency\": true, \"update_fulfilled_in_time\": true}, \"resources\": [{\"checksum\": null, \"created_at\": \"2026-09-28T23:15:00.509000+00:00\", \"description\": null, \"extras\": {}, \"filesize\": null, \"filetype\": \"remote\", \"format\": \"wfs\", \"harvest\": null, \"id\": \"78b51d6f-ae90-4b"
+   ],
+   "text": "{\"access_audiences\": [], \"access_type\": \"open\", \"access_type_reason\": null, \"access_type_reason_category\": null, \"acronym\": null, \"archived\": null, \"authorization_request_url\": null, \"badges\": [{\"kind\": \"hvd\"}], \"contact_points\": [{\"contact_form\": null, \"email\": \"geral@dgeg.gov.pt\", \"id\": \"6abc467be6ffa912cef03ae6\", \"name\": \"Dire\\u00e7\\u00e3o-Geral de Energia e Geologia\", \"role\": \"publisher\"}], \"created_at\": \"2016-04-11T00:00:00+00:00\", \"deleted\": null, \"description\": \"Postos de abastecimento de combust\\u00edveis localizados no territ\\u00f3rio continental de Portugal, para o consumo p\\u00fablico e cooperativo, cuja responsabilidade pelo cumprimento \\u00e9 dos titulares das respetivas licen\\u00e7as de explora\\u00e7\\u00e3o (Titular). Este conjunto de dados integra os Conjuntos de Dados de Elevado Valor/HVD identificados de acordo com o Regulamento de Execu\\u00e7\\u00e3o n.\\u00ba 2023/138 da Diretiva (UE) 2019/1024, relativa aos dados abertos e \\u00e0 reutiliza\\u00e7\\u00e3o de informa\\u00e7\\u00f5es do setor p\\u00fablico.\", \"description_short\": null, \"extras\": {\"harvest:derived_license\": \"cc-by\", \"harvest:legal_constraints\": [\"Acesso p\\u00fablico sem restri\\u00e7\\u00f5es\", \"Licen\\u00e7a de utiliza\\u00e7\\u00e3o - CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)\"], \"harvest:name\": \"DGEG - Dire\\u00e7\\u00e3o-Geral de Energia e Geologia (DGT)\"}, \"featured\": false, \"frequency\": \"punctual\", \"frequency_date\": null, \"harvest\": {\"backend\": \"Harvester DGT\", \"created_at\": \"2016-04-11T00:00:00+00:00\", \"domain\": \"snig.dgterritorio.gov.pt\", \"last_update\": \"2026-10-09T23:15:00.625000+00:00\", \"modified_at\": \"2024-12-30T00:00:00+00:00\", \"remote_id\": \"0a1e01cd-698f-4e0d-9a6a-26822c06819b\", \"source_id\": \"6543c37fc4057dd95a583c75\"}, \"id\": \"6543c38d2836e3b63c65fca4\", \"internal\": {\"created_at_internal\": \"2016-04-11T00:00:00+00:00\", \"last_modified_internal\": \"2024-12-30T00:00:00+00:00\"}, \"last_modified\": \"2024-12-30T00:00:00+00:00\", \"last_update\": \"2024-12-30T00:00:00+00:00\", \"license\": \"cc-by\", \"license_title\": \"Creative Commons Attribution 4.0 - CC BY 4.0\", \"metrics\": {\"dataservices\": 0, \"discussions\": 0, \"discussions_open\": 0, \"followers\": 0, \"followers_by_months\": {\"2025-06\": 0, \"2025-07\": 0, \"2025-08\": 0, \"2025-09\": 0, \"2025-10\": 0, \"2025-11\": 0, \"2025-12\": 0, \"2026-01\": 0, \"2026-02\": 0, \"2026-03\": 0, \"2026-04\": 0, \"2026-05\": 0, \"2026-06\": 0}, \"resources_downloads\": 77, \"reuses\": 0, \"reuses_by_months\": {\"2025-06\": 0, \"2025-07\": 0, \"2025-08\": 0, \"2025-09\": 0, \"2025-10\": 0, \"2025-11\": 0, \"2025-12\": 0, \"2026-01\": 0, \"2026-02\": 0, \"2026-03\": 0, \"2026-04\": 0, \"2026-05\": 0, \"2026-06\": 0}, \"views\": 639}, \"organization\": {\"acronym\": \"DGEG\", \"badges\": [{\"kind\": \"certified\"}, {\"kind\": \"public-service\"}], \"class\": \"Organization\", \"id\": \"654138c66ddddda109c4960c\", \"logo\": \"https://dados.gov.pt/s/avatars/6b/fd6834e24d429dbcfb003c837849f4-original.png\", \"logo_thumbnail\": \"https://dados.gov.pt/s/avatars/6b/fd6834e24d429dbcfb003c837849f4-100.png\", \"name\": \"Dire\\u00e7\\u00e3o-Geral de Energia e Geologia - DGEG\", \"page\": \"https://dados.gov.pt/organizations/direcao-geral-de-energia-e-geologia-dgeg\", \"permissions\": {\"delete\": false, \"edit\": false, \"harvest\": false, \"members\": false, \"private\": false}, \"slug\": \"direcao-geral-de-energia-e-geologia-dgeg\", \"uri\": \"https://dados.gov.pt/api/1/organizations/direcao-geral-de-energia-e-geologia-dgeg/\"}, \"owner\": null, \"page\": \"https://dados.gov.pt/datasets/postos-de-abastecimento-de-combustiveis-para-veiculos-rodoviarios\", \"permissions\": {\"delete\": false, \"edit\": false, \"edit_resources\": false}, \"private\": false, \"quality\": {\"all_resources_available\": true, \"dataset_description_quality\": true, \"has_open_format\": true, \"has_resources\": true, \"license\": true, \"resources_documentation\": false, \"score\": 0.7777777777777778, \"spatial\": true, \"temporal_coverage\": false, \"update_frequency\": true, \"update_fulfilled_in_time\": true}, \"resources\": [{\"checksum\": null, \"created_at\": \"2026-09-28T23:15:00.509000+00:00\", \"description\": nu"
+  }
+ }
+}
