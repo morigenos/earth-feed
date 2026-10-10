@@ -49,7 +49,7 @@ pushes these files, and prints the feed address to paste into Earth Now.
 | `sats.json` | CelesTrak orbital elements (OMM JSON) for stations, weather, navigation, Earth observation, science and 300 Starlink | calculated | every 6 h |
 | `fuel.json` + `fuel/history/` | EU Weekly Oil Bulletin: 95, diesel, LPG by country, with and without taxes; weekly history since 2005 | reported | checked twice a day, data weekly |
 | `fuel_world.json` + `fuel/history/` | Official national averages for the US (EIA), UK (DESNZ), Canada (Statistics Canada), New Zealand (MBIE) and Malaysia (Ministry of Finance), in euros at ECB rates | reported | at most every 12 h; data weekly (Canada monthly) |
-| `fuel_stations.json` + `fuel/stations/` | Pump prices at about 42,000 stations in France, Spain and Italy from their government feeds | reported | each run; France and Spain at most hourly, Italy every 6 h |
+| `fuel_stations.json` + `fuel/stations/` | Pump prices at about 56,000 stations in France, Spain, Italy and Mexico from their government feeds (Mexico in pesos, with the ECB euro rate) | reported | each run; France and Spain at most hourly, Italy and Mexico every 6 h |
 | `lightning.json` | GOES GLM flashes, past ~20 min | observed | 15 min |
 | `index.json` | List of available files | reference | every run |
 

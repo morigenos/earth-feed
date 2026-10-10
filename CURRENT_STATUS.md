@@ -16,7 +16,7 @@ Last verified: 20 September 2026, against a live workflow run. Fuel rows and glo
 | outages | ok | 0 | IODA reported nothing in the window |
 | fuel | pending first scheduled run | 73 | 27 EU states, bulletin of 5 Oct 2026; verified locally against the Commission workbook, 10 Oct 2026 |
 | fuel_world | pending first scheduled run | 13 | US, UK, Canada, New Zealand, Malaysia (plus East Malaysia diesel); live run on GitHub, 10 Oct 2026 |
-| fuel_stations | ok, Spain pending | 30,775 | First run from main, 10 Oct 2026: France 9,174 and Italy 21,601 published; Spain's server refused the runner's connection, so the globe shows Spain from its embedded snapshot until a run gets through |
+| fuel_stations | ok, Spain pending | 30,775 | First run from main, 10 Oct 2026: France 9,174 and Italy 21,601 published; Spain's server refused the runner's connection, so the globe shows Spain from its embedded snapshot until a run gets through. Mexico (13,848) verified on a runner; publishes once merged |
 | fires | not configured | — | needs `FIRMS_KEY` |
 | ships | not configured | — | no collector: free AIS is websocket-only |
 | fishing | not configured | — | needs `GFW_TOKEN` |
@@ -43,6 +43,9 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
   painted separately, local currency in the country panel. Selecting France, Spain or Italy, or zooming close,
   shows its stations as dots ranked cheap to dear within their area; click one for its prices. The page embeds a
   station snapshot (10 Oct 2026) for when the feed is out of reach.
+- Mexico's stations (10 Oct 2026): 13,848 stations from the Comisión Nacional de Energía, ranked across the
+  country, prices in pesos with the euro equivalent. Mexico has no national average in the layer, so it stays
+  unshaded; the panel says so and notes the border regions' lower VAT.
 - Published page: https://claude.ai/artifact/HBtwLbZx8kKKbZ3c1RVzDh
 - Roadmap: https://claude.ai/artifact/1zi4qa2CYpQqieQZNSDNB7
 
@@ -53,3 +56,4 @@ parsing, GOES-19 lightning) came from ChatGPT and is documented in `STAGE1.md`.
 3. Pipelines and submarine cables remain blocked on licence and a dead data source.
 4. Fuel: Phase 1b (GlobalPetrolPrices, private channel) waits on written licence terms; see the fuel plan in the project folder.
 5. Fuel: Statistics Canada publishes only regular petrol nationally; diesel and premium are city-level and not used yet.
+6. Fuel stations: Germany waits on a Tankerkönig API key; Portugal on reuse terms from the DGEG; the UK's Fuel Finder on registration and runner access.

@@ -38,8 +38,8 @@ Every file is a JSON object carrying at least:
 | `fuel/history/<ISO3>.json` | `{dates:[yyyymmdd…], series:{FUEL:{tax:[…], net:[…]}}}` | weekly since 2005, ascending, EUR/L, `null` where not reported; also `EU.json` and `EUR.json` |
 | `fuel_world.json` | `[area, fuel, eurPerL, eurPerLExTax\|null, observedDate, sourceId, coverageLevel, currency, localPrice, localUnit, gradeLabel]` | areas USA, GBR, CAN, NZL, MYS and the sub-area `MYS-E` (Sabah, Sarawak, Labuan); plus `standard` (area → standard petrol id), `sources` (per source: name, licence, attribution, url, cadence, maxAgeDays, level, fetched), `asOf`, `extra` (Malaysia's subsidised RON95) |
 | `fuel/history/<AREA>.json` (national) | as above, plus `grades`, `unit`, `source`, `attribution`, `maxAgeDays` | same path as the EU histories; written by `fetch_fuel_world.py` for its areas; Canada monthly since 2006 |
-| `fuel_stations.json` | `[iso3, stationCount, validTime]` | plus `countries` (per country: source, licence, attribution, url, level, cadence, validTime, fuels, zones, stats, bbox, fetched, maxAgeDays, file, count, bytes) |
-| `fuel/stations/<ISO3>.json` | `[lon, lat, brandIdx\|-1, flags, petrol\|null, diesel\|null, lpg\|null, updatedEpoch, id, town, address, extra\|null]` | FRA, ESP, ITA; plus `brands`, `fuels`, `extraFuels`, `zones`, `fields`, `flagBits`, `stats` |
+| `fuel_stations.json` | `[iso3, stationCount, validTime]` | plus `countries` (per country: source, licence, attribution, url, level, cadence, validTime, fuels, zones, stats, bbox, fetched, maxAgeDays, file, count, bytes, `currency`; outside the euro also `eurPerUnit`, `fxDate`; optional `note`, `undated`) |
+| `fuel/stations/<ISO3>.json` | `[lon, lat, brandIdx\|-1, flags, petrol\|null, diesel\|null, lpg\|null, updatedEpoch, id, town, address, extra\|null]` | FRA, ESP, ITA, MEX; plus `brands`, `fuels`, `extraFuels`, `zones`, `fields`, `flagBits`, `stats`, `currency` (and the index's optional fields) |
 | `fuel/fx.json` | `{CCY: [[yyyymmdd…], [rate…]]}` | cache of ECB euro reference rates, used when the ECB is unreachable |
 | `health.json` | `{datasets: {name: {status, lastAttempt, lastSuccess, recordCount, validTime}}}` | `status` ∈ ok, not_configured, error strings |
 | `index.json` | `{files: [...]}` | manifest |
@@ -88,7 +88,13 @@ Every file is a JSON object carrying at least:
 ## Station prices (`fuel_stations.json`, `fuel/stations/`)
 
 - France (prix-carburants, Licence Ouverte 2.0), Spain (MITECO Geoportal, reuse with attribution),
-  Italy (MIMIT Osservatorio prezzi, IODL 2.0). Pump prices with tax, euros per litre, three decimals.
+  Italy (MIMIT Osservatorio prezzi, IODL 2.0), Mexico (Comisión Nacional de Energía, Libre Uso MX).
+  Pump prices with tax per litre in the country's `currency`: euros with three decimals, Mexican pesos
+  with two. Outside the euro, `eurPerUnit` is the ECB reference rate (euros per unit) of `fxDate`; if the
+  ECB is unreachable the previous file's rate is kept, and if there is none the field is `null`.
+- `undated: true` (Mexico) means the source gives no per-station dates: `updatedEpoch` is `null` and no
+  age filter can be applied. `validTime` is then the source's scheduled publication time (18:00 Mexico City).
+- `note` is a caveat the globe shows with the country's stations (Mexico: lower VAT in the border regions).
 - `flags`: bit 0 motorway, bit 1 attended service only, bit 2 open 24 hours; `flags >> 3` is the zone index
   into `zones` (Spain: mainland and Balearics, Canary Islands, Ceuta and Melilla, ranked separately).
 - Columns `petrol`, `diesel`, `lpg` hold each country's standard product (labels in `fuels`);
